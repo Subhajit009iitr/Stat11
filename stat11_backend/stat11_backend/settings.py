@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import environ
 import pymysql
-  
+
 pymysql.install_as_MySQLdb()
 
 env = environ.Env()
@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stat11'
+    'stat11',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
