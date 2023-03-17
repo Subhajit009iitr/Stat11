@@ -1,10 +1,9 @@
-from dataclasses import fields
 from rest_framework import serializers
-from models.models import *
+from ...models.scoreboard.bowler_scoreboard import BowlerScoreboard
 
 
 class BowlerScoreboardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Bowler_scoreboard
+        model = BowlerScoreboard
         fields = '__all__'
         

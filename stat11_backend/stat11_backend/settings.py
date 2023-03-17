@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import environ
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 env = environ.Env()
 environ.Env.read_env()
@@ -41,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stat11'
+    'stat11',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +85,16 @@ WSGI_APPLICATION = 'stat11_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS':{
+            'charset': 'utf8mb4',
+            'sql_mode':'STRICT_TRANS_TABLES'
+        },
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT'),
     }
 }
 

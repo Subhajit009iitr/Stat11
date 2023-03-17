@@ -1,2 +1,4 @@
 .python-version
 /env
+.DS_Store
+dump.rdb
