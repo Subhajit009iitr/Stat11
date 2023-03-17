@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ..models.team import Team
-from ..serializers.match_serializer import MatchNestedSerializer
-from ..serializers.player_serializer import PlayerNestedSerializer
+from .match_serializers import MatchNestedSerializer
+from .player_serializers import PlayerNestedSerializer
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:

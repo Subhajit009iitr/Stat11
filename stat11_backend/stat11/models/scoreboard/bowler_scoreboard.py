@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from ..player import Player
 from ..team import Team
+from ...constants.bowler_statuses import ( BOWLER_STATUSES, IDLE )
 
 class StatusOfBowler(models.TextChoices):
     BOWLING = 'bowling', _('Bowling')
@@ -14,7 +15,7 @@ class BowlerScoreboard(models.Model):
     balls=models.IntegerField()
     wickets=models.IntegerField()
     maidens=models.IntegerField()
-    status=models.CharField(max_length=10, choices=StatusOfBowler.choices, default=StatusOfBowler.IDLE)
+    status=models.CharField(max_length=10, choices=BOWLER_STATUSES, default=IDLE)
     entry_time=models.TimeField()
     exit_time=models.TimeField()
 
