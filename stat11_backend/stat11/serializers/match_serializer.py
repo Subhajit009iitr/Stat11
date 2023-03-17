@@ -1,6 +1,5 @@
-from dataclasses import fields
 from rest_framework import serializers
-from models.models import *
+from ..models.match import Match
 
 
 class MatchSerializer(serializers.ModelSerializer):

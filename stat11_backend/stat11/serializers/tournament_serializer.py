@@ -1,10 +1,8 @@
-from dataclasses import fields
 from rest_framework import serializers
-from models.models import *
-
+from ..models.tournament import Tournament
 
 class TournamentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Tournament
         fields = '__all__'
         
