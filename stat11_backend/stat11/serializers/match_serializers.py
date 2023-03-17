@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models.match import Match
-from ..serializers.tournament_serializer import TournamentSerializer
+from .tournament_serializers import TournamentSerializer
 
 class MatchSerializer(serializers.ModelSerializer):
     class Meta:

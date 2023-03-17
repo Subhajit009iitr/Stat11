@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ...models.scoreboard.batter_scoreboard import BatterScoreboard
-from ...serializers.player_serializer import PlayerNestedSerializer
-from ...serializers.team_serializer import TeamNestedSerializer
+from ..player_serializers import PlayerNestedSerializer
+from ..team_serializers import TeamNestedSerializer
 
 class BatterScoreboardSerializer(serializers.ModelSerializer):
     class Meta:
