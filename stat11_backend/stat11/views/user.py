@@ -8,8 +8,9 @@ class UserModelViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @action(detail=True, methods=['get'])
+    @action(detail=False, methods=['get'])
     def who_am_i(self, request):
-        print(request.user)
-        return Response({"data": request.user})
-
+        if request.user.username:
+            serializer = UserSerializer(request.user)
+            return Response({"data": serializer.data})
+        return Response({"data": "User not registered!"})
