@@ -1,18 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Link, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.svg'
 import batter from '../assets/Batter.svg'
+import stumps from '../assets/FallingStumps.svg'
 import LoginForm from '../components/forms/loginForm'
+import SignupForm from '../components/forms/signupForm'
 
-function Login() {
-  const navigate = useNavigate()
+function Auth() {
+  const [login, setLogin] = useState(false)
 
   const centerAlignBoxProps = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   }
+
+  const illustration = login ? batter : stumps
+
+  const changeAuthText = login ? "New User?" : "Already a User?"
+
+  const changeAuthTo = login ? "Sign Up" : "Login"
+
+  const authForm = login ? <LoginForm /> : <SignupForm />
 
   return (
     <Box
@@ -33,11 +42,11 @@ function Login() {
         <Box
         component="img"
         sx={{
-          width: "75%",
+          width: "60%",
           maxHeight: "90%"
         }}
-        alt="Batter"
-        src={batter}
+        alt="Illustration"
+        src={illustration}
         />
       </Box>
       <Box
@@ -72,7 +81,7 @@ function Login() {
           src={logo}
           />
         </Box>
-        <LoginForm />
+        {authForm}
         <Box
         sx={{
           width: "100%",
@@ -89,11 +98,11 @@ function Login() {
             marginRight: "0.4rem"
           }}
           >
-            New User?
+            {changeAuthText}
           </Typography>
           <Link
           component="button"
-          onClick={() => navigate('/signup')}
+          onClick={() => setLogin(!login)}
           >
             <Typography
             variant='h6'
@@ -102,7 +111,7 @@ function Login() {
               marginRight: "4rem"
             }}
             >
-              Sign Up
+              {changeAuthTo}
             </Typography>
           </Link>
         </Box>
@@ -111,4 +120,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Auth

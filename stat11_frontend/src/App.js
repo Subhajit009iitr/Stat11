@@ -1,8 +1,8 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/home';
-import Login from './pages/login';
+import Auth from './pages/auth';
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
         element={<Home />}
         />
         <Route 
-        path={`/login`}
-        element={<Login />}
+        path={`/auth`}
+        element={<Auth />}
         />
       </Routes>
     </div>

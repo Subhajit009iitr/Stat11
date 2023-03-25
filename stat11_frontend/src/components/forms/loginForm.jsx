@@ -1,7 +1,14 @@
-import { Box, Button, Divider, Link, TextField, Typography } from '@mui/material'
 import React from 'react'
+import { Box, Button, Divider, Link, TextField, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 function LoginForm() {
+  const navigate = useNavigate()
+
+  const loginClickHandler = () => {
+    console.log("Log me in!")
+  }
+
   return (
     <Box
     sx={{
@@ -79,6 +86,7 @@ function LoginForm() {
           borderRadius: 8,
           width: "70%",
         }}
+        onClick={loginClickHandler}
         >
           <Typography
           variant='button'
@@ -96,7 +104,7 @@ function LoginForm() {
         <Link
         component="button"
         underline='always'
-        onClick={() => console.log("Go fast!")}
+        onClick={() => navigate('/home')}
         >
             <Typography
             variant='h6'

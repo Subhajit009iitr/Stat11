@@ -11,7 +11,7 @@ function Home() {
             <div>Home</div>
         )
     }else{
-        return <Navigate to={`/login`} replace={true} />
+        return <Navigate to={`/auth`} replace={true} />
     }
 }
 
