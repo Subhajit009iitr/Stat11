@@ -3,6 +3,7 @@ import { Box, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.svg'
 import batter from '../assets/Batter.svg'
+import LoginForm from '../components/forms/loginForm'
 
 function Login() {
   const navigate = useNavigate()
@@ -32,7 +33,8 @@ function Login() {
         <Box
         component="img"
         sx={{
-          width: "87.5%"
+          width: "75%",
+          maxHeight: "90%"
         }}
         alt="Batter"
         src={batter}
@@ -70,7 +72,7 @@ function Login() {
           src={logo}
           />
         </Box>
-        <Box>Form</Box>
+        <LoginForm />
         <Box
         sx={{
           width: "100%",

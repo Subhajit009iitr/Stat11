@@ -11,18 +11,19 @@ import { ThemeProvider, createTheme, alpha } from '@mui/material';
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#448791",
-      light: alpha("#448791", 0.1)
+      light: alpha("#448791", 0.1),
+      dark: "#387078"
     },
     secondary: {
       main: "#6498E6"
     },
     hint: {
       main: "#7D7D7D",
-      ligth: "#A5A5A5",
+      light: "#A5A5A5",
       dark: "#7A7979"
     },
     background: {
@@ -33,8 +34,7 @@ const theme = createTheme({
   typography: {
     htmlFontSize: 10,
     h2: {
-      fontSize: "3.2rem",
-      fontWeight: 400,
+      fontSize: "3.2rem"
     },
     h3: {
       fontSize: "2.8rem"
@@ -56,7 +56,8 @@ const theme = createTheme({
     },
     button: {
       fontSize: "2.4rem",
-      fontWeight: 500
+      fontWeight: 500,
+      textTransform: "none"
     }
   }
 })
