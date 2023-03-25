@@ -10,16 +10,23 @@ function LoginForm() {
         justifyContent: "center",
         alignItems: "center",
         flexGrow: 1,
-        // backgroundColor: "yellow",
         width: "70%"
     }}
     >
-       <Typography
-       variant='h2'
-       gutterBottom={true}
-       >
+      <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-start"
+       }}
+      >
+        <Typography
+        variant='h2'
+        gutterBottom={true}
+        >
             Welcome back!
-       </Typography>
+        </Typography>
+      </Box>
        <TextField 
         required={true}
         label='Email-ID' 
@@ -30,6 +37,9 @@ function LoginForm() {
         color='hint'
         error={false}
         onChange={() => console.log("Yah")}
+        sx={{
+          margin: "0.8rem 0 0.4rem 0"
+        }}
         />
         <TextField 
         required={true}
@@ -41,15 +51,20 @@ function LoginForm() {
         color='hint'
         error={false}
         onChange={() => console.log("Yah")}
+        sx={{
+          margin: "0.8rem 0"
+        }}
         />
         <Link
         component="button"
         underline='hover'
         onClick={() => console.log("How dare u forget PASSWORD??")}
+        sx={{
+          margin: "1.6rem 0 1.2rem 0"
+        }}
         >
             <Typography
             variant='h6'
-            gutterBottom={true}
             color='hint.light'
             >
                 Forgot Password?
@@ -62,7 +77,7 @@ function LoginForm() {
         disabled={false}
         sx={{
           borderRadius: 8,
-          width: "70%"
+          width: "70%",
         }}
         >
           <Typography
@@ -72,10 +87,10 @@ function LoginForm() {
           </Typography>
         </Button>
         <Divider
-        light={true}
         sx={{
           width: "85%",
           backgroundColor: "hint",
+          margin: "1.2rem 0"
         }}
         />
         <Link
