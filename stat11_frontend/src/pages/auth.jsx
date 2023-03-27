@@ -3,8 +3,8 @@ import { Box, Link, Typography } from '@mui/material'
 import logo from '../assets/Logo.svg'
 import batter from '../assets/Batter.svg'
 import stumps from '../assets/FallingStumps.svg'
-import LoginForm from '../components/forms/loginForm'
-import SignupForm from '../components/forms/signupForm'
+import LoginForm from '../components/form/loginForm'
+import SignupForm from '../components/form/signupForm'
 
 function Auth() {
   const [login, setLogin] = useState(false)
