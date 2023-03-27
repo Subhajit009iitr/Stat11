@@ -7,95 +7,15 @@ import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGene
 function SignupForm() {
     const navigate = useNavigate()
     const [isPlayer, setIsPlayer] = useState(false)
-    const [username, setUsername] = useState()
-    const [email, setEmail] = useState()
-    const [pass, setPass] = useState()
-    const [confirmPass, setConfirmPass] = useState()
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
+    const [confirmPass, setConfirmPass] = useState('')
     const [playerType, setPlayerType] = useState('')
 
     const signUpClickHandler = () => {
         console.log("Sign me up!")
     }
-
-    // const checkBoxChangeHandler = (setStateFunction) => {
-    //   const onChangeHandler = (event) => {
-    //     setStateFunction(event.target.checked)
-    //   }
-    //   return onChangeHandler
-    // }
-
-    // const textFieldChangeHandler = (setStateFunction) => {
-    //   const onChangeHandler = (event) => {
-    //     setStateFunction(event.target.value)
-    //   }
-    //   return onChangeHandler
-    // }
-
-    // const textFormFieldGenerator = (label, stateVar ,setStateVar) => {
-    //   return (
-    //     <TextField 
-    //     required={true}
-    //     label={label} 
-    //     type='text' 
-    //     placeholder={label} 
-    //     value={stateVar}
-    //     variant='outlined'
-    //     fullWidth={true}
-    //     color='hint'
-    //     error={false}
-    //     onChange={
-    //       textFieldChangeHandler(setStateVar)
-    //     }
-    //     sx={{
-    //       margin: "0.8rem 0"
-    //     }}
-    //     />
-    //   )
-    // }
-
-    // const checkBoxFormFieldGenerator = (label, stateVar, setStateVar) => {
-    //   return (
-    //     <FormControlLabel 
-    //     label={label}
-    //     control={
-    //         <Checkbox 
-    //         checked={stateVar}
-    //         onChange={
-    //           checkBoxChangeHandler(setStateVar)
-    //         }
-    //         />
-    //     }
-    //     />
-    //   )
-    // }
-
-    // const selectFormFieldGenerator = (label, items, stateVar, setStateVar) => {
-    //   const menuItems = items.length>0 ?
-    //   items.map((item, index) => <MenuItem key={index} value={item[0]}>{item[1]}</MenuItem>) :
-    //   <></>
-
-    //   return (
-    //     <FormControl 
-    //     fullWidth
-    //     sx={{
-    //         marginBottom: "1.6rem"
-    //     }}
-    //     >
-    //         <InputLabel>{label}</InputLabel>
-    //         <Select 
-    //         required
-    //         label={label}
-    //         variant='outlined'
-    //         value={stateVar}
-    //         onChange={
-    //           textFieldChangeHandler(setStateVar)
-    //         }
-    //         >
-    //             {menuItems}
-    //         </Select>
-    //     </FormControl>
-    //   )
-    // }
 
     const playerTypeFormField = isPlayer ?
     selectFormFieldGenerator(

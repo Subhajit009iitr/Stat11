@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Button, Divider, Link, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { textFormFieldGenerator } from './genericFormFieldGenerators'
 
 function LoginForm() {
   const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('')
 
   const loginClickHandler = () => {
     console.log("Log me in!")
@@ -34,7 +37,7 @@ function LoginForm() {
             Welcome back!
         </Typography>
       </Box>
-       <TextField 
+       {/* <TextField 
         required={true}
         label='Email-ID' 
         type='text' 
@@ -47,8 +50,13 @@ function LoginForm() {
         sx={{
           margin: "0.8rem 0 0.4rem 0"
         }}
-        />
-        <TextField 
+        /> */}
+        {textFormFieldGenerator(
+          'Email-ID',
+          email,
+          setEmail
+        )}
+        {/* <TextField 
         required={true}
         label='Password' 
         type='text' 
@@ -61,7 +69,12 @@ function LoginForm() {
         sx={{
           margin: "0.8rem 0"
         }}
-        />
+        /> */}
+        {textFormFieldGenerator(
+          'Password',
+          pass,
+          setPass
+        )}
         <Link
         component="button"
         underline='hover'
