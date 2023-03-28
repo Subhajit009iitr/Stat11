@@ -37,39 +37,11 @@ function LoginForm() {
             Welcome back!
         </Typography>
       </Box>
-       {/* <TextField 
-        required={true}
-        label='Email-ID' 
-        type='text' 
-        placeholder='Email-ID' 
-        variant='outlined'
-        fullWidth={true}
-        color='hint'
-        error={false}
-        onChange={() => console.log("Yah")}
-        sx={{
-          margin: "0.8rem 0 0.4rem 0"
-        }}
-        /> */}
         {textFormFieldGenerator(
           'Email-ID',
           email,
           setEmail
         )}
-        {/* <TextField 
-        required={true}
-        label='Password' 
-        type='text' 
-        placeholder='Password' 
-        variant='outlined'
-        fullWidth={true}
-        color='hint'
-        error={false}
-        onChange={() => console.log("Yah")}
-        sx={{
-          margin: "0.8rem 0"
-        }}
-        /> */}
         {textFormFieldGenerator(
           'Password',
           pass,
@@ -80,7 +52,8 @@ function LoginForm() {
         underline='hover'
         onClick={() => console.log("How dare u forget PASSWORD??")}
         sx={{
-          margin: "1.6rem 0 1.2rem 0"
+          marginTop: 4,
+          marginBottom: 3
         }}
         >
             <Typography

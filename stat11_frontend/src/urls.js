@@ -1,19 +1,17 @@
-// Frontend urls
+// Hosts
 
-// export const baseFrontendUrl = () => {
-//     return '/'
-// }
+export const BACKEND_HOST = 'http://localhost:8000/'
 
-// export const homeUrl = () => {
-//     return `${baseFrontendUrl}home/`
-// }
+// Backend URLs
 
-// export const loginUrl = () => {
-//     return `${baseFrontendUrl}login/`
-// }
+export const baseBackendUrl = () => {
+    return `${BACKEND_HOST}api/`
+}
 
-// export const signupUrl = () => {
-//     return `${baseFrontendUrl}signup/`
-// }
+export const loginBackendUrl = () => {
+    return `${baseBackendUrl}auth/login/`
+}
 
-// Backend urls
+export const signupBackendUrl = () => {
+    return `${baseBackendUrl}auth/signup/`
+}

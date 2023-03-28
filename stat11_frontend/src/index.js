@@ -12,6 +12,7 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 export const theme = createTheme({
+  spacing: (factor) => `${0.4 * factor}rem`,
   palette: {
     primary: {
       main: "#448791",

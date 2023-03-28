@@ -13,5 +13,7 @@ router.register('batter_scoreboard',BatterScoreboardModelViewSet ,basename='batt
 router.register('bowler_scoreboard',BowlerScoreboardModelViewSet ,basename='bowler_scoreboard')
 
 urlpatterns =[
-    path('', include(router.urls))
+    path('api/', include((router.urls, 'stat11'))),
+    path('api/auth/login/', LoginUser.as_view()),
+    path('api/auth/signup/', SignUpUser.as_view()),
 ]
