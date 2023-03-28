@@ -1,17 +1,17 @@
 // Hosts
 
-export const BACKEND_HOST = 'http://localhost:8000/'
+export const BACKEND_HOST = 'http://localhost:8000'
 
 // Backend URLs
 
 export const baseBackendUrl = () => {
-    return `${BACKEND_HOST}api/`
+    return `${BACKEND_HOST}/api/`
 }
 
 export const loginBackendUrl = () => {
-    return `${baseBackendUrl}auth/login/`
+    return `${baseBackendUrl()}auth/login/`
 }
 
 export const signupBackendUrl = () => {
-    return `${baseBackendUrl}auth/signup/`
+    return `${baseBackendUrl()}auth/signup/`
 }

@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
-import { Box, Button, Divider, Link, TextField, Typography } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { textFormFieldGenerator } from './genericFormFieldGenerators'
+import { loginUser } from '../../features/auth/authSlice'
 
 function LoginForm() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
 
   const loginClickHandler = () => {
-    console.log("Log me in!")
+    dispatch(
+      loginUser({
+        email: email,
+        pass: pass
+      })
+    )
   }
 
   return (
@@ -50,7 +58,7 @@ function LoginForm() {
         <Link
         component="button"
         underline='hover'
-        onClick={() => console.log("How dare u forget PASSWORD??")}
+        onClick={() => alert("Really man! U forget PASSWORD??")}
         sx={{
           marginTop: 4,
           marginBottom: 3
@@ -84,7 +92,8 @@ function LoginForm() {
         sx={{
           width: "85%",
           backgroundColor: "hint",
-          margin: "1.2rem 0"
+          marginTop: 3,
+          marginBottom: 3
         }}
         />
         <Link

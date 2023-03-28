@@ -3,7 +3,7 @@ import { BACKEND_HOST } from "./urls";
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
+// axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
 
 const BackendClient = axios.create({
   baseURL: BACKEND_HOST,

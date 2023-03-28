@@ -4,4 +4,5 @@ from rest_framework.decorators import action
 
 class LoginUser(APIView):
     def post(self, request):
+        print(request.data)
         return Response({"data": "working..."})
