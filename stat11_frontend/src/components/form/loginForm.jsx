@@ -15,7 +15,7 @@ function LoginForm() {
     dispatch(
       loginUser({
         email: email,
-        pass: pass
+        passwords: pass
       })
     )
   }

@@ -5,4 +5,4 @@ from rest_framework.decorators import action
 class SignUpUser(APIView):
     def post(self, request):
         print(request.data)
-        return Response({"data": "working..."})
+        return Response({"data": "sign up work"})

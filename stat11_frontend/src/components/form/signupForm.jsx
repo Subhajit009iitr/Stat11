@@ -3,9 +3,13 @@ import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import playerTypes from '../../constants/playerTypes'
 import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from './genericFormFieldGenerators'
+import { useDispatch } from 'react-redux'
+import { signupUser } from '../../features/auth/authSlice'
 
 function SignupForm() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [isPlayer, setIsPlayer] = useState(false)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -13,8 +17,39 @@ function SignupForm() {
     const [confirmPass, setConfirmPass] = useState('')
     const [playerType, setPlayerType] = useState('')
 
+    const validateEmail = () => {
+      if(email==='') return true
+
+      var emailReg = /^[A-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\.[A-Z0-9_!#$%&'*+/=?`{|}~^-]+↵)*@[A-Z0-9-]+(?:\.[A-Z0-9-]+)*$/
+      if(emailReg.test(email)) return true
+      return false
+    }
+
+    const validatePass = () => {
+      if(pass==='') return true
+
+      var passReg = /"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/
+      if(passReg.test(pass)) return true
+      return false
+    }
+
+    const validateConfirmPass = () => {
+      if(confirmPass==='') return true
+
+      if(confirmPass===pass) return true
+      return false
+    }
+
     const signUpClickHandler = () => {
-        console.log("Sign me up!")
+        dispatch(
+          signupUser({
+            username: username,
+            email: email,
+            password: pass,
+            is_player: isPlayer,
+            player_type: playerType
+          })
+        )
     }
 
     const playerTypeFormField = isPlayer ?
@@ -59,17 +94,23 @@ function SignupForm() {
             {textFormFieldGenerator(
               'Email-ID',
               email,
-              setEmail
+              setEmail,
+              validateEmail,
+              "Invalid email format"
             )}
             {textFormFieldGenerator(
               'Password',
               pass,
-              setPass
+              setPass,
+              validatePass,
+              "Invalid password format"
             )}
             {textFormFieldGenerator(
               'Confirm Password',
               confirmPass,
-              setConfirmPass
+              setConfirmPass,
+              validateConfirmPass,
+              "Confirm password doesn't match password"
             )}
             <Box
             sx={{

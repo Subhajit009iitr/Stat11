@@ -18,7 +18,9 @@ const textFieldChangeHandler = (setStateFunction) => {
 
 // Form Field Generators
 
-export const textFormFieldGenerator = (label, stateVar ,setStateVar) => {
+export const textFormFieldGenerator = (label, stateVar ,setStateVar, error = () => true, errorText) => {
+    let err = !error()
+
     return (
       <TextField 
       required={true}
@@ -29,7 +31,8 @@ export const textFormFieldGenerator = (label, stateVar ,setStateVar) => {
       variant='outlined'
       fullWidth={true}
       color='hint'
-      error={false}
+      error={err}
+      helperText={err ? errorText : ''}
       onChange={
         textFieldChangeHandler(setStateVar)
       }
