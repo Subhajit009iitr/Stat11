@@ -20,7 +20,7 @@ function SignupForm() {
     const validateEmail = () => {
       if(email==='') return true
 
-      var emailReg = /^[A-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\.[A-Z0-9_!#$%&'*+/=?`{|}~^-]+↵)*@[A-Z0-9-]+(?:\.[A-Z0-9-]+)*$/
+      var emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
       if(emailReg.test(email)) return true
       return false
     }
@@ -41,15 +41,26 @@ function SignupForm() {
     }
 
     const signUpClickHandler = () => {
-        dispatch(
-          signupUser({
-            username: username,
-            email: email,
-            password: pass,
-            is_player: isPlayer,
-            player_type: playerType
-          })
-        )
+      // if(validateEmail() && validatePass() && validateConfirmPass()){
+      //   dispatch(
+      //     signupUser({
+      //       username: username,
+      //       email: email,
+      //       password: pass,
+      //       is_player: isPlayer,
+      //       player_type: playerType
+      //     })
+      //   )
+      // } 
+      dispatch(
+        signupUser({
+          username: username,
+          email: email,
+          password: pass,
+          is_player: isPlayer,
+          player_type: playerType
+        })
+      )
     }
 
     const playerTypeFormField = isPlayer ?

@@ -1,6 +1,7 @@
 from django.urls import path,include
 from stat11.views import *
 from rest_framework.routers import DefaultRouter
+from django.views.decorators.csrf import csrf_exempt
 
 router = DefaultRouter()
 
@@ -15,5 +16,6 @@ router.register('bowler_scoreboard',BowlerScoreboardModelViewSet ,basename='bowl
 urlpatterns =[
     path('api/', include((router.urls, 'stat11'))),
     path('api/auth/login/', LoginUser.as_view()),
-    path('api/auth/signup/', SignUpUser.as_view()),
+    path('api/auth/signup/', csrf_exempt(SignUpUser.as_view())),
+    # path('api/auth/signup/', SignUpUser.as_view()),
 ]

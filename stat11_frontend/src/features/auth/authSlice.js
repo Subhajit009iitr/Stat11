@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
 import { loginBackendUrl, signupBackendUrl } from "../../urls";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const initialState = {
     loading: false,
@@ -28,12 +30,32 @@ export const loginUser = createAsyncThunk('auth/loginUser', userData => {
 })
 
 export const signupUser = createAsyncThunk('auth/signupUser', userData => {
-    return BackendClient
+    // return BackendClient
+    // .post(
+    //     signupBackendUrl(),
+    //     {
+    //         email: userData['email'],
+    //         password: userData['password']
+    //     }
+    // )
+    // .then(res => {
+    //     console.log(res)
+    //     alert("Got response")
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    //     alert("Errorrr!!!")
+    // })
+
+    return axios
     .post(
         signupBackendUrl(),
+        userData,
         {
-            email: userData['email'],
-            password: userData['password']
+            headers: {
+                "X-CSRFToken": Cookies.get('csrftoken'),
+            },
+            withCredentials: true
         }
     )
     .then(res => {
@@ -44,6 +66,19 @@ export const signupUser = createAsyncThunk('auth/signupUser', userData => {
         console.log(err)
         alert("Errorrr!!!")
     })
+
+    // return BackendClient
+    // .get(
+    //     signupBackendUrl()
+    // )
+    // .then(res => {
+    //     console.log(res)
+    //     alert("Got response")
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    //     alert("Errorrr!!!")
+    // })
 })
 
 const authSlice = createSlice({
