@@ -17,5 +17,4 @@ urlpatterns =[
     path('api/', include((router.urls, 'stat11'))),
     path('api/auth/login/', LoginUser.as_view()),
     path('api/auth/signup/', csrf_exempt(SignUpUser.as_view())),
-    # path('api/auth/signup/', SignUpUser.as_view()),
 ]

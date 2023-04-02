@@ -28,7 +28,7 @@ function SignupForm() {
     const validatePass = () => {
       if(pass==='') return true
 
-      var passReg = /"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/
+      var passReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
       if(passReg.test(pass)) return true
       return false
     }
@@ -41,26 +41,18 @@ function SignupForm() {
     }
 
     const signUpClickHandler = () => {
-      // if(validateEmail() && validatePass() && validateConfirmPass()){
-      //   dispatch(
-      //     signupUser({
-      //       username: username,
-      //       email: email,
-      //       password: pass,
-      //       is_player: isPlayer,
-      //       player_type: playerType
-      //     })
-      //   )
-      // } 
-      dispatch(
-        signupUser({
-          username: username,
-          email: email,
-          password: pass,
-          is_player: isPlayer,
-          player_type: playerType
-        })
-      )
+      if(validateEmail() && validatePass() && validateConfirmPass()){
+        dispatch(
+          signupUser({
+            username: username,
+            email: email,
+            password: pass,
+            is_player: isPlayer,
+            player_type: playerType
+          })
+        )
+        navigate('/login')
+      } 
     }
 
     const playerTypeFormField = isPlayer ?

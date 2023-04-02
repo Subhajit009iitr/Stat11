@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
 import { loginBackendUrl, signupBackendUrl } from "../../urls";
-import axios from "axios";
-import Cookies from "js-cookie";
 
 const initialState = {
     loading: false,
-    error: '',
+    error: false,
     isAuthenticated: false,
+    openAuthSnackbar: false,
+    userCreated: false,
+    message: ''
 }
 
 export const loginUser = createAsyncThunk('auth/loginUser', userData => {
@@ -30,55 +31,12 @@ export const loginUser = createAsyncThunk('auth/loginUser', userData => {
 })
 
 export const signupUser = createAsyncThunk('auth/signupUser', userData => {
-    // return BackendClient
-    // .post(
-    //     signupBackendUrl(),
-    //     {
-    //         email: userData['email'],
-    //         password: userData['password']
-    //     }
-    // )
-    // .then(res => {
-    //     console.log(res)
-    //     alert("Got response")
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    //     alert("Errorrr!!!")
-    // })
-
-    return axios
+    return BackendClient
     .post(
         signupBackendUrl(),
-        userData,
-        {
-            headers: {
-                "X-CSRFToken": Cookies.get('csrftoken'),
-            },
-            withCredentials: true
-        }
+        userData
     )
-    .then(res => {
-        console.log(res)
-        alert("Got response")
-    })
-    .catch(err => {
-        console.log(err)
-        alert("Errorrr!!!")
-    })
-
-    // return BackendClient
-    // .get(
-    //     signupBackendUrl()
-    // )
-    // .then(res => {
-    //     console.log(res)
-    //     alert("Got response")
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    //     alert("Errorrr!!!")
-    // })
+    .then(res => res.data)
 })
 
 const authSlice = createSlice({
@@ -109,13 +67,13 @@ const authSlice = createSlice({
         })
         .addCase(signupUser.fulfilled, (state,action) => {
             state.loading = false
-            state.error = ''
-            state.isAuthenticated = action.payload
+            state.error = false
+            state.message = action.payload
         })
         .addCase(signupUser.rejected, (state,action) => {
             state.loading = false
-            state.error = action.error.message
-            state.isAuthenticated = false
+            state.error = true
+            state.message = action.error.message
         })
     }
 })
