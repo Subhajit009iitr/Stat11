@@ -11,25 +11,18 @@ class LoginUser(APIView):
         user_data = request.data
 
         try:
-            print("HELLO0")
-            print(User.objects.all())
             user = User.objects.get(email=user_data['email'])
-            print("HELLO1")
         except ObjectDoesNotExist:
             message = 'User not found'
             status_code = status.HTTP_204_NO_CONTENT
-            print("HELLO2")
         else:
-            print(user.check_password(user_data['password']))
-            print("HELLO3")
             if user.check_password(user_data['password']):
-                # login(request, user)
+                login(request, user)
                 message = 'User logged in successfully'
                 status_code = status.HTTP_200_OK
             else:
                 message = 'Incorrect user credentials'
                 status_code = status.HTTP_401_UNAUTHORIZED
 
-        print("HELLO4")
         res = {'message': message}
         return Response(res, status=status_code)

@@ -5,6 +5,7 @@ import { loginBackendUrl, signupBackendUrl } from "../../urls";
 const initialState = {
     loading: false,
     error: false,
+    warning: false,
     onLogin: true,
     isAuthenticated: false,
     openAuthSnackbar: false,
@@ -17,7 +18,19 @@ export const loginUser = createAsyncThunk('auth/loginUser', userData => {
         loginBackendUrl(),
         userData
     )
-    .then(res => res.data)
+    .then(res => {
+        if(res.status===200){
+            return {
+                message: res.data['message'],
+                isAuthenticated: true
+            }
+        }else if(res.status===204){
+            return {
+                message: "User not found",
+                isAuthenticated: false
+            }
+        }
+    })
 })
 
 export const signupUser = createAsyncThunk('auth/signupUser', userData => {
@@ -49,16 +62,19 @@ const authSlice = createSlice({
             state.loading = true
         })
         .addCase(loginUser.fulfilled, (state,action) => {
-            alert("Login fulfilled!")
             state.loading = false
-            state.error = ''
-            // state.isAuthenticated = action.payload
+            state.error = false
+            state.warning = !action.payload['isAuthenticated']
+            state.message = action.payload['message']
+            state.isAuthenticated = action.payload['isAuthenticated']
+            state.openAuthSnackbar = true
         })
         .addCase(loginUser.rejected, (state,action) => {
-            alert("Login rejected!")
             state.loading = false
-            state.error = action.error.message
-            // state.isAuthenticated = false
+            state.error = true
+            state.message = 'Incorrect user credentials!'
+            state.isAuthenticated = false
+            state.openAuthSnackbar = true
         })
         .addCase(signupUser.pending, state => {
             state.loading = true

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Link, Typography } from '@mui/material'
 import logo from '../assets/Logo.svg'
 import batter from '../assets/Batter.svg'
@@ -8,10 +8,12 @@ import SignupForm from '../components/form/signupForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { showSnackbar, switchAuthPage } from '../features/auth/authSlice'
 import MySnackbar from '../components/snackbar'
+import { useNavigate } from 'react-router-dom'
 
 function Auth() {
   const authState = useSelector(state => state.auth)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const centerAlignBoxProps = {
     display: "flex",
@@ -38,6 +40,10 @@ function Auth() {
       showSnackbar(false)
     )
   }
+
+  useEffect(() => {
+    if(authState.isAuthenticated) navigate('/home')
+  },[authState.isAuthenticated])
 
   return (
     <>
@@ -137,7 +143,7 @@ function Auth() {
       <MySnackbar
       open={authState.openAuthSnackbar}
       onClose={onSnackbarCloseHandler}
-      severity={authState.error ? "error" : "success"}
+      severity={authState.error ? "error" : (authState.warning ? "warning" : "success")}
       message={authState.message}
       />
     </>
