@@ -1,19 +1,36 @@
+import { Alert, IconButton, Snackbar } from '@mui/material'
 import React from 'react'
-import { Snackbar } from '@mui/material';
+import { GrClose } from 'react-icons/gr'
 
-function SnackBar(props) {
-    const { open, message, type } = props
-
-    console.log("Yah")
+function MySnackbar(props) {
+    const { open, onClose, severity, message } = props
 
     return (
-        <SnackBar
+        <Snackbar
         open={open}
-        message={message}
+        onClose={onClose}
+        autoHideDuration={4000}
+        action={
+            <>
+                <IconButton
+                size="small"
+                color="inherit"
+                onClick={onClose}
+                >
+                <GrClose />
+                </IconButton>
+            </>
+        }
         >
-            Hello
-        </SnackBar>
+        <Alert 
+        onClose={onClose} 
+        severity={severity} 
+        sx={{ width: '100%' }}
+        >
+            {message}
+        </Alert>
+        </Snackbar>
     )
 }
 
-export default SnackBar
+export default MySnackbar

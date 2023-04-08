@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import playerTypes from '../../constants/playerTypes'
 import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from './genericFormFieldGenerators'
 import { useDispatch } from 'react-redux'
-import { signupUser } from '../../features/auth/authSlice'
+import { showSnackbar, signupUser } from '../../features/auth/authSlice'
 
 function SignupForm() {
     const navigate = useNavigate()
@@ -51,8 +51,11 @@ function SignupForm() {
             player_type: playerType
           })
         )
-        navigate('/login')
-      } 
+        // navigate('/login')
+      }
+      // dispatch(
+      //   showSnackbar(true)
+      // ) 
     }
 
     const playerTypeFormField = isPlayer ?

@@ -20,6 +20,7 @@ class SignUpUser(APIView):
                 username=user_data['username'],
                 email=user_data['email']
             )
+            user.set_password(user_data['password'])
             user.save()
             message = 'User created successfully.'
 

@@ -5,12 +5,13 @@ import batter from '../assets/Batter.svg'
 import stumps from '../assets/FallingStumps.svg'
 import LoginForm from '../components/form/loginForm'
 import SignupForm from '../components/form/signupForm'
-import SnackBar from '../components/snackbar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { showSnackbar, switchAuthPage } from '../features/auth/authSlice'
+import MySnackbar from '../components/snackbar'
 
 function Auth() {
-  const [login, setLogin] = useState(false)
   const authState = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
   const centerAlignBoxProps = {
     display: "flex",
@@ -18,13 +19,25 @@ function Auth() {
     alignItems: "center",
   }
 
-  const illustration = login ? batter : stumps
+  const illustration = authState.onLogin ? batter : stumps
 
-  const changeAuthText = login ? "New User?" : "Already a User?"
+  const changeAuthText = authState.onLogin ? "New User?" : "Already a User?"
 
-  const changeAuthTo = login ? "Sign Up" : "Login"
+  const changeAuthTo = authState.onLogin ? "Sign Up" : "Login"
 
-  const authForm = login ? <LoginForm /> : <SignupForm />
+  const authForm = authState.onLogin ? <LoginForm /> : <SignupForm />
+
+  const switchPage = () => {
+    dispatch(
+      switchAuthPage(!authState.onLogin)
+    )
+  }
+
+  const onSnackbarCloseHandler = () => {
+    dispatch(
+      showSnackbar(false)
+    )
+  }
 
   return (
     <>
@@ -106,7 +119,7 @@ function Auth() {
             </Typography>
             <Link
             component="button"
-            onClick={() => setLogin(!login)}
+            onClick={switchPage}
             >
               <Typography
               variant='h6'
@@ -121,11 +134,12 @@ function Auth() {
           </Box>
         </Box>
       </Box>
-      {/* <SnackBar 
-      // open={authState.openAuthSnackbar}
-      open={true}
-      message={"authState.message"}
-      /> */}
+      <MySnackbar
+      open={authState.openAuthSnackbar}
+      onClose={onSnackbarCloseHandler}
+      severity={authState.error ? "error" : "success"}
+      message={authState.message}
+      />
     </>
   )
 }

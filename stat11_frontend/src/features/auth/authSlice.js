@@ -5,9 +5,9 @@ import { loginBackendUrl, signupBackendUrl } from "../../urls";
 const initialState = {
     loading: false,
     error: false,
+    onLogin: true,
     isAuthenticated: false,
     openAuthSnackbar: false,
-    userCreated: false,
     message: ''
 }
 
@@ -24,10 +24,10 @@ export const loginUser = createAsyncThunk('auth/loginUser', userData => {
         console.log(res)
         alert("Got response")
     })
-    .catch(err => {
-        console.log(err)
-        alert("Errorrr!!!")
-    })
+    // .catch(err => {
+    //     console.log(err)
+    //     alert("Errorrr!!!")
+    // })
 })
 
 export const signupUser = createAsyncThunk('auth/signupUser', userData => {
@@ -45,6 +45,12 @@ const authSlice = createSlice({
     reducers: {
         userAuthenticated: (state,action) => {
             state.isAuthenticated = action.payload
+        },
+        showSnackbar: (state,action) => {
+            state.openAuthSnackbar = action.payload
+        },
+        switchAuthPage: (state,action) => {
+            state.onLogin = action.payload
         }
     },
     extraReducers: builder => {
@@ -68,15 +74,17 @@ const authSlice = createSlice({
         .addCase(signupUser.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
-            state.message = action.payload
+            state.message = action.payload['message']
+            state.openAuthSnackbar = true
         })
-        .addCase(signupUser.rejected, (state,action) => {
+        .addCase(signupUser.rejected, state => {
             state.loading = false
             state.error = true
-            state.message = action.error.message
+            state.message = "Error creating new user!"
+            state.openAuthSnackbar = true
         })
     }
 })
 
 export default authSlice.reducer
-export const { userAuthenticated } = authSlice.actions
+export const { userAuthenticated, switchAuthPage, showSnackbar } = authSlice.actions
