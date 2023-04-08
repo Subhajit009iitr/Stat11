@@ -15,19 +15,9 @@ export const loginUser = createAsyncThunk('auth/loginUser', userData => {
     return BackendClient
     .post(
         loginBackendUrl(),
-        {
-            email: userData['email'],
-            password: userData['password']
-        }
+        userData
     )
-    .then(res => {
-        console.log(res)
-        alert("Got response")
-    })
-    // .catch(err => {
-    //     console.log(err)
-    //     alert("Errorrr!!!")
-    // })
+    .then(res => res.data)
 })
 
 export const signupUser = createAsyncThunk('auth/signupUser', userData => {
@@ -59,14 +49,16 @@ const authSlice = createSlice({
             state.loading = true
         })
         .addCase(loginUser.fulfilled, (state,action) => {
+            alert("Login fulfilled!")
             state.loading = false
             state.error = ''
-            state.isAuthenticated = action.payload
+            // state.isAuthenticated = action.payload
         })
         .addCase(loginUser.rejected, (state,action) => {
+            alert("Login rejected!")
             state.loading = false
             state.error = action.error.message
-            state.isAuthenticated = false
+            // state.isAuthenticated = false
         })
         .addCase(signupUser.pending, state => {
             state.loading = true
@@ -76,6 +68,7 @@ const authSlice = createSlice({
             state.error = false
             state.message = action.payload['message']
             state.openAuthSnackbar = true
+            state.onLogin = true
         })
         .addCase(signupUser.rejected, state => {
             state.loading = false

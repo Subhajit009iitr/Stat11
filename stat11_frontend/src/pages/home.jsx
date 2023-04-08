@@ -6,13 +6,17 @@ function Home() {
     const authState = useSelector(state => state.auth)
     const dispatch = useDispatch()
 
-    if(authState.isAuthenticated){
-        return (
-            <div>Home</div>
-        )
-    }else{
-        return <Navigate to={`/auth`} replace={true} />
-    }
+    // if(authState.isAuthenticated){
+    //     return (
+    //         <div>Home</div>
+    //     )
+    // }else{
+    //     return <Navigate to={`/auth`} replace={true} />
+    // }
+
+    return (
+        <div>Home</div>
+    )
 }
 
 export default Home
