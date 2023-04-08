@@ -1,12 +1,23 @@
-import React from 'react'
-import { Box, Button, Divider, Link, TextField, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { textFormFieldGenerator } from './genericFormFieldGenerators'
+import { loginUser } from '../../features/auth/authSlice'
 
 function LoginForm() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('')
 
   const loginClickHandler = () => {
-    console.log("Log me in!")
+    dispatch(
+      loginUser({
+        email: email,
+        passwords: pass
+      })
+    )
   }
 
   return (
@@ -34,40 +45,23 @@ function LoginForm() {
             Welcome back!
         </Typography>
       </Box>
-       <TextField 
-        required={true}
-        label='Email-ID' 
-        type='text' 
-        placeholder='Email-ID' 
-        variant='outlined'
-        fullWidth={true}
-        color='hint'
-        error={false}
-        onChange={() => console.log("Yah")}
-        sx={{
-          margin: "0.8rem 0 0.4rem 0"
-        }}
-        />
-        <TextField 
-        required={true}
-        label='Password' 
-        type='text' 
-        placeholder='Password' 
-        variant='outlined'
-        fullWidth={true}
-        color='hint'
-        error={false}
-        onChange={() => console.log("Yah")}
-        sx={{
-          margin: "0.8rem 0"
-        }}
-        />
+        {textFormFieldGenerator(
+          'Email-ID',
+          email,
+          setEmail
+        )}
+        {textFormFieldGenerator(
+          'Password',
+          pass,
+          setPass
+        )}
         <Link
         component="button"
         underline='hover'
-        onClick={() => console.log("How dare u forget PASSWORD??")}
+        onClick={() => alert("Really man! U forget PASSWORD??")}
         sx={{
-          margin: "1.6rem 0 1.2rem 0"
+          marginTop: 4,
+          marginBottom: 3
         }}
         >
             <Typography
@@ -98,7 +92,8 @@ function LoginForm() {
         sx={{
           width: "85%",
           backgroundColor: "hint",
-          margin: "1.2rem 0"
+          marginTop: 3,
+          marginBottom: 3
         }}
         />
         <Link
