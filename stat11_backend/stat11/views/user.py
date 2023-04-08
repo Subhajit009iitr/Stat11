@@ -5,6 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from stat11.models import User
 from stat11.serializers import UserSerializer
+from rest_framework import status
 
 class UserModelViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -17,5 +18,15 @@ class UserModelViewSet(viewsets.ModelViewSet):
     def who_am_i(self, request):
         if request.user.username:
             serializer = UserSerializer(request.user)
-            return Response({"data": serializer.data})
-        return Response({"data": "User not registered!"})
+            data = serializer.data
+            status_code = status.HTTP_200_OK
+        else:
+            data = ''
+            status_code = status.HTTP_204_NO_CONTENT
+        
+        res = {'data': data}
+        return Response(data, status=status_code)
+    
+    @action(detail=True, methods=['get'])
+    def is_authenticated(self,request):
+        return Response(request.user.is_authenticated)
