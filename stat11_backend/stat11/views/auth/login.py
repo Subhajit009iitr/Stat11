@@ -7,6 +7,7 @@ from rest_framework import status
 from django.contrib.auth import login
 
 class LoginUser(APIView):
+    
     def post(self, request):
         user_data = request.data
 

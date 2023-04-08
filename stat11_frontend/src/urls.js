@@ -12,6 +12,10 @@ export const loginBackendUrl = () => {
     return `${baseBackendUrl()}auth/login/`
 }
 
+export const logoutBackendUrl = () => {
+    return `${baseBackendUrl()}auth/logout/`
+}
+
 export const signupBackendUrl = () => {
     return `${baseBackendUrl()}auth/signup/`
 }

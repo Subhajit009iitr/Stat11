@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { loginBackendUrl, signupBackendUrl } from "../../urls";
+import { loginBackendUrl, logoutBackendUrl, signupBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -31,6 +31,14 @@ export const loginUser = createAsyncThunk('auth/loginUser', userData => {
             }
         }
     })
+})
+
+export const logoutUser = createAsyncThunk('auth/logoutUser', () => {
+    return BackendClient
+    .get(
+        logoutBackendUrl()
+    )
+    .then(res => res.data)
 })
 
 export const signupUser = createAsyncThunk('auth/signupUser', userData => {
@@ -69,12 +77,26 @@ const authSlice = createSlice({
             state.isAuthenticated = action.payload['isAuthenticated']
             state.openAuthSnackbar = true
         })
-        .addCase(loginUser.rejected, (state,action) => {
+        .addCase(loginUser.rejected, (state) => {
             state.loading = false
             state.error = true
             state.message = 'Incorrect user credentials!'
             state.isAuthenticated = false
             state.openAuthSnackbar = true
+        })
+        .addCase(logoutUser.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(logoutUser.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = action.payload['message']
+            state.isAuthenticated = false
+        })
+        .addCase(logoutUser.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
         })
         .addCase(signupUser.pending, state => {
             state.loading = true
