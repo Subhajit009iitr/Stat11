@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { loginBackendUrl, logoutBackendUrl, signupBackendUrl } from "../../urls";
+import { isAuthenticatedBackendUrl, loginBackendUrl, logoutBackendUrl, signupBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -50,13 +50,21 @@ export const signupUser = createAsyncThunk('auth/signupUser', userData => {
     .then(res => res.data)
 })
 
+export const userIsAuthenticated = createAsyncThunk('auth/userIsAuthenticated', () => {
+    return BackendClient
+    .get(
+        isAuthenticatedBackendUrl()
+    )
+    .then(res => res.data)
+})
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        userAuthenticated: (state,action) => {
-            state.isAuthenticated = action.payload
-        },
+        // userAuthenticated: (state,action) => {
+        //     state.isAuthenticated = action.payload
+        // },
         showSnackbar: (state,action) => {
             state.openAuthSnackbar = action.payload
         },
@@ -92,6 +100,7 @@ const authSlice = createSlice({
             state.error = false
             state.message = action.payload['message']
             state.isAuthenticated = false
+            state.openAuthSnackbar = true
         })
         .addCase(logoutUser.rejected, (state,action) => {
             state.loading = false
@@ -114,8 +123,22 @@ const authSlice = createSlice({
             state.message = "Error creating new user!"
             state.openAuthSnackbar = true
         })
+        .addCase(userIsAuthenticated.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(userIsAuthenticated.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.isAuthenticated = action.payload
+        })
+        .addCase(userIsAuthenticated.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.isAuthenticated = false
+        })
     }
 })
 
 export default authSlice.reducer
-export const { userAuthenticated, switchAuthPage, showSnackbar } = authSlice.actions
+export const { switchAuthPage, showSnackbar } = authSlice.actions
