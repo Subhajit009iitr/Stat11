@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import playerTypes from '../../constants/playerTypes'
-import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from './genericFormFieldGenerators'
+import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../GenericComponent/genericFormFieldGenerators'
 import { useDispatch } from 'react-redux'
 import { showSnackbar, signupUser } from '../../features/auth/authSlice'
 
@@ -42,20 +42,20 @@ function SignupForm() {
 
     const signUpClickHandler = () => {
       if(validateEmail() && validatePass() && validateConfirmPass()){
-        dispatch(
-          signupUser({
-            username: username,
-            email: email,
-            password: pass,
-            is_player: isPlayer,
-            player_type: playerType
-          })
-        )
-        // navigate('/login')
+        if(pass.length>0){
+          dispatch(
+            signupUser({
+              username: username,
+              email: email,
+              password: pass,
+              is_player: isPlayer,
+              player_type: playerType
+            })
+          )
+        }else{
+          alert("Password cannot be empty!")
+        }
       }
-      // dispatch(
-      //   showSnackbar(true)
-      // ) 
     }
 
     const playerTypeFormField = isPlayer ?
