@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import playerTypes from '../../constants/playerTypes'
-import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../GenericComponent/genericFormFieldGenerators'
+import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { useDispatch } from 'react-redux'
 import { showSnackbar, signupUser } from '../../features/auth/authSlice'
 
