@@ -31,3 +31,7 @@ export const whoAmIBackendUrl = () => {
 export const isAuthenticatedBackendUrl = () => {
     return `${userBackendUrl()}check_if_authenticated/`
 }
+
+export const teamUrl = () => {
+    return `${baseBackendUrl()}batter_scoreboard/`
+}

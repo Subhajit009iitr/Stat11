@@ -8,6 +8,8 @@ import { Box } from '@mui/material'
 import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 
 function Home() {
+    const authState = useSelector(state => state.auth)
+    const matchCardState = useSelector(state => state.matchCard)
     const dispatch = useDispatch()
 
     useEffect(() => {
