@@ -6,7 +6,6 @@ import {
   TableRow,
   TableHead,
   TableContainer,
-
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -15,36 +14,34 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#448791",
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#448791",
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 function createBowlerTable(Bowler, overs, maidens, runs, wickets, eco) {
-    return { Bowler, overs, maidens, runs, wickets, eco };
-  }
-  
-  const rows_bowler = [
-    createBowlerTable("1.Raiwat Bapat", 6.0, 8, 1, 0, 5.5),
-    createBowlerTable("2.Nishita sandwich", 6.0, 8, 1, 0, 5.5),
-    createBowlerTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
-  ];
+  return { Bowler, overs, maidens, runs, wickets, eco };
+}
+
+const rows_bowler = [
+  createBowlerTable("Raiwat Bapat", 6.5, 8, 1, 0, 5.5),
+  // createBowlerTable("Nishita sandwich", 6.0, 8, 1, 0, 5.5),
+  // createBowlerTable("Manashree Eclair", 6.0, 8, 1, 0, 5.5),
+];
 
 export default function BowlingScorecard() {
   return (

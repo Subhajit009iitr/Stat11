@@ -38,12 +38,13 @@ function createBatterTable(Batter, runs, balls, s4, s6, SR) {
 }
 
 const rows_batter = [
-  createBatterTable("1.Raiwat Bapat", 6.0, 8, 1, 0, 5.5),
-  createBatterTable("2.Nishita sandwich", 6.0, 8, 1, 0, 5.5),
-  createBatterTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
+  createBatterTable("Raiwat Bapat", 6.0, 8, 1, 0, 5.5),
+  createBatterTable("Nishita sandwich", 6.0, 8, 1, 0, 5.5),
+  // createBatterTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
 ];
 
 function BattingScorecard() {
+  const secondarytext = "Batting"
   return (
     <div>
       <Card
@@ -61,11 +62,11 @@ function BattingScorecard() {
                   <StyledTableCell sx={{ paddingLeft: "48px" }}>
                     Batter Name
                   </StyledTableCell>
-                  <StyledTableCell>Runs&nbsp;</StyledTableCell>
-                  <StyledTableCell>Balls&nbsp;</StyledTableCell>
-                  <StyledTableCell>4s&nbsp;</StyledTableCell>
-                  <StyledTableCell>6s&nbsp;</StyledTableCell>
-                  <StyledTableCell>S.R. &nbsp;</StyledTableCell>
+                  <StyledTableCell sx={{ textAlign: "center" }}>Runs&nbsp;</StyledTableCell>
+                  <StyledTableCell sx={{ textAlign: "center" }}>Balls&nbsp;</StyledTableCell>
+                  <StyledTableCell sx={{ textAlign: "center" }}>4s&nbsp;</StyledTableCell>
+                  <StyledTableCell sx={{ textAlign: "center" }}>6s&nbsp;</StyledTableCell>
+                  <StyledTableCell sx={{ textAlign: "center" }}>S.R. &nbsp;</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -76,13 +77,13 @@ function BattingScorecard() {
                       scope="row"
                       sx={{ paddingLeft: "48px" }}
                     >
-                      {row.Batter}
+                      {row.Batter}<br/><font color= "#A5A5A5">{secondarytext}</font>
                     </StyledTableCell>
-                    <StyledTableCell>{row.runs}</StyledTableCell>
-                    <StyledTableCell>{row.balls}</StyledTableCell>
-                    <StyledTableCell>{row.s4}</StyledTableCell>
-                    <StyledTableCell>{row.s6}</StyledTableCell>
-                    <StyledTableCell>{row.SR}</StyledTableCell>
+                    <StyledTableCell sx={{ textAlign: "center" }}>{row.runs}</StyledTableCell>
+                    <StyledTableCell sx={{ textAlign: "center" }}>{row.balls}</StyledTableCell>
+                    <StyledTableCell sx={{ textAlign: "center" }}>{row.s4}</StyledTableCell>
+                    <StyledTableCell sx={{ textAlign: "center" }}>{row.s6}</StyledTableCell>
+                    <StyledTableCell sx={{ textAlign: "center" }}>{row.SR}</StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
