@@ -29,7 +29,7 @@ export const theme = createTheme({
     },
     background: {
       paper: "#FFFFFF",
-      default: "#FFFFFF"
+      default: "#F8F8F8"
     }
   },
   typography: {

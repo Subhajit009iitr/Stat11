@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { textFormFieldGenerator } from '../GenericComponent/genericFormFieldGenerators'
+import { textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { loginUser } from '../../features/auth/authSlice'
+import { changeSideBarTabsType, switchSideBarTab } from '../../features/sideBar/sideBarSlice'
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -20,6 +21,13 @@ function LoginForm() {
         })
       )
     }
+  }
+
+  const continueToHomeClickHandler = () => {
+    dispatch(
+      switchSideBarTab('Home')
+    )
+    navigate('/home')
   }
 
   const validateEmail = () => {
@@ -111,7 +119,7 @@ function LoginForm() {
         <Link
         component="button"
         underline='always'
-        onClick={() => navigate('/home')}
+        onClick={continueToHomeClickHandler}
         >
             <Typography
             variant='h6'

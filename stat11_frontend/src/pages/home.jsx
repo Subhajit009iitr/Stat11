@@ -3,44 +3,39 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { logoutUser, userIsAuthenticated } from '../features/auth/authSlice'
 import { whoAmI } from '../features/user/userSlice'
+import SideBar from '../components/sideBar/sideBar'
+import { Box } from '@mui/material'
+import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 
 function Home() {
-    const authState = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    // if(authState.isAuthenticated){
-    //     return (
-    //         <div>Home</div>
-    //     )
-    // }else{
-    //     return <Navigate to={`/auth`} replace={true} />
-    // }
-
-    // alert("Reached home!")
-    // useEffect(() => {
-    //     if(authState.isAuthenticated===false) navigate('/auth')
-    // },[authState.isAuthenticated])
 
     useEffect(() => {
-        dispatch(userIsAuthenticated())
-        dispatch(whoAmI())
+        dispatch(
+            changeSideBarTabsType('home')
+          )
     },[])
 
     return (
-        <>
-        <div>Home</div>
-        <button 
-        onClick={() => navigate('/auth')}
+        <Box
+        sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: "background.default",
+            height: "100vh"
+        }}
         >
-            Auth
-        </button>
-        <button 
-        onClick={() => dispatch(logoutUser())}
+        <Box
+        sx={{
+            display: 'flex',
+        }}
         >
-            Logout
-        </button>
-        </>
+            <SideBar />
+            <Box>
+                Home
+            </Box>
+        </Box>
+        </Box>
     )
 }
 
