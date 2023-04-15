@@ -5,6 +5,7 @@ import playerTypes from '../../constants/playerTypes'
 import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { useDispatch } from 'react-redux'
 import { showSnackbar, signupUser } from '../../features/auth/authSlice'
+import { switchHomeTab } from '../../features/home/homeSlice'
 
 function SignupForm() {
     const navigate = useNavigate()
@@ -56,6 +57,13 @@ function SignupForm() {
           alert("Password cannot be empty!")
         }
       }
+    }
+
+    const continueToHomeClickHandler = () => {
+      dispatch(
+        switchHomeTab('Home')
+      )
+      navigate('/home')
     }
 
     const playerTypeFormField = isPlayer ?
@@ -165,7 +173,7 @@ function SignupForm() {
             <Link
             component="button"
             underline='always'
-            onClick={() => navigate('/home')}
+            onClick={continueToHomeClickHandler}
             >
                 <Typography
                 variant='h6'

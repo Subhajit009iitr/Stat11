@@ -24,10 +24,13 @@ function Home() {
     //     if(authState.isAuthenticated===false) navigate('/auth')
     // },[authState.isAuthenticated])
 
-    useEffect(() => {
-        dispatch(userIsAuthenticated())
-        dispatch(whoAmI())
-    },[])
+    // useEffect(() => {
+    //     console.log("reached home")
+    //     // dispatch(userIsAuthenticated())
+    //     // dispatch(whoAmI())
+    // },[])
+
+    console.log("reached home")
 
     return (
         <Box
@@ -48,7 +51,7 @@ function Home() {
                 Home
             </Box>
         </Box>
-        <button 
+        {/* <button 
         onClick={() => dispatch(logoutUser())}
         >
             Logout
@@ -57,7 +60,7 @@ function Home() {
         onClick={() => navigate('/auth')}
         >
             Auth
-        </button>
+        </button> */}
         </Box>
     )
 }
