@@ -35,3 +35,7 @@ export const isAuthenticatedBackendUrl = () => {
 export const teamUrl = () => {
     return `${baseBackendUrl()}batter_scoreboard/`
 }
+
+export const teamDataUrl = () => {
+    return `${baseBackendUrl()}team/`
+}

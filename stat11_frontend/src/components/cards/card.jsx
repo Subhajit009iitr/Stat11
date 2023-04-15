@@ -90,7 +90,7 @@ export default function MediaCard(props) {
             </Box>
             <Box component={'span'} sx={{
                 float:'right',
-                paddingRight: '50px'
+                paddingRight: '20px'
             }}>{props.team1runs}-{props.team1wickets}</Box>
             <br/><br/>
 
@@ -120,7 +120,7 @@ export default function MediaCard(props) {
             </Box>
             <Box component={'span'} sx={{
                 float:'right',
-                paddingRight: '50px'
+                paddingRight: '20px'
             }}>{props.team2runs}-{props.team2wickets}</Box>
             <br/><br/>
 

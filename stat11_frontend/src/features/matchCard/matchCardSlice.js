@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, matchUrl } from "../../urls";
+import { teamUrl, teamDataUrl, matchUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -19,9 +19,18 @@ const initialState = {
     payload:0,
 }
 
-export const teamData = createAsyncThunk('matchCard/teamData', async () => {
+export const teamScoreData = createAsyncThunk('matchCard/teamData', async () => {
     try {
         const res = await BackendClient.get(teamUrl());
+        return res.data;
+    } catch (err) {
+        return console.log(err);
+    }
+});
+
+export const TeamData = createAsyncThunk('matchCard/TeamData', async () => {
+    try {
+        const res = await BackendClient.get(teamDataUrl());
         return res.data;
     } catch (err) {
         return console.log(err);
@@ -40,6 +49,34 @@ const getTotalRunsForTeam2 = (data) => {
     return {totalRuns};
 };
 
+const getNameForTeam1 = (data) => {
+    const teams = data.filter((team) => team.match.id === 1);
+    const teamName = teams[0].name;
+    return {teamName};
+};
+
+const getNameForTeam2 = (data) => {
+    const teams = data.filter((team) => team.match.id === 1);
+    const teamName = teams[1].name;
+    return {teamName};
+};
+
+const getCollegeTeam1 = (data) => {
+    const teams = data.filter((team) => team.match.id === 1);
+    const college = teams[1].collegename;
+    return {college};
+}
+const getCollegeTeam2 = (data) => {
+    const teams = data.filter((team) => team.match.id === 1);
+    const college = teams[1].collegename;
+    return {college};
+}
+const getToss = (data) => {
+    const teams = data.filter((team) => team.match.id === 1);
+    const toss = teams[0].toss;
+    return {toss};
+}
+
 // const updateWinner = (data) =>{
 //     // const winner = data.
 //     // return data.
@@ -50,10 +87,10 @@ const matchCardSlice = createSlice({
     initialState,
     reducers: {
         updateteam1runs: (state,action) => {
-            state.team1runs = getTotalRunsForTeam1(action)
+            state.team1runs = getTotalRunsForTeam1(action.payload)
         },
         updateteam2runs: (state,action) => {
-            state.team2runs = getTotalRunsForTeam2(action)
+            state.team2runs = getTotalRunsForTeam2(action.payload)
         },
         // updateWinner: (state, action)=>{
         //     state.winner = updateWinner(action)
@@ -63,12 +100,12 @@ const matchCardSlice = createSlice({
 
     extraReducers: builder => {
         builder
-        .addCase(teamData.pending, (state) => {
+        .addCase(teamScoreData.pending, (state) => {
             state.loading = true
             console.log("Pendinggg")
 
         })
-        .addCase(teamData.fulfilled, (state,action) => {
+        .addCase(teamScoreData.fulfilled, (state,action) => {
             state.loading = false
             console.log("HUIHUI")
             state.error = ''
@@ -77,11 +114,33 @@ const matchCardSlice = createSlice({
             state.team2runs = getTotalRunsForTeam2(action.payload)
             
         })
-        .addCase(teamData.rejected, (state,action) => {
+        .addCase(teamScoreData.rejected, (state,action) => {
             state.loading = false
             state.error = action.error.message
             console.log("Error")
         })
+        .addCase(TeamData.pending, (state) => {
+            state.loading = true
+            console.log("love")
+
+        })
+        .addCase(TeamData.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = ''
+            console.log("yoii",action.payload)
+            state.team1 = getNameForTeam1(action.payload)
+            state.team2 = getNameForTeam2(action.payload)
+            state.team1college = getCollegeTeam1(action.payload)
+            state.team2college = getCollegeTeam2(action.payload)
+            state.toss = getToss(action.payload)
+        })
+        .addCase(TeamData.rejected, (state,action) => {
+            state.loading = false
+            state.error = action.error.message
+            console.log("Eww")
+        })
+
+
     }
 })
 
