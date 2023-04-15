@@ -36,6 +36,18 @@ export const teamUrl = () => {
     return `${baseBackendUrl()}batter_scoreboard/`
 }
 
-export const teamDataUrl = () => {
+export const teamBackendUrl = () => {
     return `${baseBackendUrl()}team/`
+}
+
+export const matchTeamsBackendUrl = (matchId) => {
+    return `${teamBackendUrl}?match__id=${matchId}`
+}
+
+export const matchBackendUrl = () => {
+    return `${baseBackendUrl()}match/`
+}
+
+export const allMatchAndTeamsUrl = () => {
+    return `${matchBackendUrl()}all_match_and_teams/`
 }

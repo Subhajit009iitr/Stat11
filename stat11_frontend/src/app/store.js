@@ -2,13 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice'
 import userReducer from '../features/user/userSlice'
 import sideBarReducer from '../features/sideBar/sideBarSlice'
-import matchCardReducer from '../features/matchCard/matchCardSlice'
+import matchReducer from '../features/match/matchSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     user: userReducer,
     sideBar: sideBarReducer,
-    matchCard: matchCardReducer
+    match: matchReducer
   },
 });
