@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 
-export default function Header() {
+export default function Header(props) {
   return (
     <div>
       <Typography
@@ -14,7 +14,7 @@ export default function Header() {
           paddingBottom: "10px",
         }}
       >
-        Purple Team v/s Orange Team
+        {props.team1Name} v/s {props.team2Name}
         <br />
         <Typography
           component="box"
@@ -24,7 +24,7 @@ export default function Header() {
             float: "left",
           }}
         >
-          Location, City, State &nbsp;
+          {props.location} &nbsp;
         </Typography>
         <Typography
           component="box"
@@ -35,7 +35,7 @@ export default function Header() {
           }}
         >
           {" "}
-          hehe Overs
+          {props.numberOfOvers} Overs
         </Typography>
       </Typography>
 
@@ -52,7 +52,7 @@ export default function Header() {
       >
         {" "}
         Toss: <br />
-        Purple Team
+        {props.teamWhichWonTheToss}
       </Typography>
 
       <Typography component="box" sx={{ backgroundColor: "#D9D9D9" }}>
