@@ -49,7 +49,13 @@ export default function UpdateScore() {
   );
   return (
     <div>
-      <Header />
+      <Header
+        team1Name="Royal Challengers Bangalore"
+        team2Name="Lucknow Super Giants"
+        location="M. Chinnaswamy Stadium, Bengaluru"
+        numberOfOvers="20"
+        teamWhichWonTheToss="Lucknow Super Giants"
+      />
       <TeamScore
         teamName="Mumbai Indians"
         teamRuns="185"
