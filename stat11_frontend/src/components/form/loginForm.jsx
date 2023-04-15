@@ -4,7 +4,7 @@ import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { loginUser } from '../../features/auth/authSlice'
-import { switchHomeTab } from '../../features/home/homeSlice'
+import { changeSideBarTabsType, switchSideBarTab } from '../../features/sideBar/sideBarSlice'
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ function LoginForm() {
 
   const continueToHomeClickHandler = () => {
     dispatch(
-      switchHomeTab('Home')
+      switchSideBarTab('Home')
     )
     navigate('/home')
   }

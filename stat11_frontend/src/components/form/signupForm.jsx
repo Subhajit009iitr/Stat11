@@ -5,7 +5,7 @@ import playerTypes from '../../constants/playerTypes'
 import { checkBoxFormFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { useDispatch } from 'react-redux'
 import { showSnackbar, signupUser } from '../../features/auth/authSlice'
-import { switchHomeTab } from '../../features/home/homeSlice'
+import { changeSideBarTabsType, switchSideBarTab } from '../../features/sideBar/sideBarSlice'
 
 function SignupForm() {
     const navigate = useNavigate()
@@ -61,7 +61,7 @@ function SignupForm() {
 
     const continueToHomeClickHandler = () => {
       dispatch(
-        switchHomeTab('Home')
+        switchSideBarTab('Home')
       )
       navigate('/home')
     }

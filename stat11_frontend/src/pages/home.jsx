@@ -5,32 +5,16 @@ import { logoutUser, userIsAuthenticated } from '../features/auth/authSlice'
 import { whoAmI } from '../features/user/userSlice'
 import SideBar from '../components/sideBar/sideBar'
 import { Box } from '@mui/material'
+import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 
 function Home() {
-    const authState = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
-    // if(authState.isAuthenticated){
-    //     return (
-    //         <div>Home</div>
-    //     )
-    // }else{
-    //     return <Navigate to={`/auth`} replace={true} />
-    // }
-
-    // alert("Reached home!")
-    // useEffect(() => {
-    //     if(authState.isAuthenticated===false) navigate('/auth')
-    // },[authState.isAuthenticated])
-
-    // useEffect(() => {
-    //     console.log("reached home")
-    //     // dispatch(userIsAuthenticated())
-    //     // dispatch(whoAmI())
-    // },[])
-
-    console.log("reached home")
+    useEffect(() => {
+        dispatch(
+            changeSideBarTabsType('home')
+          )
+    },[])
 
     return (
         <Box
@@ -51,16 +35,6 @@ function Home() {
                 Home
             </Box>
         </Box>
-        {/* <button 
-        onClick={() => dispatch(logoutUser())}
-        >
-            Logout
-        </button>
-        <button 
-        onClick={() => navigate('/auth')}
-        >
-            Auth
-        </button> */}
         </Box>
     )
 }

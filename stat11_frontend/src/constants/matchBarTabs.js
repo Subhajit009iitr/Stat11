@@ -15,7 +15,7 @@ const matchBarTabs = [
     },
     {
         icon: <IoAnalytics size={iconSize} />,
-        text: 'Scoreboard'
+        text: 'Analysis'
     },
     {
         icon: <RiTeamLine size={iconSize} />,
