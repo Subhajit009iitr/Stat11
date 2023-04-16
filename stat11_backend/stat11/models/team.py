@@ -2,6 +2,7 @@ from django.db import models
 from .match import Match
 from .player import Player
 
+
 class Team(models.Model):
     match=models.ForeignKey(Match, on_delete=models.CASCADE)
     name=models.CharField(max_length=255 ,unique=True)
@@ -10,7 +11,7 @@ class Team(models.Model):
     toss=models.BooleanField(default=False)
     turn=models.BooleanField(default=False)
     college=models.CharField(max_length=255,blank=True)
-    noball=models.IntegerField()
-    legbye=models.IntegerField()
-    bye=models.IntegerField()
-    wide=models.IntegerField()
+    noball=models.IntegerField(default=0)
+    legbye=models.IntegerField(default=0)
+    bye=models.IntegerField(default=0)
+    wide=models.IntegerField(default=0)

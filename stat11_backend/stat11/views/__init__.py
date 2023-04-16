@@ -7,3 +7,4 @@ from .scoreboard.batter_scoreboard import BatterScoreboardModelViewSet
 from .scoreboard.bowler_scoreboard import BowlerScoreboardModelViewSet
 from .auth.login import LoginUser
 from .auth.signup import SignUpUser
+from .auth.logout import LogoutUser
