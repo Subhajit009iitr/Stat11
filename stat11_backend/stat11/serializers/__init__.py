@@ -1,4 +1,4 @@
-from .user_serializers import UserSerializer
+from .user_serializers import UserSerializer, FilteredUserSerializer
 from .player_serializers import PlayerSerializer, PlayerNestedSerializer
 from .tournament_serializers import TournamentSerializer
 from .match_serializers import MatchSerializer, MatchNestedSerializer

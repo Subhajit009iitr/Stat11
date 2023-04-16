@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Box, Button, Divider, Link, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { textFormFieldGenerator } from './genericFormFieldGenerators'
+import { textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { loginUser } from '../../features/auth/authSlice'
+import { changeSideBarTabsType, switchSideBarTab } from '../../features/sideBar/sideBarSlice'
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -12,12 +13,29 @@ function LoginForm() {
   const [pass, setPass] = useState('')
 
   const loginClickHandler = () => {
+    if(validateEmail()){
+      dispatch(
+        loginUser({
+          email: email,
+          password: pass
+        })
+      )
+    }
+  }
+
+  const continueToHomeClickHandler = () => {
     dispatch(
-      loginUser({
-        email: email,
-        passwords: pass
-      })
+      switchSideBarTab('Home')
     )
+    navigate('/home')
+  }
+
+  const validateEmail = () => {
+    if(email==='') return true
+
+    var emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    if(emailReg.test(email)) return true
+    return false
   }
 
   return (
@@ -48,7 +66,9 @@ function LoginForm() {
         {textFormFieldGenerator(
           'Email-ID',
           email,
-          setEmail
+          setEmail,
+          validateEmail,
+          "Invalid email format"
         )}
         {textFormFieldGenerator(
           'Password',
@@ -99,7 +119,7 @@ function LoginForm() {
         <Link
         component="button"
         underline='always'
-        onClick={() => navigate('/home')}
+        onClick={continueToHomeClickHandler}
         >
             <Typography
             variant='h6'
