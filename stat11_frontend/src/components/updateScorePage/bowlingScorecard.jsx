@@ -6,6 +6,7 @@ import {
   TableRow,
   TableHead,
   TableContainer,
+  Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -15,17 +16,18 @@ import CardContent from "@mui/material/CardContent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#448791",
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.light,
+    color: theme.palette.common.black,
+    fontSize: 20,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 18,
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.common.white,
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -45,12 +47,13 @@ const rows_bowler = [
 
 export default function BowlingScorecard() {
   return (
-    <div>
+    <Box sx = {{width: "80%", ml: "20%", position: "sticky", backgroundColor: "#F8F8F8"}}>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
           paddingRight: "116px",
           paddingLeft: "116px", //360px after nav bar
+          backgroundColor: "background.default"
         }}
       >
         <CardContent>
@@ -110,6 +113,6 @@ export default function BowlingScorecard() {
           </TableContainer>
         </CardContent>
       </Card>
-    </div>
+    </Box>
   );
 }

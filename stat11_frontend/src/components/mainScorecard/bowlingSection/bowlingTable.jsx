@@ -15,7 +15,7 @@ import CardContent from "@mui/material/CardContent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#aad3e0",
+    backgroundColor: theme.palette.secondary.light,
     color: theme.palette.common.black,
     fontSize: 20,
   },
@@ -26,7 +26,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: "white",
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -55,7 +55,7 @@ export default function BowlingTable() {
           boxShadow: "0px 0px 0px 0px",
           paddingRight: "116px",
           paddingLeft: "116px", //360px after nav bar
-          backgroundColor: "#E5E5E5"
+          backgroundColor: "background.default"
         }}
       >
         <CardContent>

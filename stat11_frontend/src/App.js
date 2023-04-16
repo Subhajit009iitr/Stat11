@@ -22,6 +22,14 @@ function App() {
         path={`/auth`}
         element={<Auth />}
         />
+        <Route 
+        path={`/updateScore`}
+        element={<UpdateScore />}
+        />
+        <Route 
+        path={`/scorecard`}
+        element={<MainScorecard/>}
+        />
       </Routes>
     </div>
   )
