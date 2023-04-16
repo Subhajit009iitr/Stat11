@@ -10,5 +10,6 @@ def get_team_batter_data(team_id):
         strike_rate = (batters.runs/batters.balls)*100
         data['strike_rate'] = strike_rate
         team_batter_data.append(data)
-    return (team_batter_data)
+    sorted_data = sorted(team_batter_data, key=lambda x: x['strike_rate'], reverse=True)
+    return (sorted_data)
         

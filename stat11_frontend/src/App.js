@@ -4,8 +4,9 @@ import './App.css';
 import Home from './pages/home';
 import Auth from './pages/auth';
 import MainScorecard from './pages/mainScorecard';
-import Help from "./pages/help";
+import Help from './pages/help';
 import Home2 from './pages/home2'
+import Highlights from './pages/highlights'
 
 function App() {
   return (
@@ -25,8 +26,8 @@ function App() {
         element={<MainScorecard/>}
         />
         <Route 
-        path={`/scorecard`}
-        element={<MainScorecard/>}
+        path={`/high`}
+        element={<Highlights/>}
         />
       </Routes>
     </div>

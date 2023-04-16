@@ -5,7 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from stat11.models import Match
 from stat11.serializers import MatchSerializer, MatchNestedSerializer
-from stat11.utils import get_match_team_data
+from stat11.utils import get_match_team_data, get_match_mvp_data
 
 class MatchModelViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all()
@@ -20,8 +20,14 @@ class MatchModelViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['get'])
     def all_match_and_teams(self, request):
-
         all_match_list = self.get_queryset()
         first_match = all_match_list[0]
         res = get_match_team_data(first_match.id)
+        return Response(res)
+    
+    @action(detail=False, methods=['get'])
+    def mvp_top_three(self, request):
+        all_match_list = self.get_queryset()
+        first_match = all_match_list[0]
+        res= get_match_mvp_data(first_match.id)
         return Response(res)

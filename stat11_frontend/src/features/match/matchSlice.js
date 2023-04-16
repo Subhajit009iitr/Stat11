@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, allMatchAndTeamsUrl, teamBattersScoreUrl } from "../../urls";
+import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -9,6 +9,7 @@ const initialState = {
     matchAndTeamsList: ["T1 ", "T2 ","T1C "," T2C", true, 0, 0, "Yet to be decided", 0, 0, false ],
     batterScores: [],
     bowlerScores: [],
+    mvp: [],
     match: '',
 }
 
@@ -20,6 +21,13 @@ export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams',
     .then(res => res.data)
 })
 
+export const getMVP = createAsyncThunk('match/getMVP', ()=>{
+    return BackendClient
+    .get(
+        matchMVPUrl()
+    )
+    .then(res =>res.data)
+} )
 
 export const batterScoreData = createAsyncThunk('match/batterScoreData', ()=>{
     return BackendClient
@@ -27,6 +35,14 @@ export const batterScoreData = createAsyncThunk('match/batterScoreData', ()=>{
         teamBattersScoreUrl()
     )
     .then(res =>res.data)    
+})
+
+export const bowlerScoreData = createAsyncThunk('match/bowlerScoreData', ()=>{
+    return BackendClient
+    .get(
+        teamBowlersScoreUrl()
+    )
+    .then(res =>res.data) 
 })
 
 export const teamScoreData = createAsyncThunk('match/teamScoreData', async () => {
@@ -105,7 +121,7 @@ const matchSlice = createSlice({
 
         .addCase(batterScoreData.pending, (state) => {
             state.loading = true
-            console.log("Batter fetch hona shuru hua")
+            console.log("")
         })
         .addCase(batterScoreData.fulfilled, (state,action) => {
             state.loading = false
@@ -122,6 +138,24 @@ const matchSlice = createSlice({
             console.log("Error")
         })
         
+        .addCase(getMVP.pending, (state) => {
+            state.loading = true
+            console.log("")
+        })
+        .addCase(getMVP.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            console.log(action.payload)
+            state.mvp = action.payload 
+        })
+        .addCase(getMVP.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.mvp = []
+            console.log("Error")
+        })
         
 
     }
