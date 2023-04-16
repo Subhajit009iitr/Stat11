@@ -1,12 +1,4 @@
 import {
-  Typography,
-  Grid,
-  List,
-  styled,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
   Box,
 } from "@mui/material";
 import React from "react";
@@ -15,7 +7,6 @@ import SideBar from "../components/sideBar/sideBar";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { changeSideBarTabsType } from "../features/sideBar/sideBarSlice";
-import TeamNameHeading from "../components/displayTeams/teamNameHeading";
 import DisplayTeamLists from "../components/displayTeams/displayTeamLists";
 
 function DisplayTeams(props) {

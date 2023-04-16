@@ -81,8 +81,8 @@ export default function DisplayTeamLists(props) {
     >
       <Grid container spacing={5}>
         <Grid item xs>
-          <Box>
-            <TableContainer component={Paper}>
+          <Box >
+            <TableContainer component={Paper} sx ={{borderRadius: "16px"}}>
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
@@ -119,7 +119,7 @@ export default function DisplayTeamLists(props) {
         /> */}
         <Grid item xs>
           <Box>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx ={{borderRadius: "16px"}}>
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>

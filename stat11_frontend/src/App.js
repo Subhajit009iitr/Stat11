@@ -7,6 +7,7 @@ import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
 import Help from "./pages/help";
 import Home2 from './pages/home2'
+import DisplayTeams from './pages/displayTeams';
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
         element={<Home2 />}
         />
         <Route 
-        path={`/scorecard`}
-        element={<MainScorecard/>}
+        path={`/displayTeams`}
+        element={<DisplayTeams />}
         />
         <Route 
         path={`/updateScore`}
