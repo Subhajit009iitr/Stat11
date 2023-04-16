@@ -5,6 +5,7 @@ from stat11.models import User, Player
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 from django.contrib.auth import login
+from django.shortcuts import redirect
 
 class SignUpUser(APIView):
     
