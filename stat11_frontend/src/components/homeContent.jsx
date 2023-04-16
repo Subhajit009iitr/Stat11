@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Divider, Typography } from '@mui/material'
 import MediaCard from '../components/cards/card';
 import { TeamData, getMatchTeams } from '../features/match/matchSlice'
 import { getAllMatchAndTeams } from '../features/match/matchSlice';
@@ -36,7 +36,7 @@ function HomeContent() {
         sx={{
             fontSize:'32px',
             float:'left',
-            paddingLeft:'30px',
+            paddingLeft:'25%',
             paddingTop:'80px',
             paddingBottom:'10px',
         }}>
@@ -50,13 +50,13 @@ function HomeContent() {
         sx={{
             float:'left',     
             fontSize: '20px',
-            padding:'20px',
+            paddingLeft:'25%',
             color:'#848484',
         }}
         >Today</Box><br/><br/>
         <Box component='div' 
         sx={{
-            paddingLeft:'-20px'
+            paddingLeft:'25%'
         }}>
         <Box component='span' 
         sx={{
@@ -66,8 +66,11 @@ function HomeContent() {
 
         {[...Array(10)].map((_, index) => (
         <Box>
-            <MediaCard team1 ={team1Name.teamName} team2={team2Name.teamName} 
-            team1runs = {t1Runs.totalRuns} team2runs = {t2Runs.totalRuns}
+            <MediaCard 
+            team1 ={team1Name.teamName} 
+            team2={team2Name.teamName} 
+            team1runs = {t1Runs.totalRuns} 
+            team2runs = {t2Runs.totalRuns}
             // team1college = {team1college.college} team2college= {team2college.college}
             team1college = "IIT Roorkee" team2college= "IIT Roorkee"
             toss = {tosss.toss} matchover = "1" winner ="Blue"

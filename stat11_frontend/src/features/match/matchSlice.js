@@ -19,7 +19,8 @@ const initialState = {
     team2wickets : 0,
     payload:0,
 
-    matchAndTeamsList: [],
+    matchAndTeamsList: ["T1 ", "T2 ","T1C "," T2C", true, 0, 0, "Yet to be decided", 0, 0, false ],
+    playerScores: [[],[],[],[],[],[],[],[],[],[],[],[]],
     match: '',
     // team1: '',
     // team2: ''
@@ -33,7 +34,7 @@ export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams',
     .then(res => res.data)
 })
 
-export const teamScoreData = createAsyncThunk('match/teamData', async () => {
+export const teamScoreData = createAsyncThunk('match/teamScoreData', async () => {
     try {
         const res = await BackendClient.get(teamUrl());
         return res.data;
@@ -124,37 +125,39 @@ const matchSlice = createSlice({
             state.loading = true
         })
         .addCase(getAllMatchAndTeams.fulfilled, (state,action) => {
-            alert("Got fulfill")
+            // alert("Got fulfill")
             state.loading = false
             state.error = false
             state.message = ''
             state.matchAndTeamsList = action.payload
+            console.log(action.payload)
         })
         .addCase(getAllMatchAndTeams.rejected, (state,action) => {
-            alert("Got reject")
+            // alert("Got reject")
             state.loading = false
             state.error = true
             state.message = action.error.message
             state.matchAndTeamsList = []
         })
-        // .addCase(teamScoreData.pending, (state) => {
-        //     state.loading = true
-        // })
-        // .addCase(teamScoreData.fulfilled, (state,action) => {
-        //     state.loading = false
-        //     state.error = false
-        //     state.message = ''
-        //     console.log(action.payload)
-        //     state.team1runs = getTotalRunsForTeam1(action.payload)
-        //     state.team2runs = getTotalRunsForTeam2(action.payload)
+
+        .addCase(teamScoreData.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(teamScoreData.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            console.log(action.payload)
+            state.playerScores = action.payload
             
-        // })
-        // .addCase(teamScoreData.rejected, (state,action) => {
-        //     state.loading = false
-        //     state.error = true
-        //     state.message = action.error.message
-        //     console.log("Error")
-        // })
+        })
+        .addCase(teamScoreData.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.playerScores = []
+            console.log("Error")
+        })
         // .addCase(getMatchTeams.pending, (state) => {
         //     state.loading = true
         //     console.log("love")

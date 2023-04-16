@@ -23,12 +23,15 @@ class MatchModelViewSet(viewsets.ModelViewSet):
 
         all_match_list = self.get_queryset()
         # for match in all_match_list:
-        #     print("yah")
+        #     print("meow",match)
+        # print(all_match_list)
+         
+        # for i in all_match_list:
+        #     first_match = i
+        #     print(vars(first_match))
 
+        # get_match_team_data(first_match.id)
         first_match = all_match_list[0]
-        get_match_team_data(first_match.id)
-
-        res = {
-            'data': ''
-        }
+        print("meow",first_match.id)
+        res = get_match_team_data(first_match.id)
         return Response(res)

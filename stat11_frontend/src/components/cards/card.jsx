@@ -14,8 +14,8 @@ export default function MediaCard(props) {
     const winner = <Box component={'span'}
             sx={{
                 display:'inline-flex',
-                paddingLeft:1,
-                float:'left',
+                paddingRight:'20px',
+                float:'right',
                 fontSize:'1.5rem',
                 color: '#7D7D7D',
                 paddingTop: '20px',
@@ -45,7 +45,7 @@ export default function MediaCard(props) {
         height: '240px',
         boxShadow:"4px 4px 4px 4px #D9D9D9", 
         borderRadius: '16px', 
-        paddingLeft: '20px'}}>
+     }}>
       <CardContent>
           <Typography component="box" 
                 sx={{
