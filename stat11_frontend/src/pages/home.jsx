@@ -36,7 +36,7 @@ function Home() {
         >
             <SideBar />
             <Box>
-                {/* <HomeContent /> */}
+                <HomeContent />
             </Box>
         </Box>
         </Box>
