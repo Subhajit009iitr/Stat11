@@ -6,24 +6,10 @@ const initialState = {
     loading: false,
     error: false,
     message: '',
-    team1: " ",
-    team1college: " ",
-    team2: " ",
-    team2college: " ",
-    team1runs : 0,
-    team2runs : 0,
-    toss : 1,
-    matchover : 1, 
-    winner : "Yet to be decided ",
-    team1wickets : 0,
-    team2wickets : 0,
-    payload:0,
-
     matchAndTeamsList: ["T1 ", "T2 ","T1C "," T2C", true, 0, 0, "Yet to be decided", 0, 0, false ],
-    playerScores: [[],[],[],[],[],[],[],[],[],[],[],[]],
+    batterScores: [],
+    bowlerScores: [],
     match: '',
-    // team1: '',
-    // team2: ''
 }
 
 export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams', () => {
@@ -148,14 +134,14 @@ const matchSlice = createSlice({
             state.error = false
             state.message = ''
             console.log(action.payload)
-            state.playerScores = action.payload
+            state.batterScores = action.payload
             
         })
         .addCase(teamScoreData.rejected, (state,action) => {
             state.loading = false
             state.error = true
             state.message = action.error.message
-            state.playerScores = []
+            state.batterScores = []
             console.log("Error")
         })
         // .addCase(getMatchTeams.pending, (state) => {

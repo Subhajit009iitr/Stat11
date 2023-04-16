@@ -1,12 +1,15 @@
 import React from "react";
-import {
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { Box } from '@mui/material'
+import { teamScoreData } from "../../../features/match/matchSlice";
+import { 
   Table,
   TableBody,
   TableCell,
   TableRow,
   TableHead,
   TableContainer,
-  Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -80,6 +83,14 @@ const rows_batter = [
 ];
 
 export default function BattingTable(props) {
+  const batterDetails = useSelector(state => state.match.batterScores)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(
+      teamScoreData()
+      )
+  },[])
+
   let secondarytext;
   if (props.hasInningsEnded) {
     secondarytext = "Not out";
@@ -102,6 +113,7 @@ export default function BattingTable(props) {
       return "HitWicket " + row.bowler;
     }
   };
+
   return (
     <Box >
       <TableContainer

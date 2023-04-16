@@ -7,7 +7,6 @@ import theme from '../../index';
 import CardContent from '@mui/material/CardContent';
 import { display } from '@mui/system';
 
-<MediaCard team1 = "Blue" team1college = "IIT Roorkee"></MediaCard>
 export default function MediaCard(props) {
     var winteam = (props.team1runs<props.team2runs)? props.team2:props.team1;
     //console.log(winteam);
@@ -55,7 +54,7 @@ export default function MediaCard(props) {
                     fontSize: '1.5rem',
                 }}
                 >
-                    20 overs
+                    {props.no_of_overs} overs
             </Typography>
             <br/>
             <br/>

@@ -25,6 +25,7 @@ function Home() {
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: "background.default",
+            backgroundAttachment: 'fixed',
             height: "100vh"
         }}
         >

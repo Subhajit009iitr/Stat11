@@ -7,17 +7,17 @@ import { TeamData, getMatchTeams } from '../features/match/matchSlice'
 import { getAllMatchAndTeams } from '../features/match/matchSlice';
 
 function HomeContent() {
-    const t1Runs = useSelector(state => state.match.team1runs)
-    const t2Runs = useSelector(state => state.match.team2runs)
+    // const t1Runs = useSelector(state => state.match.team1runs)
+    // const t2Runs = useSelector(state => state.match.team2runs)
     
-    const team1Name = useSelector(state => state.match.team1)
-    // console.log(team1Name)
-    const team2Name = useSelector(state => state.match.team2)
-    const team1college = useSelector(state => state.match.team1college)
-    const team2college = useSelector(state => state.match.team2college)
-    const tosss = useSelector(state => state.match.toss)
+    // const team1Name = useSelector(state => state.match.team1)
+    // // console.log(team1Name)
+    // const team2Name = useSelector(state => state.match.team2)
+    // const team1college = useSelector(state => state.match.team1college)
+    // const team2college = useSelector(state => state.match.team2college)
+    // const tosss = useSelector(state => state.match.toss)
+    const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
     const dispatch = useDispatch()
-
     useEffect(() => {
         // dispatch(
         //     teamScoreData()
@@ -44,13 +44,14 @@ function HomeContent() {
         </Typography>
 
         <Typography component='box'>
-            <hr style={{width: '96vw'}}/>
+            <Divider style={{width: '96vw', color:"#D9D9D9"}}/>
         </Typography>
         <Box component='div'
         sx={{
             float:'left',     
             fontSize: '20px',
             paddingLeft:'25%',
+            //paddingTop:"20px",
             color:'#848484',
         }}
         >Today</Box><br/><br/>
@@ -67,13 +68,15 @@ function HomeContent() {
         {[...Array(10)].map((_, index) => (
         <Box>
             <MediaCard 
-            team1 ={team1Name.teamName} 
-            team2={team2Name.teamName} 
-            team1runs = {t1Runs.totalRuns} 
-            team2runs = {t2Runs.totalRuns}
+            no_of_overs = {Matchdetails[0].match.overs_no}
+            team1 ={Matchdetails[0].name} 
+            team2 = {Matchdetails[1].name} 
+            team1runs = {Matchdetails[0].team_runs} 
+            team2runs = {Matchdetails[1].team_runs}
+           
             // team1college = {team1college.college} team2college= {team2college.college}
             team1college = "IIT Roorkee" team2college= "IIT Roorkee"
-            toss = {tosss.toss} matchover = "1" winner ="Blue"
+            toss = {Matchdetails[0].toss} matchover = "1" winner ="Blue"
             team1wickets = "02" team2wickets = "03"
             />
         {(index + 1) % 3 == 0 ? <br /> : null}
