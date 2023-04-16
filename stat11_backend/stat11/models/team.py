@@ -9,3 +9,8 @@ class Team(models.Model):
     flag=models.ImageField(max_length=255, blank=True, null=True)
     toss=models.BooleanField(default=False)
     turn=models.BooleanField(default=False)
+    college = models.CharField(max_length=255, blank=True)
+    noball = models.IntegerField(default=0)
+    legbye = models.IntegerField(default=0)
+    bye = models.IntegerField(default=0)
+    wide = models.IntegerField(default=0)
