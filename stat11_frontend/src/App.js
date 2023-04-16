@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/home';
 import Auth from './pages/auth';
 import UpdateScore from './pages/updateScore';
+import MainScorecard from './pages/mainScorecard';
 
 function App() {
   return (
@@ -20,10 +21,6 @@ function App() {
         <Route 
         path={`/auth`}
         element={<Auth />}
-        />
-        <Route 
-        path={`/updateScore`}
-        element={<UpdateScore />}
         />
       </Routes>
     </div>

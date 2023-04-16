@@ -3,7 +3,7 @@ import { Typography, Box } from "@mui/material";
 
 export default function Header(props) {
   return (
-    <Box sx={{ width: "70%", ml: "25%", position: "sticky" }}>
+    <Box sx = {{width: "70%", ml:"25%", position: "sticky"}}>
       <Typography
         component="box"
         sx={{
