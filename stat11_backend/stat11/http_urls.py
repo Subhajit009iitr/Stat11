@@ -16,5 +16,6 @@ router.register('bowler_scoreboard',BowlerScoreboardModelViewSet ,basename='bowl
 urlpatterns =[
     path('api/', include((router.urls, 'stat11'))),
     path('api/auth/login/', LoginUser.as_view()),
+    path('api/auth/logout/', csrf_exempt(LogoutUser.as_view())),
     path('api/auth/signup/', csrf_exempt(SignUpUser.as_view())),
 ]
