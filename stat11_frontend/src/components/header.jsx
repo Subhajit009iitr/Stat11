@@ -1,9 +1,9 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 export default function Header(props) {
   return (
-    <div>
+    <Box sx={{ width: "70%", ml: "25%", position: "sticky" }}>
       <Typography
         component="box"
         sx={{
@@ -11,7 +11,7 @@ export default function Header(props) {
           float: "left",
           paddingLeft: "30px",
           paddingTop: "72px",
-          paddingBottom: "10px",
+          // paddingBottom: "10px",
         }}
       >
         {props.team1Name} v/s {props.team2Name}
@@ -46,7 +46,7 @@ export default function Header(props) {
           fontSize: "20px",
           textAlign: "right",
           paddingTop: "80px",
-          paddingRight: "160px",
+          // paddingRight: "160px",
           float: "right",
         }}
       >
@@ -56,8 +56,8 @@ export default function Header(props) {
       </Typography>
 
       <Typography component="box" sx={{ backgroundColor: "#D9D9D9" }}>
-        <hr style={{ width: "96vw" }} />
+        <hr style={{ width: "100%" }} />
       </Typography>
-    </div>
+    </Box>
   );
 }

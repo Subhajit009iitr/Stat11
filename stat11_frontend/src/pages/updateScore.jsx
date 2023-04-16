@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Header from "../components/header";
 import BattingScorecard from "../components/updateScorePage/battingScorecard";
 import BowlingScorecard from "../components/updateScorePage/bowlingScorecard";
@@ -6,12 +7,15 @@ import playerList from "../constants/playerList";
 import { Typography } from "@mui/material";
 import ScorerButtonGrid from "../components/updateScorePage/scorerButtonGrid";
 import TeamScore from "../components/updateScorePage/teamScore";
-import { selectFormFieldGenerator } from "../components/form/genericFormFieldGenerators";
+import { selectFormFieldGenerator } from "../components/genericComponent/genericFormFieldGenerators";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import dismissalModes from "../constants/modeOfDismissalList";
+import SideBar from "../components/sideBar/sideBar";
+import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 
 export default function UpdateScore() {
+  const dispatch = useDispatch()
   const [newBowler, setNewBowler] = useState("");
   const [newBatsman, setNewBatsman] = useState("");
   const [wicket, setWicket] = useState("");
@@ -47,6 +51,9 @@ export default function UpdateScore() {
   ) : (
     <></>
   );
+  useEffect(() => {
+    dispatch(changeSideBarTabsType("home"));
+  }, []);
   return (
     <div>
       <Header
@@ -56,6 +63,7 @@ export default function UpdateScore() {
         numberOfOvers="20"
         teamWhichWonTheToss="Lucknow Super Giants"
       />
+      <SideBar />
       <TeamScore
         teamName="Mumbai Indians"
         teamRuns="185"

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/home';
 import Auth from './pages/auth';
+import UpdateScore from './pages/updateScore';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <Route 
         path={`/auth`}
         element={<Auth />}
+        />
+        <Route 
+        path={`/updateScore`}
+        element={<UpdateScore />}
         />
       </Routes>
     </div>
