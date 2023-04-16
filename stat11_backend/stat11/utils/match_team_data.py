@@ -8,6 +8,7 @@ def get_match_team_data(match_id):
     # print(match_teams)
     # for i in match_teams:
     #     print(vars(i))
+
     for index, team in enumerate(match_teams):
         team_runs = 0
         team_extras = 0

@@ -22,16 +22,6 @@ class MatchModelViewSet(viewsets.ModelViewSet):
     def all_match_and_teams(self, request):
 
         all_match_list = self.get_queryset()
-        # for match in all_match_list:
-        #     print("meow",match)
-        # print(all_match_list)
-         
-        # for i in all_match_list:
-        #     first_match = i
-        #     print(vars(first_match))
-
-        # get_match_team_data(first_match.id)
         first_match = all_match_list[0]
-        print("meow",first_match.id)
         res = get_match_team_data(first_match.id)
         return Response(res)
