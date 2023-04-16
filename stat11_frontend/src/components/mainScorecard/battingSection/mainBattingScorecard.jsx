@@ -8,7 +8,7 @@ import DisplayTotalScore from "./displayTotalScore";
 
 function MainBattingScorecard(props) {
   return (
-    <Box>
+    <Box sx = {{width: "80%", ml: "20%", position: "sticky"}}>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
