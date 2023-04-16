@@ -14,7 +14,7 @@ function MainBattingScorecard(props) {
           boxShadow: "0px 0px 0px 0px",
           paddingRight: "116px",
           paddingLeft: "116px", //360px after nav bar
-          backgroundColor: "#E5E5E5"
+          backgroundColor: "background.default"
         }}
       >
         <CardContent>

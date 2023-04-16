@@ -1,22 +1,20 @@
-import React from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { Box } from '@mui/material'
-import { teamScoreData } from "../../../features/match/matchSlice";
-import { 
+import React, { useState, useEffect } from "react";
+import {
   Table,
   TableBody,
   TableCell,
   TableRow,
   TableHead,
   TableContainer,
+  Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#aad3e0",
+    backgroundColor: theme.palette.secondary.light,
     color: theme.palette.common.black,
     fontSize: 20,
   },
@@ -27,7 +25,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: "white",
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -35,61 +33,85 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createBatterTable(
-  Batter,
-  runs,
-  balls,
-  s4,
-  s6,
-  SR,
-  status,
-  fielder,
-  bowler,
-  howOut
-) {
-  if (status)
-    return { Batter, runs, balls, s4, s6, SR, fielder, bowler, howOut, status };
-  return { Batter, runs, balls, s4, s6, SR, status };
-}
-
-const rows_batter = [
-  createBatterTable(
-    "Virat Kohli",
-    61,
-    44,
-    4,
-    4,
-    138.64,
-    true,
-    "Marcus Stoinis",
-    "Amit Mishra",
-    2
-  ),
-  createBatterTable("Faf du Plessis", 79, 46, 5, 5, 171.74, false),
-  createBatterTable(
-    "Glenn Maxwell",
-    59,
-    29,
-    3,
-    6,
-    203.45,
-    true,
-    "",
-    "Mark Wood",
-    1
-  ),
-  createBatterTable("Dinesh Karthik", 1, 1, 0, 0, 100, false),
-  // createBatterTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
-];
-
 export default function BattingTable(props) {
-  const batterDetails = useSelector(state => state.match.batterScores)
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(
-      teamScoreData()
-      )
-  },[])
+  function createBatterTable(
+    Batter,
+    runs,
+    balls,
+    s4,
+    s6,
+    SR,
+    status,
+    fielder,
+    bowler,
+    howOut
+  ) {
+    if (status)
+      return {
+        Batter,
+        runs,
+        balls,
+        s4,
+        s6,
+        SR,
+        fielder,
+        bowler,
+        howOut,
+        status,
+      };
+    return { Batter, runs, balls, s4, s6, SR, status };
+  }
+
+  const [rows_batter, setRows_batter] = useState([]);
+  function addBatterRow() {
+    setRows_batter([
+      ...rows_batter,
+      createBatterTable(
+        "Virat Kohli",
+        61,
+        44,
+        4,
+        4,
+        138.64,
+        true,
+        "Marcus Stoinis",
+        "Amit Mishra",
+        2
+      ),
+    ]);
+  }
+  useEffect(() => {
+    addBatterRow();
+  }, []);
+  // const rows_batter = [
+  //   createBatterTable(
+  // "Virat Kohli",
+  // 61,
+  // 44,
+  // 4,
+  // 4,
+  // 138.64,
+  // true,
+  // "Marcus Stoinis",
+  // "Amit Mishra",
+  // 2
+  //   ),
+  //   createBatterTable("Faf du Plessis", 79, 46, 5, 5, 171.74, false),
+  //   createBatterTable(
+  //     "Glenn Maxwell",
+  //     59,
+  //     29,
+  //     3,
+  //     6,
+  //     203.45,
+  //     true,
+  //     "",
+  //     "Mark Wood",
+  //     1
+  //   ),
+  //   createBatterTable("Dinesh Karthik", 1, 1, 0, 0, 100, false),
+  //   // createBatterTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
+  // ];
 
   let secondarytext;
   if (props.hasInningsEnded) {
@@ -115,9 +137,10 @@ export default function BattingTable(props) {
   };
 
   return (
-    <Box >
+    <Box>
       <TableContainer
         component={Paper}
+        sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px" }}
       >
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>

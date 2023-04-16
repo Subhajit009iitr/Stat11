@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/home';
 import Auth from './pages/auth';
+import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
 import Help from "./pages/help";
 import Home2 from './pages/home2'
@@ -22,6 +23,10 @@ function App() {
         <Route 
         path={`/scorecard`}
         element={<MainScorecard/>}
+        />
+        <Route 
+        path={`/updateScore`}
+        element={<UpdateScore />}
         />
         <Route 
         path={`/scorecard`}
