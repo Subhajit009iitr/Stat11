@@ -2,6 +2,7 @@ from django.db import models
 from .match import Match
 from .player import Player
 
+
 class Team(models.Model):
     match=models.ForeignKey(Match, on_delete=models.CASCADE)
     name=models.CharField(max_length=255 ,unique=True)
