@@ -11,11 +11,11 @@ class StatusOfBowler(models.TextChoices):
 class BowlerScoreboard(models.Model):
     team=models.ForeignKey(Team, on_delete=models.CASCADE)
     player=models.ForeignKey(Player, on_delete=models.CASCADE)
-    runs=models.IntegerField()
-    balls=models.IntegerField()
-    wickets=models.IntegerField()
-    maidens=models.IntegerField()
+    runs=models.IntegerField(default=0)
+    balls=models.IntegerField(default=0)
+    wickets=models.IntegerField(default=0)
+    maidens=models.IntegerField(default=0)
     status=models.CharField(max_length=10, choices=BOWLER_STATUSES, default=IDLE)
-    entry_time=models.TimeField()
-    exit_time=models.TimeField()
+    entry_time=models.TimeField(null=True, blank=True)
+    exit_time=models.TimeField(null=True, blank=True)
 
