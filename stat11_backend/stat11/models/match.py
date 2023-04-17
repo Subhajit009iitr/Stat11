@@ -2,7 +2,7 @@ from django.db import models
 from .tournament import Tournament
 
 class Match(models.Model):
-    tournament=models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    # tournament=models.ForeignKey(Tournament, on_delete=models.CASCADE)
     created_on=models.DateField(auto_now_add=True)
     date=models.DateField()
     time=models.TimeField()

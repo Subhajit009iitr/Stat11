@@ -7,7 +7,7 @@ import theme from '../../index';
 import CardContent from '@mui/material/CardContent';
 import { display } from '@mui/system';
 
-export default function MediaCard(props) {
+function MatchCard(props) {
     var winteam = (props.team1runs<props.team2runs)? props.team2:props.team1;
     //console.log(winteam);
     const winner = <Box component={'span'}
@@ -133,3 +133,5 @@ export default function MediaCard(props) {
     </div>
   );
 }
+
+export default MatchCard

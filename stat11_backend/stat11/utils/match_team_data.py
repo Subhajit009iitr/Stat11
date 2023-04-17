@@ -1,25 +1,38 @@
 from stat11.models import Team, BatterScoreboard
-from stat11.serializers import TeamNestedSerializer
+from stat11.serializers import TeamNestedSerializer, TeamSerializer
 
 def get_match_team_data(match_id):
-    match_team_data = []
+    match_teams_data = []
     match_teams = Team.objects.filter(match__id=match_id)
-    
-    # print(match_teams)
-    # for i in match_teams:
-    #     print(vars(i))
 
-    for index, team in enumerate(match_teams):
+    for team in match_teams:
         team_runs = 0
-        team_extras = 0
         team_batter_scoreboard = BatterScoreboard.objects.filter(team__id=team.id)
         for scoreboard in team_batter_scoreboard:
             team_runs += scoreboard.runs
-        serializer = TeamNestedSerializer(team)
-        data = serializer.data
-        data['team_runs'] = team_runs
-        team_extras=team.noball+team.wide+team.bye+team.legbye
-        data['team_extras'] = team_extras
-        match_team_data.append(data)
-    return (match_team_data)
+        serializer = TeamSerializer(team)
+        team_data = serializer.data
+        team_data['runs'] = team_runs
+        match_teams_data.append(team_data)
+
+    return (match_teams_data)
+        
+def segregate_match_and_teams_date_wise(match_and_teams_list):
+    segregated_list = []
+    temp = []
+    date = ''
+
+    if len(match_and_teams_list)>0:
+        date = match_and_teams_list[0]['match']['date']
+
+    for match_data in match_and_teams_list:
+        if date!=match_data['match']['date']:
+            segregated_list.append(temp)
+            date = match_data['match']['date']
+            temp = [match_data]
+        else:
+            temp.append(match_data)
+
+    segregated_list.append(temp)
+    return segregated_list
         

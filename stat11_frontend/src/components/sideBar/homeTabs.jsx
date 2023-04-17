@@ -52,7 +52,7 @@ function HomeTabs() {
     return (
         <List
         sx={{
-        width: '100%',
+        width: '100%'
         }}
         >
             {homeTabs}
