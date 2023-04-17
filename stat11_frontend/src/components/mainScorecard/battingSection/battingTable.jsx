@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
+import React from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { Box } from '@mui/material'
+import { batterScoreData } from "../../../features/match/matchSlice";
+
+import { 
   Table,
   TableBody,
   TableCell,
@@ -33,101 +38,72 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+function createBatterTable(
+  Batter,
+  runs,
+  balls,
+  s4,
+  s6,
+  SR,
+  status,
+  fielder,
+  bowler,
+  howOut
+) {
+  var x = false;
+  if (status == 'out')
+    {
+      x = true;
+      return { Batter, runs, balls, s4, s6, SR, fielder, bowler, howOut, x };
+    }
+    
+  return { Batter, runs, balls, s4, s6, SR, x };
+}
+
+
+
+function addrows(batterDetails)
+{
+  // var rowsbatter = []
+  //   rowsbatter[0] = createBatterTable("Subhajit", 29 ,2, 2, 2, 8.8, false);
+  //   rowsbatter[1] = createBatterTable("Subhajit", 29 ,2, 2, 2, 8.8, false);
+  // // for(let i=0; i<2; i++ )
+  // {
+  //   rowsbatter[i] = 
+  //   createBatterTable(batterDetails[i].player.person.username,
+  //     batterDetails[i].runs,
+  //     batterDetails[i].balls,
+  //     batterDetails[i].fours,
+  //     batterDetails[i].sixes,
+  //     99.8
+  //     )
+  // };
+const rowsbatter = batterDetails.map((batterDetail) => {
+  return createBatterTable(
+    //batterDetail.player.person.username,
+    batterDetail.player.person.first_name+" "+batterDetail.player.person.last_name,
+    batterDetail.runs,
+    batterDetail.balls,
+    batterDetail.fours,
+    batterDetail.sixes,
+    batterDetail.strike_rate,
+  );
+});
+
+
+  return rowsbatter
+}
+
 export default function BattingTable(props) {
-  function createBatterTable(
-    Batter,
-    runs,
-    balls,
-    s4,
-    s6,
-    SR,
-    status,
-    fielder,
-    bowler,
-    howOut
-  ) {
-    if (status)
-      return {
-        Batter,
-        runs,
-        balls,
-        s4,
-        s6,
-        SR,
-        fielder,
-        bowler,
-        howOut,
-        status,
-      };
-    return { Batter, runs, balls, s4, s6, SR, status };
-  }
-
-  // const [rows_batter, setRows_batter] = useState([]);
-  // function addBatterRow() {
-  //   setRows_batter([
-  //     ...rows_batter,
-  //     createBatterTable(
-  //       "Virat Kohli",
-  //       61,
-  //       44,
-  //       4,
-  //       4,
-  //       138.64,
-  //       true,
-  //       "Marcus Stoinis",
-  //       "Amit Mishra",
-  //       2
-  //     ),
-  //   ]);
-  //   setRows_batter([
-  //     ...rows_batter,
-  //     createBatterTable(
-  //       "Faf Du Plessis",
-  //       79,
-  //       46,
-  //       5,
-  //       5,
-  //       171.74,
-  //       false,
-  //       "Marcus Stoinis",
-  //       "Amit Mishra",
-  //       2
-  //     ),
-  //   ]);
-  // }
-  // useEffect(() => {
-  //   addBatterRow();
-  // }, []);
-  const rows_batter = [
-    createBatterTable(
-  "Virat Kohli",
-  61,
-  44,
-  4,
-  4,
-  138.64,
-  true,
-  "Marcus Stoinis",
-  "Amit Mishra",
-  2
-    ),
-    createBatterTable("Faf du Plessis", 79, 46, 5, 5, 171.74, false),
-    createBatterTable(
-      "Glenn Maxwell",
-      59,
-      29,
-      3,
-      6,
-      203.45,
-      true,
-      "",
-      "Mark Wood",
-      1
-    ),
-    createBatterTable("Dinesh Karthik", 1, 1, 0, 0, 100, false),
-    // createBatterTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
-  ];
-
+  const batterDetails = useSelector(state => state.match.batterScores) 
+  const rows_batter = addrows(batterDetails)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(
+      batterScoreData()
+      )
+  },[])
+  console.log("batters ",batterDetails)
   let secondarytext;
   if (props.hasInningsEnded) {
     secondarytext = "Not out";
@@ -183,7 +159,8 @@ export default function BattingTable(props) {
           <TableBody>
             {rows_batter.map((row) =>
               // console.log(row);
-              !row.status ? (
+              
+              !row.x ? (
                 <StyledTableRow>
                   {/* secondarytext = {{row.status}? updateSecondaryText({row.howOut}, {row.fielder}, {row.bowler}) : secondarytext} */}
                   <StyledTableCell

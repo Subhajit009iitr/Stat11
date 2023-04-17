@@ -5,9 +5,10 @@ import Home from './pages/home';
 import Auth from './pages/auth';
 import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
-import Help from "./pages/help";
+import Help from './pages/help';
 import Home2 from './pages/home2'
 import DisplayTeams from './pages/displayTeams';
+import Highlights from './pages/highlights'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path={`/`} element={<Home />} />
         <Route path={`/home`} element={<Home />} />
+        <Route path={`/scoreboard`} element={<MainScorecard />} />
         <Route path={`/auth`} element={<Auth />} />
         <Route path={`/help`} element={<Help />} />
         <Route 
@@ -30,8 +32,8 @@ function App() {
         element={<UpdateScore />}
         />
         <Route 
-        path={`/scorecard`}
-        element={<MainScorecard/>}
+        path={`/high`}
+        element={<Highlights/>}
         />
       </Routes>
     </div>
