@@ -62,7 +62,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
   function addbowlerrows(bowlerdetails)
   {
-    const rowsBowler = bowlerdetails.map((bowlerDetail)=>{
+    const rowsBowler = bowlerdetails.slice(0,3).map((bowlerDetail)=>{
       return createBestBowlerTable(
           bowlerDetail.player.person.first_name+" "+bowlerDetail.player.person.last_name,
           bowlerDetail.team.name,
@@ -78,7 +78,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
   function addbatterrows(batterdetails)
   {
-    const rowsbatter = batterdetails.map((batterDetail)=>{
+    const rowsbatter = batterdetails.slice(0,3).map((batterDetail)=>{
       return createBestBatterTable(
           batterDetail.player.person.first_name+" "+batterDetail.player.person.last_name,
           batterDetail.team.name,
