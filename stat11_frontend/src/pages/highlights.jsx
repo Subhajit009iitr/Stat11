@@ -9,7 +9,7 @@ import SideBar from '../components/sideBar/sideBar'
 import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMVP } from '../features/match/matchSlice';
+import { getMVP,batterScoreData, bowlerScoreData } from '../features/match/matchSlice';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -34,42 +34,64 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   function createMvpTable( mvp, team, points ) {
     return { mvp, team, points };
   }
-
-  function addMVProws(mvpdetails)
-  {
-    const rowsMVP = mvpdetails.map((mvpDetail)=>{
-      return createBowlerTable(
-          mvpDetail.player.person.first_name+" "+bowlerDetail.player.person.last_name,
-          mvpDetail.maidens,
-          mvpDetail.runs,
-          mvpDetail.wickets,
-          mvpDetail.nb,
-          mvpDetail.wd,
-          mvpDetail.eco,
-        )
-      })
-      return rowsMVP
-  }
-  
   function createBestBatterTable( Batter, team, runs, balls, s4, s6, SR ) {
     return { Batter, team, runs, balls, s4, s6, SR};
   }
   
-  const rows_batter = [
-    createBestBatterTable('1.Raiwat Bapat', 'Ganga Goberdhan', 6.0, 8, 1, 0, 5.5),
-    createBestBatterTable('2.Nishita sandwich', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
-    createBestBatterTable('3.Manashree Eclair', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
-  ];
-
   function createBestBowlerTable( Bowler, team, overs, maidens, runs, wickets, eco ) {
     return { Bowler, team, overs, maidens, runs, wickets, eco };
   }
+
+  // const rows_batter = [
+  //   createBestBatterTable('1.Raiwat Bapat', 'Ganga Goberdhan', 6.0, 8, 1, 0, 5.5),
+  //   createBestBatterTable('2.Nishita sandwich', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
+  //   createBestBatterTable('3.Manashree Eclair', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
+  // ];
+
+  function addMVProws(mvpdetails)
+  {
+    const rowsMVP = mvpdetails.map((mvpDetail)=>{
+      return createMvpTable(
+          mvpDetail.playerName,
+          mvpDetail.team,
+          mvpDetail.mvp_score,
+        )
+      })
+      return rowsMVP
+  }
+
+  function addbowlerrows(bowlerdetails)
+  {
+    const rowsBowler = bowlerdetails.map((bowlerDetail)=>{
+      return createBestBowlerTable(
+          bowlerDetail.player.person.first_name+" "+bowlerDetail.player.person.last_name,
+          bowlerDetail.team.name,
+          bowlerDetail.overs,
+          bowlerDetail.maidens,
+          bowlerDetail.runs,
+          bowlerDetail.wickets,
+          bowlerDetail.economy,
+        )
+      })
+      return rowsBowler
+  }
   
-  const rows_bowler = [
-    createBestBowlerTable('1.Raiwat Bapat', 'Ganga Goberdhan', 6.0, 8, 1, 0, 5.5),
-    createBestBowlerTable('2.Nishita sandwich', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
-    createBestBowlerTable('3.Manashree Eclair', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
-  ];
+  function addbatterrows(batterdetails)
+  {
+    const rowsbatter = batterdetails.map((batterDetail)=>{
+      return createBestBatterTable(
+          batterDetail.player.person.first_name+" "+batterDetail.player.person.last_name,
+          batterDetail.team.name,
+          batterDetail.runs,
+          batterDetail.balls,
+          batterDetail.fours,
+          batterDetail.sixes,
+          batterDetail.strike_rate,
+        )
+      })
+      return rowsbatter
+  }
+  
   
 function Highlights() {
   const dispatch = useDispatch()
@@ -79,14 +101,34 @@ function Highlights() {
       )
 },[])
 
-const mvpdetails = useSelector(state=>state.match.mvp)
-const MVProws = addMVProws(mvpdetails)
-const rows_bowler = addbowlerrows()
+const batterDetails = useSelector(state=>state.match.batterScores)
+const bowlerDetails = useSelector(state=>state.match.bowlerScores)
+const mvpDetails = useSelector(state=>state.match.mvp)
 useEffect(() => {
   dispatch(
-      ('match')
+      batterScoreData(),
+      
     )
 },[])
+
+useEffect(() => {
+  dispatch(
+      bowlerScoreData(),
+      
+    )
+},[])
+
+useEffect(() => {
+  dispatch(
+      getMVP(),     
+    )
+},[])
+const MVProws = addMVProws(mvpDetails)
+const rows_bowler = addbowlerrows(bowlerDetails)
+const rows_batter = addbatterrows(batterDetails)
+console.log("Bowler Details ",bowlerDetails)
+console.log("MVP Details ", mvpDetails)
+
 return (
     
     <div>

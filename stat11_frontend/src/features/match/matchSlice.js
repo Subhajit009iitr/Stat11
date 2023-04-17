@@ -138,15 +138,33 @@ const matchSlice = createSlice({
             console.log("Error")
         })
         
+        .addCase(bowlerScoreData.pending, (state) => {
+            state.loading = true
+            console.log("bowler score pendin")
+        })
+        .addCase(bowlerScoreData.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            console.log(action.payload)
+            state.bowlerScores = action.payload 
+        })
+        .addCase(bowlerScoreData.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.bowlerScores = []
+            console.log("Error")
+        })
         .addCase(getMVP.pending, (state) => {
             state.loading = true
-            console.log("")
+            console.log("MVP pending")
         })
         .addCase(getMVP.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
+            console.log("MVP Payload ", action.payload)
             state.mvp = action.payload 
         })
         .addCase(getMVP.rejected, (state,action) => {
@@ -154,7 +172,7 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.mvp = []
-            console.log("Error")
+            console.log("MVP rejected")
         })
         
 
