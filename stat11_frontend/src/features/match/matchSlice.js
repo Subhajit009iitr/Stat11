@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl } from "../../urls";
+import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -10,6 +10,7 @@ const initialState = {
     batterScores: [],
     bowlerScores: [],
     mvp: [],
+    Teams: [],
     match: '',
 }
 
@@ -53,6 +54,14 @@ export const teamScoreData = createAsyncThunk('match/teamScoreData', async () =>
         return console.log(err);
     }
 });
+
+export const matchTeams = createAsyncThunk('match/matchTeams', ()=>{
+    return BackendClient
+    .get(
+        matchTeamsUrl()
+    )
+    .then(res =>res.data) 
+})
 
 export const getMatchTeams = createAsyncThunk('match/getMatchTeams', (matchId) => {
     // try {
@@ -135,6 +144,24 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.batterScores = []
+            console.log("Error")
+        })
+        .addCase(matchTeams.pending, (state) => {
+            state.loading = true
+            console.log("Match teams pending")
+        })
+        .addCase(matchTeams.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            console.log("Matchteams payload",action.payload)
+            state.Teams = action.payload 
+        })
+        .addCase(matchTeams.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.Teams = []
             console.log("Error")
         })
         

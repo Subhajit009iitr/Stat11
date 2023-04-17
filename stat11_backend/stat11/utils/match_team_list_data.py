@@ -16,7 +16,7 @@ def get_match_team_list_data(match_id):
     for i,pl in enumerate(teamList):
         team = []
         for j,pid in enumerate(pl):
-            print(pid)
+            # print(pid)
             player = Player.objects.all()
             for k in player:
                 if(k.id == pid):

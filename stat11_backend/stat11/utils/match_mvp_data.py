@@ -47,4 +47,4 @@ def get_match_mvp_data(match_id):
         top_three = [sorted_data[0],sorted_data[1],sorted_data[2]]
     else:
         top_three=sorted_data
-    return (sorted_data)
+    return (top_three)

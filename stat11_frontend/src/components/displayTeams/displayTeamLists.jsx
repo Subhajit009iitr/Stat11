@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   styled,
@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
+import { useSelector,useDispatch } from "react-redux";
+import { matchTeams,getAllMatchAndTeams } from "../../features/match/matchSlice";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,39 +37,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createRow(name, playerType) {
-  return { name, playerType };
-}
+export default function DisplayTeamLists() {
 
-const team1List = [
-  createRow("Virat Kohli", "Batter"),
-  createRow("Faf Du Plessis", "Batter"),
-  createRow("Glenn Maxwell", "Batter"),
-  createRow("Dinesh Karthik", "Batter"),
-  createRow("Mahipal Lomror", "Batter"),
-  createRow("Shahbaz Ahmed", "All Rounder"),
-  createRow("David Willey", "All Rounder"),
-  createRow("Wayne Parnell", "All Rounder"),
-  createRow("Harshal Patel", "All Rounder"),
-  createRow("Mohmammed Siraj", "Bowler"),
-  createRow("Karn Sharma", "Bowler"),
-];
+  const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
+  const Team = useSelector(state => state.match.Teams);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getAllMatchAndTeams())
+    dispatch(matchTeams())
+  },[])
 
-const team2List = [
-    createRow("Kyle Mayers", "Batter"),
-  createRow("KL Rahul", "Batter"),
-  createRow("Marcus Stoinis", "Batter"),
-  createRow("Krunal Pandya", "All Rounder"),
-  createRow("Nicholas Pooran", "Batter"),
-  createRow("Jaydev Unadkat", "Bowler"),
-  createRow("Amit Mishra", "Bowler"),
-  createRow("Avesh Khan", "Bowler"),
-  createRow("Mark Wood", "Bowler"),
-  createRow("Ravi Bishnoi", "Bowler"),
-  createRow("Ayush Badoni", "Batter"),
-  ];
-
-export default function DisplayTeamLists(props) {
+  console.log("Yesss");
+  const team1List = Team[0];
+  console.log("Yes");
+  const team2List = Team[1];
+  
   return (
     <Box
       component="div"
@@ -76,7 +60,6 @@ export default function DisplayTeamLists(props) {
         marginTop: "2%",
         width: "65%",
         borderRadius: "16px",
-        // marginRight: "80%"
       }}
     >
       <Grid container spacing={5}>
@@ -87,8 +70,8 @@ export default function DisplayTeamLists(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell >
-                      <Typography variant="h3" sx={{ color: "white", textAlign: "center"}}>
-                        {props.team1Name}
+                      <Typography variant="h5" sx={{ color: "white", textAlign: "center"}}>
+                        {Matchdetails[0].name}
                       </Typography>
                     </StyledTableCell>
                   </TableRow>
@@ -103,7 +86,7 @@ export default function DisplayTeamLists(props) {
                       >
                         {row.name}
                         <br />
-                        <font color="#A5A5A5">{row.playerType}</font>
+                        <font color="#A5A5A5">{row.type}</font>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -112,11 +95,7 @@ export default function DisplayTeamLists(props) {
             </TableContainer>
           </Box>
         </Grid>
-        {/* <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ backgroundColor: "white", borderRightWidth: 5 }}
-        /> */}
+
         <Grid item xs>
           <Box>
             <TableContainer component={Paper} sx ={{borderRadius: "16px"}}>
@@ -124,8 +103,8 @@ export default function DisplayTeamLists(props) {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>
-                      <Typography variant="h3" sx={{ color: "white", textAlign: "center"}}>
-                        {props.team2Name}
+                      <Typography variant="h5" sx={{ color: "white", textAlign: "center"}}>
+                        {Matchdetails[1].name}
                       </Typography>
                     </StyledTableCell>
                   </TableRow>
@@ -140,7 +119,7 @@ export default function DisplayTeamLists(props) {
                       >
                         {row.name}
                         <br />
-                        <font color="#A5A5A5">{row.playerType}</font>
+                        <font color="#A5A5A5">{row.type}</font>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
