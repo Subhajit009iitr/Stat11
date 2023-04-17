@@ -35,6 +35,10 @@ function App() {
         path={`/high`}
         element={<Highlights/>}
         />
+        <Route 
+        path={`/scorecard`}
+        element={<MainScorecard/>}
+        />
       </Routes>
     </div>
   );

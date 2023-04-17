@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Box } from '@mui/material'
 import { batterScoreData } from "../../../features/match/matchSlice";
-
 import { 
   Table,
   TableBody,
@@ -11,7 +9,7 @@ import {
   TableRow,
   TableHead,
   TableContainer,
-  Box,
+  Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
