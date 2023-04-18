@@ -1,7 +1,7 @@
 from stat11.models import Team, BatterScoreboard
 from stat11.serializers import TeamNestedSerializer
 
-def get_match_team_data(match_id):
+def get_match_teams(match_id):
     match_team_data = []
     match_teams = Team.objects.filter(match__id=match_id)
 

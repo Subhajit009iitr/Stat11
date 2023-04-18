@@ -16,22 +16,10 @@ def get_match_team_list_data(match_id):
     for i,pl in enumerate(teamList):
         team = []
         for j,pid in enumerate(pl):
-            # print(pid)
-            player = Player.objects.all()
-            for k in player:
-                if(k.id == pid):
-                    data = k
-            
-            if(data.type == 'all_rounder'):
-                Type = 'All Rounder'
-            elif(data.type == 'bowler'):
-                Type = 'Bowler'
-            else:
-                Type = 'Batter'
-            
+            data = Player.objects.get(id=pid)
             obj={
                 'name' : data.person.first_name+" "+data.person.last_name,
-                'type' : Type
+                'type' : data.type
             } 
             team.append(obj)
         netTeam.append(team)
