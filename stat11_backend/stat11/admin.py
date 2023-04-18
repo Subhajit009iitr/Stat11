@@ -15,7 +15,7 @@ class UsersAdmin(admin.ModelAdmin):
 
 @admin.register(Match)
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ['id','tournament','created_on']
+    list_display = ['id','created_on']
 
 @admin.register(Team)
 class UsersAdmin(admin.ModelAdmin):

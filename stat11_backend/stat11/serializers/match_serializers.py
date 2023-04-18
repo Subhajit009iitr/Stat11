@@ -7,8 +7,8 @@ class MatchSerializer(serializers.ModelSerializer):
         model = Match
         fields = '__all__'
 
-class MatchNestedSerializer(serializers.ModelSerializer):
-    tournament = TournamentSerializer()
-    class Meta:
-        model = Match
-        fields = '__all__'    
+# class MatchNestedSerializer(serializers.ModelSerializer):
+#     tournament = TournamentSerializer()
+#     class Meta:
+#         model = Match
+#         fields = '__all__'    
