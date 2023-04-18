@@ -5,37 +5,30 @@ function HelpContentSection(props) {
     const { question, text } = props
 
     return (
-        <Box
+        <CardContent
         sx={{
-            display: 'flex',
-            justifyContent: 'flex-start'
+            ml: 10,
+            mr: 10
         }}
         >
-            <CardContent
-            sx={{
-                ml: 10,
-                mr: 10
-            }}
+            <Typography
+                variant="body1"
+                color="primary.main"
+                align='left'
+                sx={{
+                    mb: 4
+                }}
             >
-                <Typography
-                    variant="body1"
-                    color="primary.main"
-                    align='left'
-                    sx={{
-                        mb: 4
-                    }}
-                >
-                    {question}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    color="hint.main"
-                    align='justify'
-                >
-                    {text}
-                </Typography>
-            </CardContent>
-        </Box>
+                {question}
+            </Typography>
+            <Typography
+                variant="body2"
+                color="hint.main"
+                align='justify'
+            >
+                {text}
+            </Typography>
+        </CardContent>
     )
 }
 

@@ -6,7 +6,6 @@ import Auth from './pages/auth';
 import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
 import DisplayTeams from './pages/displayTeams';
-// import Help from "./pages/help";
 
 function App() {
   return (
@@ -32,10 +31,6 @@ function App() {
         path={`/auth`} 
         element={<Auth />} 
         />
-        {/* <Route 
-        path={`/help`} 
-        element={<Help />} 
-        /> */}
         <Route 
         path={`/updateScore`}
         element={<UpdateScore />}

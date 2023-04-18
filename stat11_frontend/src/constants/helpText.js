@@ -17,3 +17,6 @@ export const questionList = [
         text: "Scorers can sign up on Stat11 to add new matches and choose from existing teams or create new teams. Then they can score these matches and the viewers would get real-time updates."
     }
 ]
+
+export const contactSupportText = "For further queries or feedback, contact us at support@stat11.com"
+// export const contactSupportText = "If you have any questions or feedback, please contact us at the following email address: support@stat11.com."

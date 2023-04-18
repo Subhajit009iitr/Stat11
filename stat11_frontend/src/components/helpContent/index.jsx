@@ -1,12 +1,36 @@
 import { React } from "react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Divider } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import HomeHeader from "../header/homeHeader";
 import HelpContentSection from "./helpContentSection";
+import { aboutUs, questionList, contactSupportText } from "../../constants/helpText";
 
 function HelpContent() {
+
+  const helpQuestions = questionList.length>0 ?
+  questionList.map((question,index) => {
+    const sectionBaseMargin = index<questionList.length ?
+    <Box 
+    sx={{
+      m: 2
+    }}
+    /> :
+    <></>
+
+    return (
+      <>
+        <HelpContentSection 
+        question={question['question']}
+        text={question['text']}
+        />
+        {sectionBaseMargin}
+      </>
+    )
+  }) :
+  []
+
   return (
     <>
       <HomeHeader 
@@ -16,182 +40,44 @@ function HelpContent() {
       sx={{
         boxShadow: "4px 4px 4px 4px #D9D9D9",
         borderRadius: 3,
-        // padding: 5,
         mt: 1,
         mb: 10,
         ml: 10,
         mr: 20,
-        pt: 4
+        pt: 4,
+        pb: 12
       }}
       >
-        {/* <CardContent
-          sx={{
-            textAlign: "justify",
-            // marginLeft: "40px",
-            // marginRight: "40px",
-          }}
-        >
-          <Typography
-            variant="h4"
-            label="heading"
-            component="box"
-            sx={{
-              color: "primary.main",
-            }}
-          >
-            About Us
-          </Typography>
-          <br />
-          <br />
-          <Typography
-            variant="h6"
-            label="heading"
-            component="box"
-            sx={{
-              color: "#595959",
-            }}
-          >
-            Welcome to Stat11! Our app provides real-time updates, statistics,
-            and visual analysis for cricket matches, and also allows admins to
-            score local matches. Here's a guide to help you get started:
-          </Typography>
-          <br />
-          <br />
-          <Divider
-            sx={{
-              color: "#D9D9D9",
-              width: "95%",
-            }}
-          />
-        </CardContent> */}
         <HelpContentSection 
-        question="About Us"
-        text="Welcome to Stat11! Our app provides real-time updates, statistics,
-        and visual analysis for cricket matches, and also allows admins to
-        score local matches. Here's a guide to help you get started:"
+        question={aboutUs['heading']}
+        text={aboutUs['text']}
         />
+        <Divider
+        sx={{
+          backgroundColor: "hint.light",
+          opacity: "0.5",
+          mb: 4,
+          mt: 4,
+          ml: 7,
+          mr: 7,
+        }}
+        />
+        {helpQuestions}
         <CardContent
           sx={{
-            textAlign: "justify",
-            marginLeft: "40px",
-            marginRight: "40px",
-          }}
-        >
-          <Typography
-            variant="h5"
-            label="heading"
-            component="box"
-            sx={{
-              color: "primary.main",
-            }}
-          >
-            Where can I see live scores?
-          </Typography>
-          <br />
-          <br />
-          <Typography
-            variant="body1"
-            label="heading"
-            component="box"
-            sx={{
-              color: "#595959",
-            }}
-          >
-            The home page displays all of the live and past matches' scores
-            ordered by their dates. Each match then has its own analytics and
-            detailed scoreboard for more information.
-          </Typography>
-          <br />
-        </CardContent>
-        <CardContent
-          sx={{
-            textAlign: "justify",
-            marginLeft: "40px",
-            marginRight: "40px",
-          }}
-        >
-          <Typography
-            variant="h5"
-            label="heading"
-            component="box"
-            sx={{
-              color: "primary.main",
-            }}
-          >
-            Where are the visual analytics?
-          </Typography>
-          <br />
-          <br />
-          <Typography
-            variant="body1"
-            label="heading"
-            component="box"
-            sx={{
-              color: "#595959",
-            }}
-          >
-            Analytics in the form of charts and graphs and the detailed
-            scoreboard of each match is available by clicking on that particular
-            match on the home page.
-          </Typography>
-          <br />
-        </CardContent>
-        <CardContent
-          sx={{
-            textAlign: "justify",
-            marginLeft: "40px",
-            marginRight: "40px",
-          }}
-        >
-          <Typography
-            variant="h5"
-            label="heading"
-            component="box"
-            sx={{
-              color: "primary.main",
-            }}
-          >
-            Who can add new matches?
-          </Typography>
-          <br />
-          <br />
-          <Typography
-            variant="body1"
-            label="heading"
-            component="box"
-            sx={{
-              color: "#595959",
-            }}
-          >
-            Scorers can sign up on Stat11 to add new matches and choose from
-            existing teams or create new teams. Then they can score these
-            matches and the viewers would get real-time updates.
-          </Typography>
-          <br />
-          <br />
-        </CardContent>
-
-        <br />
-        <CardContent
-          sx={{
-            textAlign: "center",
-            marginLeft: "40px",
-            marginRight: "40px",
+            ml: 10,
+            mr: 10,
           }}
         >
           <Typography
             variant="body2"
-            label="heading"
-            component="box"
+            color="primary.main"
+            align="center"
             sx={{
-              color: "primary.main",
+              opacity: "0.75"
             }}
           >
-            If you have any questions or feedback, please contact us at the
-            following email address: support@stat11.com.
-            <br></br>
-            Our support team will be happy to assist you with any issues you may
-            have.
+            {contactSupportText}
           </Typography>
         </CardContent>
       </Card>
