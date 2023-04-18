@@ -41,7 +41,7 @@ export const teamBackendUrl = () => {
 }
 
 export const matchTeamsBackendUrl = (matchId) => {
-    return `${teamBackendUrl}?match__id=${matchId}`
+    return `${teamBackendUrl()}?match__id=${matchId}`
 }
 
 export const matchBackendUrl = () => {

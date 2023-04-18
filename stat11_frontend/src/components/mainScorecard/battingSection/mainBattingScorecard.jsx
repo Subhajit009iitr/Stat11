@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getAllMatchAndTeams } from "../../../features/match/matchSlice";
 
-function MainBattingScorecard() {
+function MainBattingScorecard(i) {
+  console.log("moew",i.in)
   const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -39,16 +40,16 @@ function MainBattingScorecard() {
           />
           <BattingTable hasInningsEnded={true} />
           <DisplayTotalScore 
-            totalExtras={Matchdetails[0].team_extras}
-            wides={Matchdetails[0].wide}
-            byes={Matchdetails[0].bye}
-            legByes={Matchdetails[0].legbye}
-            noBalls={Matchdetails[0].noball}
-            teamRuns={Matchdetails[0].team_runs}
-            teamWickets={Matchdetails[0].team_wickets}
-            overs={Matchdetails[0].team_extras}
-            ballsInCurrentOver={Matchdetails[0].team_current_overs}
-            totalBatter={Matchdetails[0].team_current_over_balls}
+            totalExtras={Matchdetails[i.in].team_extras}
+            wides={Matchdetails[i.in].wide}
+            byes={Matchdetails[i.in].bye}
+            legByes={Matchdetails[i.in].legbye}
+            noBalls={Matchdetails[i.in].noball}
+            teamRuns={Matchdetails[i.in].team_runs}
+            teamWickets={Matchdetails[i.in].team_wickets}
+            overs={Matchdetails[i.in].team_extras}
+            ballsInCurrentOver={Matchdetails[i.in].team_current_overs}
+            totalBatter={Matchdetails[i.in].team_current_over_balls}
           />
           {/* The index in MatchDetais will change according to which team is displayed */}
         </CardContent>

@@ -24,7 +24,7 @@ export default function MainScorecard() {
         teamWhichWonTheToss="Lucknow Super Giants"
       />
       <SideBar />
-      <MainBattingScorecard />
+      <MainBattingScorecard in={1}/>
       <MainBowlingScorecard />
       <br />
       <br />
