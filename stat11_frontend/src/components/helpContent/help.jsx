@@ -12,11 +12,10 @@ function Help() {
         sx={{
           fontSize: "32px",
           float: "left",
-
           paddingTop: "80px",
           paddingLeft: "10px",
           paddingBottom: "10px",
-          marginLeft: "40px",
+          //marginLeft: "40px",
         }}
       >
         Quick Overview
@@ -25,7 +24,7 @@ function Help() {
         sx={{
           color: "#D9D9D9",
           width: "70%",
-          marginLeft: "40px",
+          //marginLeft: "40px",
         }}
       />
 
@@ -37,7 +36,7 @@ function Help() {
           boxShadow: "4px 4px 4px 4px #D9D9D9",
           borderRadius: "16px",
           padding: "20px",
-          marginLeft: "40px",
+          //marginLeft: "40px",
           marginTop: "40px",
         }}
       >
