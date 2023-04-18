@@ -2,9 +2,9 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Box } from '@mui/material'
-import { batterScoreData,getAllMatchAndTeams } from "../../../features/match/matchSlice";
+import { batterScoreData, getAllMatchAndTeams } from "../../../features/match/matchSlice";
 
-import { 
+import {
   Table,
   TableBody,
   TableCell,
@@ -37,6 +37,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+function mapHowOutToWicketType(data) {
+  if (data == "catch") {
+    return 2
+  } else if (data == "bowled") {
+    return 1
+  } else if (data == "lbw") {
+    return 4
+  } else if (data == "run_out") {
+    return 3
+  } else {
+    return 5
+  }
+}
+
 function createBatterTable(
   Batter,
   runs,
@@ -45,54 +59,43 @@ function createBatterTable(
   s6,
   SR,
   status,
-  fielder,
   bowler,
-  howOut
+  fielder,
+  wicket_type
 ) {
-  var x = false;
-  if (status == 'out')
-    {
-      x = true;
-      return { Batter, runs, balls, s4, s6, SR, fielder, bowler, howOut, x };
-    }
-    
-  return { Batter, runs, balls, s4, s6, SR, x };
+  var out = false;
+  var howOut = mapHowOutToWicketType(wicket_type);
+  if (status == 'out') {
+    out = true;
+    return { Batter, runs, balls, s4, s6, SR, fielder, bowler, howOut, out };
+  }
+
+  return { Batter, runs, balls, s4, s6, SR, out };
 }
 
 
 
-function addrows(batterDetails)
-{
-  // var rowsbatter = []
-  //   rowsbatter[0] = createBatterTable("Subhajit", 29 ,2, 2, 2, 8.8, false);
-  //   rowsbatter[1] = createBatterTable("Subhajit", 29 ,2, 2, 2, 8.8, false);
-  // // for(let i=0; i<2; i++ )
-  // {
-  //   rowsbatter[i] = 
-  //   createBatterTable(batterDetails[i].player.person.username,
-  //     batterDetails[i].runs,
-  //     batterDetails[i].balls,
-  //     batterDetails[i].fours,
-  //     batterDetails[i].sixes,
-  //     99.8
-  //     )
-  // };
-const rowsbatter = batterDetails.map((batterDetail) => {
-  return createBatterTable(
-    //batterDetail.player.person.username,
-    batterDetail.player.person.first_name+" "+batterDetail.player.person.last_name,
-    batterDetail.runs,
-    batterDetail.balls,
-    batterDetail.fours,
-    batterDetail.sixes,
-    batterDetail.strike_rate,
-    batterDetail.status,
-    batterDetail.bowled_out_by.person.first_name+" "+ batterDetail.bowled_out_by.person.last_name,
-    batterDetail.wicket_taker.person.first_name+ " "+ batterDetail.wicket_taker.person.last_name,
-    batterDetail.status
+function addrows(batterDetails) {
 
-  );
-});
+  const rowsbatter = batterDetails.map((batterDetail) => {
+    var bowler = (batterDetail.status == "out")? (batterDetail.bowled_out_by.person.first_name + " " + batterDetail.bowled_out_by.person.last_name): " ";
+    var fielder = (batterDetail.status == "out" && (batterDetail.wicket_type!="bowled")|(batterDetail.wicket_type!="lbw"))? (batterDetail.wicket_taker.person.first_name + " " + batterDetail.wicket_taker.person.last_name): " ";
+    return createBatterTable(
+      //batterDetail.player.person.username,
+      batterDetail.player.person.first_name + " " + batterDetail.player.person.last_name,
+      batterDetail.runs,
+      batterDetail.balls,
+      batterDetail.fours,
+      batterDetail.sixes,
+      batterDetail.strike_rate,
+      batterDetail.status,
+      //batterDetail.bowled_out_by.person.first_name + " " + batterDetail.bowled_out_by.person.last_name,
+      bowler,
+      fielder,
+      //batterDetail.wicket_taker.person.first_name + " " + batterDetail.wicket_taker.person.last_name,
+      batterDetail.wicket_type
+    );
+  });
 
 
   return rowsbatter
@@ -100,23 +103,24 @@ const rowsbatter = batterDetails.map((batterDetail) => {
 
 export default function BattingTable(props) {
 
-  const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
-  const batterDetails = useSelector(state => state.match.batterScores) 
+  const Matchdetails = useSelector(state => state.match.matchAndTeamsList)
+  const batterDetails = useSelector(state => state.match.batterScores)
   const rows_batter = addrows(batterDetails)
   const dispatch = useDispatch()
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(
       batterScoreData(),
       getAllMatchAndTeams()
-      )
-  },[])
-  console.log("batters ",batterDetails)
+    )
+  }, [])
+  console.log("batters ", batterDetails)
   let secondarytext;
   if (props.hasInningsEnded) {
     secondarytext = "Not out";
   } else {
     secondarytext = "Batting";
   }
+
 
   const updateSecondaryText = (row) => {
     if (row.howOut == 1) {
@@ -165,8 +169,8 @@ export default function BattingTable(props) {
           <TableBody>
             {rows_batter.map((row) =>
               // console.log(row);
-              
-              !row.x ? (
+
+              !row.out ? (
                 <StyledTableRow>
                   {/* secondarytext = {{row.status}? updateSecondaryText({row.howOut}, {row.fielder}, {row.bowler}) : secondarytext} */}
                   <StyledTableCell

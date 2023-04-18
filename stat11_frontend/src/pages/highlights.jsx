@@ -22,9 +22,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
+    // '&:nth-of-type(odd)': {
+    //   backgroundColor: theme.palette.action.hover,
+    // },
     // hide last border
     '&:last-child td, &:last-child th': {
       border: 0,
@@ -41,12 +41,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   function createBestBowlerTable( Bowler, team, overs, maidens, runs, wickets, eco ) {
     return { Bowler, team, overs, maidens, runs, wickets, eco };
   }
-
-  // const rows_batter = [
-  //   createBestBatterTable('1.Raiwat Bapat', 'Ganga Goberdhan', 6.0, 8, 1, 0, 5.5),
-  //   createBestBatterTable('2.Nishita sandwich', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
-  //   createBestBatterTable('3.Manashree Eclair', 'Kb Baby', 6.0, 8, 1, 0, 5.5),
-  // ];
 
   function addMVProws(mvpdetails)
   {
@@ -66,7 +60,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       return createBestBowlerTable(
           bowlerDetail.player.person.first_name+" "+bowlerDetail.player.person.last_name,
           bowlerDetail.team.name,
-          bowlerDetail.overs,
+          Math.floor(bowlerDetail.balls/6),
           bowlerDetail.maidens,
           bowlerDetail.runs,
           bowlerDetail.wickets,
@@ -126,12 +120,13 @@ useEffect(() => {
 const MVProws = addMVProws(mvpDetails)
 const rows_bowler = addbowlerrows(bowlerDetails)
 const rows_batter = addbatterrows(batterDetails)
-console.log("Bowler Details ",bowlerDetails)
-console.log("MVP Details ", mvpDetails)
+// console.log("Bowler Details ",bowlerDetails)
+// console.log("MVP Details ", mvpDetails)
 
 return (
     
-    <div>
+    <Box component='div' sx={{ backgroundColor: '#F8F8F8'}}> 
+    {/* Hardcoded color */}
         <SideBar/>
         <Typography component='box'
         sx={{
@@ -181,7 +176,7 @@ return (
 sx={{boxShadow:"0px 0px 0px 0px",
 paddingRight: '116px',
 paddingLeft: '25%', //360px after nav bar
-
+backgroundColor:"#F8F8F8" //Hardcoded here
 }}
 ><CardContent>
     <TableContainer component={Paper} sx={{borderRadius: '16px'}}>
@@ -262,10 +257,10 @@ paddingLeft: '25%', //360px after nav bar
                 {row.Bowler}
               </StyledTableCell>
               <StyledTableCell >{row.team}</StyledTableCell>
-              <StyledTableCell >{row.overs}</StyledTableCell>
-              <StyledTableCell >{row.maidens}</StyledTableCell>
-              <StyledTableCell >{row.runs}</StyledTableCell>
-              <StyledTableCell >{row.wickets}</StyledTableCell>
+              <StyledTableCell sx={{paddingLeft:"30px"}}>{row.overs}</StyledTableCell>
+              <StyledTableCell sx={{paddingLeft:"40px"}}>{row.maidens}</StyledTableCell>
+              <StyledTableCell sx={{paddingLeft:"20px"}}>{row.runs}</StyledTableCell>
+              <StyledTableCell sx={{paddingLeft:"40px"}}>{row.wickets}</StyledTableCell>
               <StyledTableCell >{row.eco}</StyledTableCell>
             </StyledTableRow>
           ))}
@@ -275,7 +270,7 @@ paddingLeft: '25%', //360px after nav bar
     </CardContent>
     </Card>
     
-    </div>
+    </Box>
   )
 }
 

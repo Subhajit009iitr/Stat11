@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, colors } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import BattingScorecardHeading from "./battingScorecardHeading";
@@ -38,13 +38,13 @@ function MainBattingScorecard() {
             hasInningsEnded={true}
           />
           <BattingTable hasInningsEnded={true} />
-          <DisplayTotalScore
+          <DisplayTotalScore 
             totalExtras={Matchdetails[0].team_extras}
             wides={Matchdetails[0].wide}
             byes={Matchdetails[0].bye}
             legByes={Matchdetails[0].legbye}
             noBalls={Matchdetails[0].noball}
-            teamRuns={Matchdetails[0].team_runs}
+            teamRuns={Matchdetails[0].team_runs+Matchdetails[0].team_extras}
             teamWickets={Matchdetails[0].team_wickets}
             overs={Matchdetails[0].team_extras}
             ballsInCurrentOver={Matchdetails[0].team_current_overs}
