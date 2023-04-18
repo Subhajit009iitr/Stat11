@@ -116,7 +116,7 @@ const matchSlice = createSlice({
             state.loading = false
             state.error = false
             state.message = ''
-            state.matchAndTeamsList = action.payload
+            state.dateWiseMatchAndTeamsList = action.payload
             console.log(action.payload)
         })
         .addCase(getAllMatchAndTeams.rejected, (state,action) => {
@@ -124,7 +124,7 @@ const matchSlice = createSlice({
             state.loading = false
             state.error = true
             state.message = action.error.message
-            state.matchAndTeamsList = []
+            state.dateWiseMatchAndTeamsList = []
         })
 
         .addCase(teamScoreData.pending, (state) => {

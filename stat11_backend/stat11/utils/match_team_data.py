@@ -13,6 +13,7 @@ def get_match_team_data(match_id):
         serializer = TeamSerializer(team)
         team_data = serializer.data
         team_data['runs'] = team_runs
+        team_data['wickets'] = 'TBD'
         match_teams_data.append(team_data)
 
     return (match_teams_data)
