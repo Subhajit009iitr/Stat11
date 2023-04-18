@@ -5,6 +5,7 @@ import { Box, Button, Divider, Icon, IconButton, Typography } from '@mui/materia
 import { getAllMatchAndTeams } from '../../features/match/matchSlice';
 import MatchSection from './matchSection';
 import { IoIosAddCircle } from 'react-icons/io'
+import HomeHeader from '../header/homeHeader';
 
 function HomeContent() {
     const matchState = useSelector(state =>state.match)
@@ -29,7 +30,7 @@ function HomeContent() {
 
     return(
         <>
-            <Box
+            {/* <Box
             sx={{
                 display: 'flex',
                 justifyContent: 'flex-start',
@@ -47,15 +48,18 @@ function HomeContent() {
                 >
                     Welcome Back!   
                 </Typography>
-            </Box>
-            <Divider
+            </Box> */}
+            <HomeHeader 
+            headingText='Welcome Back!'
+            />
+            {/* <Divider
                 sx={{
                 backgroundColor: "hint",
                 marginBottom: 3,
                 marginLeft: 6,
                 marginRight: 12
                 }}
-            />
+            /> */}
             {matchCards}
             <IconButton
             color='primary'

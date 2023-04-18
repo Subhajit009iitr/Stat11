@@ -7,11 +7,23 @@ import SideBar from '../components/sideBar/sideBar'
 import { Box } from '@mui/material'
 import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 import HomeContent from '../components/homeContent'
+import HelpContent from '../components/helpContent'
 
 function Home() {
-    const authState = useSelector(state => state.auth)
-    const matchCardState = useSelector(state => state.matchCard)
+    const sideBarState = useSelector(state => state.sideBar)
     const dispatch = useDispatch()
+
+    const content = sideBarState.tabsType==='home' ?
+    (
+        sideBarState.currentTab==='Home' ?
+        <HomeContent /> :
+        (
+            sideBarState.currentTab==='Help' ?
+            <HelpContent /> :
+            <></>
+        )
+    ) :
+    <></>
 
     useEffect(() => {
         dispatch(
@@ -51,7 +63,7 @@ function Home() {
                 marginLeft: '20%'
             }}
             >
-                <HomeContent />
+                {content}
             </Box>
         </Box>
         </Box>

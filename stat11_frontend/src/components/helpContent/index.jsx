@@ -3,11 +3,12 @@ import { Typography } from "@mui/material";
 import { Divider } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import HomeHeader from "../header/homeHeader";
 
-function Help() {
+function HelpContent() {
   return (
     <>
-      <Typography
+      {/* <Typography
         component="box"
         sx={{
           fontSize: "32px",
@@ -26,15 +27,17 @@ function Help() {
           width: "70%",
           //marginLeft: "40px",
         }}
+      /> */}
+      <HomeHeader 
+      headingText='Quick Overview'
       />
-
       <Card
         sx={{
           width: "auto",
           maxWidth: "960px",
           height: "auto",
           boxShadow: "4px 4px 4px 4px #D9D9D9",
-          borderRadius: "16px",
+          borderRadius: 4,
           padding: "20px",
           //marginLeft: "40px",
           marginTop: "40px",
@@ -206,7 +209,7 @@ function Help() {
         </CardContent>
       </Card>
     </>
-  );
+  )
 }
 
-export default Help;
+export default HelpContent;
