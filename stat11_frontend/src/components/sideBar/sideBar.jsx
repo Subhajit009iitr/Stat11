@@ -26,8 +26,7 @@ function SideBar() {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          p: 5
+          alignItems: 'center'
       },
       }}
     >
@@ -37,6 +36,9 @@ function SideBar() {
         justifyContent: 'center',
         alignItems: 'center',
         height: '120px',
+        mt: 5,
+        mr: 2,
+        ml: 2
       }}
       >
         <Box

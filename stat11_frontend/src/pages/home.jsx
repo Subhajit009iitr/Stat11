@@ -15,8 +15,14 @@ function Home() {
 
     useEffect(() => {
         dispatch(
+            userIsAuthenticated()
+        )
+        dispatch(
+            whoAmI()
+        )
+        dispatch(
             changeSideBarTabsType('home')
-          )
+        )
     },[])
 
     return (
@@ -32,10 +38,19 @@ function Home() {
         <Box
         sx={{
             display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
         }}
         >
-            <SideBar />
             <Box>
+                <SideBar />
+            </Box>
+            <Box
+            sx={{
+                flexGrow: 1,
+                marginLeft: '20%'
+            }}
+            >
                 <HomeContent />
             </Box>
         </Box>
