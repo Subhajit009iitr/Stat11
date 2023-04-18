@@ -28,4 +28,3 @@ def get_match_team_data(match_id):
         data['team_current_over_balls'] = team_current_over_balls
         match_team_data.append(data)
     return (match_team_data)
-        

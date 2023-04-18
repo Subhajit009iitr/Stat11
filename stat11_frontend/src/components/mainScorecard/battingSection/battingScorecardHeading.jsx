@@ -16,7 +16,7 @@ export default function BattingScorecardHeading(props) {
         <Grid container rowSpacing={7} columnSpacing={{ xs: 4, sm: 4, md: 4 }}>
           <Grid item xs={6}>
             <Typography
-              variant="h4"
+              variant="h5"
               sx={{ textAlign: "left", ml: "5%", mb: "3%", color: "white" }}
             >
               {props.battingTeamName}
@@ -24,7 +24,7 @@ export default function BattingScorecardHeading(props) {
           </Grid>
           <Grid item xs={6}>
             <Typography
-              variant="h4"
+              variant="h5"
               sx={{
                 textAlign: "right",
                 mr: "5%",

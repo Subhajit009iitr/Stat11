@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Box } from '@mui/material'
-import { batterScoreData } from "../../../features/match/matchSlice";
+import { batterScoreData,getAllMatchAndTeams } from "../../../features/match/matchSlice";
 
 import { 
   Table,
@@ -15,6 +15,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#aad3e0",
@@ -27,9 +28,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
+  // "&:nth-of-type(odd)": {
+  //   backgroundColor: theme.palette.action.hover,
+  // },
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -85,6 +86,11 @@ const rowsbatter = batterDetails.map((batterDetail) => {
     batterDetail.fours,
     batterDetail.sixes,
     batterDetail.strike_rate,
+    batterDetail.status,
+    batterDetail.bowled_out_by.person.first_name+" "+ batterDetail.bowled_out_by.person.last_name,
+    batterDetail.wicket_taker.person.first_name+ " "+ batterDetail.wicket_taker.person.last_name,
+    batterDetail.status
+
   );
 });
 
@@ -93,12 +99,15 @@ const rowsbatter = batterDetails.map((batterDetail) => {
 }
 
 export default function BattingTable(props) {
+
+  const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
   const batterDetails = useSelector(state => state.match.batterScores) 
   const rows_batter = addrows(batterDetails)
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(
-      batterScoreData()
+      batterScoreData(),
+      getAllMatchAndTeams()
       )
   },[])
   console.log("batters ",batterDetails)

@@ -9,7 +9,7 @@ def get_team_bowler_data(team_id):
         data =serializer.data
         economy = ((bowlers.runs*6)/bowlers.balls)
         bowlerScore = bowlers.wickets*20 + economy*10 + 10*bowlers.maidens
-        data['economy'] = economy
+        data['economy'] = round(economy,2)
         data['bowlerScore'] = bowlerScore
         team_bowler_data.append(data)
     sorted_data = sorted(team_bowler_data, key=lambda x: x['bowlerScore'], reverse=True)

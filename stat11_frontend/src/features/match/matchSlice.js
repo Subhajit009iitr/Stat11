@@ -89,7 +89,7 @@ const matchSlice = createSlice({
             state.error = false
             state.message = ''
             state.matchAndTeamsList = action.payload
-            console.log(action.payload)
+            console.log("nice",action.payload)
         })
         .addCase(getAllMatchAndTeams.rejected, (state,action) => {
             // alert("Got reject")
