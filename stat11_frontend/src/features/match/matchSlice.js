@@ -6,7 +6,6 @@ const initialState = {
     loading: false,
     error: false,
     message: '',
-    matchAndTeams: ["T1 ", "T2 ","T1C "," T2C", true, 0, 0, "Yet to be decided", 0, 0, false ],
     dateWiseMatchAndTeamsList: [],
     batterScores: [],
     bowlerScores: [],
@@ -112,15 +111,12 @@ const matchSlice = createSlice({
             state.loading = true
         })
         .addCase(getAllMatchAndTeams.fulfilled, (state,action) => {
-            // alert("Got fulfill")
             state.loading = false
             state.error = false
             state.message = ''
             state.dateWiseMatchAndTeamsList = action.payload
-            console.log(action.payload)
         })
         .addCase(getAllMatchAndTeams.rejected, (state,action) => {
-            // alert("Got reject")
             state.loading = false
             state.error = true
             state.message = action.error.message

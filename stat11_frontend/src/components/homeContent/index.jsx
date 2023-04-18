@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Box, Button, Divider, Typography } from '@mui/material'
+import { Box, Button, Divider, Icon, IconButton, Typography } from '@mui/material'
 import { getAllMatchAndTeams } from '../../features/match/matchSlice';
 import MatchSection from './matchSection';
+import { IoIosAddCircle } from 'react-icons/io'
 
 function HomeContent() {
     const matchState = useSelector(state =>state.match)
@@ -56,31 +57,22 @@ function HomeContent() {
                 }}
             />
             {matchCards}
-
-            <Button
-            label="Add a Match"
-            buttonStyle={{ borderRadius: 240 }}
-            style={{ borderRadius: 240 }}
-            
+            <IconButton
+            color='primary'
+            onClick={() => console.log("Button clciked!")}
             sx={{
-                height: "64px",
-                width:"64px",
-                color:'white',
-                position:'sticky',  
-                float:'right',
-                bottom : '88px',
-                right: '88px',
-                zIndex:2,   
-                fontSize:60,
-                paddingTop:'10px',
-                paddingRight:'8px',
-                backgroundColor:'#448791',
-                ":hover": {
-                    bgcolor: '#387078', 
-                    color: '#D9D9D9',
-                },
+                position: 'fixed',
+                right: 0,
+                bottom: 0,
+                mr: 16,
+                mb: 16,
+                p: 0
             }}
-            >+</Button>
+            >
+                <IoIosAddCircle 
+                size={72}
+                />
+            </IconButton>
     </>
     );
 }
