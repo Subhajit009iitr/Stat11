@@ -44,7 +44,7 @@ function MainBattingScorecard() {
             byes={Matchdetails[0].bye}
             legByes={Matchdetails[0].legbye}
             noBalls={Matchdetails[0].noball}
-            teamRuns={Matchdetails[0].team_runs+Matchdetails[0].team_extras}
+            teamRuns={Matchdetails[0].team_runs}
             teamWickets={Matchdetails[0].team_wickets}
             overs={Matchdetails[0].team_extras}
             ballsInCurrentOver={Matchdetails[0].team_current_overs}
