@@ -10,6 +10,8 @@ export const listButtonGenerator = (itemIcon, itemText, clickHandler = () => fal
           backgroundColor: bgColor,
           mt: 0.5,
           mb: 1,
+          mr: 5,
+          ml: 5,
           '&:hover':{
             backgroundColor: 'primary.light'
           }
