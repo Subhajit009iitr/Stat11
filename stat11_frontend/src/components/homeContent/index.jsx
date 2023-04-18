@@ -30,36 +30,9 @@ function HomeContent() {
 
     return(
         <>
-            {/* <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-end',
-                height: '120px',
-                mt: 5,
-                ml: 12
-            }}
-            >
-                <Typography
-                variant='h3'
-                sx={{
-                    mb: 9
-                }}
-                >
-                    Welcome Back!   
-                </Typography>
-            </Box> */}
             <HomeHeader 
             headingText='Welcome Back!'
             />
-            {/* <Divider
-                sx={{
-                backgroundColor: "hint",
-                marginBottom: 3,
-                marginLeft: 6,
-                marginRight: 12
-                }}
-            /> */}
             {matchCards}
             <IconButton
             color='primary'

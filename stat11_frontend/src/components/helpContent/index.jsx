@@ -4,50 +4,31 @@ import { Divider } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import HomeHeader from "../header/homeHeader";
+import HelpContentSection from "./helpContentSection";
 
 function HelpContent() {
   return (
     <>
-      {/* <Typography
-        component="box"
-        sx={{
-          fontSize: "32px",
-          float: "left",
-          paddingTop: "80px",
-          paddingLeft: "10px",
-          paddingBottom: "10px",
-          //marginLeft: "40px",
-        }}
-      >
-        Quick Overview
-      </Typography>
-      <Divider
-        sx={{
-          color: "#D9D9D9",
-          width: "70%",
-          //marginLeft: "40px",
-        }}
-      /> */}
       <HomeHeader 
       headingText='Quick Overview'
       />
       <Card
-        sx={{
-          width: "auto",
-          maxWidth: "960px",
-          height: "auto",
-          boxShadow: "4px 4px 4px 4px #D9D9D9",
-          borderRadius: 4,
-          padding: "20px",
-          //marginLeft: "40px",
-          marginTop: "40px",
-        }}
+      sx={{
+        boxShadow: "4px 4px 4px 4px #D9D9D9",
+        borderRadius: 3,
+        // padding: 5,
+        mt: 1,
+        mb: 10,
+        ml: 10,
+        mr: 20,
+        pt: 4
+      }}
       >
-        <CardContent
+        {/* <CardContent
           sx={{
             textAlign: "justify",
-            marginLeft: "40px",
-            marginRight: "40px",
+            // marginLeft: "40px",
+            // marginRight: "40px",
           }}
         >
           <Typography
@@ -82,7 +63,13 @@ function HelpContent() {
               width: "95%",
             }}
           />
-        </CardContent>
+        </CardContent> */}
+        <HelpContentSection 
+        question="About Us"
+        text="Welcome to Stat11! Our app provides real-time updates, statistics,
+        and visual analysis for cricket matches, and also allows admins to
+        score local matches. Here's a guide to help you get started:"
+        />
         <CardContent
           sx={{
             textAlign: "justify",

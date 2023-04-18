@@ -27,10 +27,10 @@ function HomeHeader(props) {
         </Box>
         <Divider
         sx={{
-        backgroundColor: "hint",
-        marginBottom: 3,
-        marginLeft: 6,
-        marginRight: 12
+            backgroundColor: "hint",
+            mb: 3,
+            ml: 10,
+            mr: 20
         }}
         />
         </>
