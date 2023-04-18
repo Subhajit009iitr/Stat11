@@ -5,7 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from stat11.models import Team
 from stat11.serializers import TeamSerializer, TeamNestedSerializer
-from stat11.utils import get_team_batter_data
+from stat11.utils import get_team_batter_list, get_team_bowler_list
 
 class TeamModelViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
@@ -20,6 +20,12 @@ class TeamModelViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['get'])
     def all_teams_and_batters(self, request):
-        all_list = self.get_queryset()
-        res = get_team_batter_data(all_list[0].id)
+        team_id = request.query_params.get('team__id')
+        res = get_team_batter_list(team_id)
+        return Response(res)
+    
+    @action(detail=False, methods=['get'])
+    def all_teams_and_bowlers(self, request):
+        team_id = request.query_params.get('team__id')
+        res = get_team_bowler_list(team_id)
         return Response(res)

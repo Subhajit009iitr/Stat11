@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Box, Button, Divider, Typography } from '@mui/material'
+import { bowlerScoreData } from "../../../features/match/matchSlice";
+
 import {
   Table,
   TableBody,
@@ -18,7 +20,7 @@ import CardContent from "@mui/material/CardContent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#aad3e0",
+    backgroundColor: theme.palette.secondary.light,
     color: theme.palette.common.black,
     fontSize: 20,
   },
@@ -29,7 +31,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: "white",
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -41,16 +43,33 @@ function createBowlerTable(Bowler, overs, maidens, runs, wickets, eco) {
   return { Bowler, overs, maidens, runs, wickets, eco };
 }
 
-const rows_bowler = [
-  createBowlerTable("Jaydev Unadkat", 2, 0, 27, 0, 13.5),
-  createBowlerTable("Avesh Khan", 4, 0, 53, 0, 13.2),
-  createBowlerTable("Krunal Pandya", 4, 0, 35, 0, 8.8),
-  createBowlerTable("Mark Wood", 4, 1, 32, 0, 8),
-  createBowlerTable("Ravi Bishnoi", 4, 0, 39, 0, 9.8),
-  createBowlerTable("Amit Mishra", 2, 0, 18, 0, 9),
-];
+function addrows(bowlerDetails)
+{
+  const rowsbowler = bowlerDetails.map((bowlerDetail)=>{
+    return createBowlerTable(
+        bowlerDetail.player.person.first_name+" "+bowlerDetail.player.person.last_name,
+        bowlerDetail.maidens,
+        bowlerDetail.runs,
+        bowlerDetail.wickets,
+        bowlerDetail.nb,
+        bowlerDetail.wd,
+        bowlerDetail.eco,
+      )
+  
+  
+  })
+   return rowsbowler 
+}
 
 export default function BowlingTable() {
+  const bowlerDetails = useSelector(state=>state.match.bowlerScores)
+  const rows_bowler = addrows(bowlerDetails)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(
+      bowlerScoreData()
+    )
+  },[])
   return (
     <div>
       <Card
@@ -58,7 +77,7 @@ export default function BowlingTable() {
           boxShadow: "0px 0px 0px 0px",
           paddingRight: "116px",
           paddingLeft: "116px", //360px after nav bar
-          backgroundColor: "#E5E5E5"
+          backgroundColor: "background.default"
         }}
       >
         <CardContent>

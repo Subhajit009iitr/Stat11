@@ -51,3 +51,19 @@ export const matchBackendUrl = () => {
 export const allMatchAndTeamsUrl = () => {
     return `${matchBackendUrl()}all_match_and_teams/`
 }
+
+export const teamBattersScoreUrl = () =>{
+    return `${teamBackendUrl()}all_teams_and_batters/`
+}
+
+export const teamBowlersScoreUrl = () =>{
+    return `${teamBackendUrl()}all_teams_and_bowlers/`
+}
+
+export const matchMVPUrl =() =>{
+    return `${matchBackendUrl()}`
+}
+
+export const matchTeamsUrl =() =>{
+    return `${matchBackendUrl()}teamList/`
+}

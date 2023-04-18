@@ -7,9 +7,12 @@ def get_match_team_data(match_id):
 
     for team in match_teams:
         team_runs = 0
+        wickets = 0
         team_batter_scoreboard = BatterScoreboard.objects.filter(team__id=team.id)
         for scoreboard in team_batter_scoreboard:
             team_runs += scoreboard.runs
+            if scoreboard.exit_time is not None:
+                wickets += 1
         serializer = TeamSerializer(team)
         team_data = serializer.data
         team_data['runs'] = team_runs

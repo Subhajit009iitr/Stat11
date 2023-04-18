@@ -15,7 +15,7 @@ export default function MainScorecard() {
   }, []);
 
   return (
-    <Box sx={{ backgroundColor: "#E5E5E5", position: "sticky" }}>
+    <Box sx={{ backgroundColor: "background.default", position: "sticky" }}>
       <Header
         team1Name="Royal Challengers Bangalore"
         team2Name="Lucknow Super Giants"

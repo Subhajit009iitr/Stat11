@@ -3,7 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/home';
 import Auth from './pages/auth';
+import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
+import DisplayTeams from './pages/displayTeams';
 import Help from "./pages/help";
 
 function App() {
@@ -11,10 +13,10 @@ function App() {
     <div className="App">
       <Routes>
         <Route 
-        path={`/`} 
-        element={<Home />} 
+        path={`/displayTeams`}
+        element={<DisplayTeams />}
         />
-        <Route 
+        <Route
         path={`/home`} 
         element={<Home />} 
         />
@@ -26,6 +28,14 @@ function App() {
         path={`/help`} 
         element={<Help />} 
         />
+        <Route 
+        path={`/updateScore`}
+        element={<UpdateScore />}
+        />
+        {/* <Route 
+        path={`/high`}
+        element={<Highlights/>}
+        /> */}
         <Route 
         path={`/scorecard`}
         element={<MainScorecard/>}
