@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { matchParticipatingTeamsBackendUrl } from "../../urls";
+import { distinctTeamsBackendUrl, matchParticipatingTeamsBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
     error: false,
     message: '',
     team1: '',
-    team2: ''
+    team2: '',
+    distinctTeamOptions: [],
+    openDialog: false
 }
 
 export const getParticipatingTeams = createAsyncThunk('team/getParticipatingTeams', (matchId) => {
@@ -18,9 +20,22 @@ export const getParticipatingTeams = createAsyncThunk('team/getParticipatingTeam
     .then(res => res.data)
 })
 
+export const getDistinctTeamOptions = createAsyncThunk('team/getDistinctTeamOptions', () => {
+    return BackendClient
+    .get(
+        distinctTeamsBackendUrl()
+    )
+    .then(res => res.data)
+})
+
 const teamSlice = createSlice({
     name: 'team',
     initialState,
+    reducers: {
+        openCreateTeamDialog: (state,action) => {
+            state.openDialog = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(getParticipatingTeams.pending, (state) => {
@@ -44,7 +59,24 @@ const teamSlice = createSlice({
             state.team1 = ''
             state.team2 = ''
         })
+        .addCase(getDistinctTeamOptions.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(getDistinctTeamOptions.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.distinctTeamOptions = action.payload
+            console.log(action.payload)
+        })
+        .addCase(getDistinctTeamOptions.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.distinctTeamOptions = []
+        })
     }
 })
 
 export default teamSlice.reducer
+export const { openCreateTeamDialog } = teamSlice.actions

@@ -37,3 +37,9 @@ class TeamModelViewSet(viewsets.ModelViewSet):
         team_id = request.query_params.get('team__id')
         res = get_team_bowler_list(team_id)
         return Response(res)
+    
+    @action(detail=False, methods=['get'])
+    def filter_distinct_teams(self, request):
+        distinct_teams = Team.objects.values('name','college','flag','players').distinct()
+        print(distinct_teams)
+        return Response(distinct_teams)

@@ -3,6 +3,11 @@ from ..models.team import Team
 from .match_serializers import MatchSerializer
 from .player_serializers import PlayerNestedSerializer, PlayerNameRestrictedSerializer
 
+class TeamSlimSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['match', 'name', 'flag', 'college', 'players']
+
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team

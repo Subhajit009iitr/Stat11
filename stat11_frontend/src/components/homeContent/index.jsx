@@ -6,10 +6,21 @@ import { getAllMatchAndTeams } from '../../features/match/matchSlice';
 import MatchSection from './matchSection';
 import { IoIosAddCircle } from 'react-icons/io'
 import HomeHeader from '../header/homeHeader';
+import CreateMatchDialog from '../dialog/createMatchDialog';
+import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/team/teamSlice';
 
 function HomeContent() {
     const matchState = useSelector(state =>state.match)
     const dispatch = useDispatch()
+
+    const createButtonClickHandler = () => {
+        dispatch(
+            openCreateTeamDialog(true)
+        )
+        dispatch(
+            getDistinctTeamOptions()
+        )
+    }
 
     useEffect(() => {
         dispatch(
@@ -36,7 +47,7 @@ function HomeContent() {
             {matchCards}
             <IconButton
             color='primary'
-            onClick={() => console.log("Button clciked!")}
+            onClick={createButtonClickHandler}
             sx={{
                 position: 'fixed',
                 right: 0,
@@ -50,6 +61,7 @@ function HomeContent() {
                 size={72}
                 />
             </IconButton>
+            <CreateMatchDialog />
     </>
     );
 }

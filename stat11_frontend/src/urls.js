@@ -44,6 +44,10 @@ export const matchParticipatingTeamsBackendUrl = (matchId) => {
     return `${teamBackendUrl()}?match__id=${matchId}`
 }
 
+export const distinctTeamsBackendUrl = () => {
+    return `${teamBackendUrl()}filter_distinct_teams/`
+}
+
 export const matchBackendUrl = () => {
     return `${baseBackendUrl()}match/`
 }

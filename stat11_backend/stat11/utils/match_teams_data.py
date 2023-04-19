@@ -1,5 +1,5 @@
 from stat11.models import Team, BatterScoreboard
-from stat11.serializers import TeamSerializer, TeamNestedRestrictedSerializer
+from stat11.serializers import TeamSlimSerializer, TeamNestedRestrictedSerializer
 
 def get_match_team_data(match_id, detail=False):
     match_teams_data = []
@@ -17,7 +17,7 @@ def get_match_team_data(match_id, detail=False):
         if detail:
             serializer = TeamNestedRestrictedSerializer(team)
         else:
-            serializer = TeamSerializer(team)
+            serializer = TeamSlimSerializer(team)
             
         team_data = serializer.data
         team_data['runs'] = team_runs
