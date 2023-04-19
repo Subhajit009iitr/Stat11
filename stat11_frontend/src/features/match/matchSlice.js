@@ -85,7 +85,9 @@ const matchSlice = createSlice({
     name: 'match',
     initialState,
     reducers: {
-
+        chooseMatch: (state,action) => {
+            state.match = action.payload
+        }
     },
     extraReducers: builder => {
         builder
@@ -205,4 +207,4 @@ const matchSlice = createSlice({
 
 
 export default matchSlice.reducer
-export const { updateteam1runs, updateteam2runs } = matchSlice.actions
+export const { updateteam1runs, updateteam2runs, chooseMatch } = matchSlice.actions

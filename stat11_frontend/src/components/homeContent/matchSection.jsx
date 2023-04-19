@@ -48,6 +48,7 @@ function MatchSection(props) {
 
             return (
                 <MatchCard 
+                match = {matchData['match']}
                 oversNo = {matchData['match']['overs_no']}
                 teams = {teams}
                 matchOver = {false}
