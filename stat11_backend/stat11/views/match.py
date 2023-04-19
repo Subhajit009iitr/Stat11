@@ -56,3 +56,10 @@ class MatchModelViewSet(viewsets.ModelViewSet):
         res = segregate_match_and_teams_date_wise(data)
 
         return Response(res, status=status.HTTP_200_OK)
+    
+    # @action(detail=False, methods=['get'])
+    # def participating_teams(self, request, pk=None):
+    #     match_teams_data = get_match_team_data(pk, detail=True)
+
+    #     res = match_teams_data
+    #     return Response(res, status=status.HTTP_200_OK)

@@ -6,7 +6,7 @@ import Auth from './pages/auth';
 import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
 import DisplayTeams from './pages/displayTeams';
-import Live from './pages/match/live';
+import Match from './pages/match';
 
 function App() {
   return (
@@ -29,13 +29,9 @@ function App() {
         element={<Home />} 
         />
         <Route
-        path={`/match/:id`} 
-        element={<Live />} 
+        path={`/match/:match_id`} 
+        element={<Match />} 
         >
-          <Route 
-          path={`live`}
-          element={<Live />}
-          />
           <Route 
           path={`scorecard`}
           element={<MainScorecard />}

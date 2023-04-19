@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl } from "../../urls";
+import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl, batterScoreboardBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -48,7 +48,7 @@ export const bowlerScoreData = createAsyncThunk('match/bowlerScoreData', ()=>{
 
 export const teamScoreData = createAsyncThunk('match/teamScoreData', async () => {
     try {
-        const res = await BackendClient.get(teamUrl());
+        const res = await BackendClient.get(batterScoreboardBackendUrl());
         return res.data;
     } catch (err) {
         return console.log(err);
