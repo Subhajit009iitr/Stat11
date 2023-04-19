@@ -49,7 +49,14 @@ class TeamModelViewSet(viewsets.ModelViewSet):
                 flag=distinct_team['flag']
             )
             serializer = TeamNestedRestrictedSerializer(filter_team, many=True)
-            for team in serializer.data:
+            for serialized_team in serializer.data:
+                team = {
+                    'id': serialized_team['id'],
+                    'name': serialized_team['name'],
+                    'flag': serialized_team['flag'],
+                    'college': serialized_team['college'],
+                    'players': serialized_team['players']
+                }
                 data.append(team)
 
         res = data

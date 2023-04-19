@@ -15,6 +15,7 @@ function MatchCard(props) {
     const navigate = useNavigate()
 
     const matchCardClickHandler = (match) => {
+        console.log("hello")
         dispatch(
             changeSideBarTabsType('match')
         )

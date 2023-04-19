@@ -31,7 +31,8 @@ export const textFormFieldGenerator = (
   stateVar,
   setStateVar,
   error = () => true,
-  errorText
+  errorText,
+  fieldType='text'
 ) => {
   let err = !error();
 
@@ -39,7 +40,7 @@ export const textFormFieldGenerator = (
     <TextField
       required={true}
       label={label}
-      type="text"
+      type={fieldType}
       placeholder={label}
       value={stateVar}
       variant="outlined"
@@ -73,7 +74,8 @@ export const selectFormFieldGenerator = (
   label,
   items,
   stateVar,
-  setStateVar
+  setStateVar,
+  multiple=false
 ) => {
   const menuItems =
     items.length > 0 ? (
@@ -96,6 +98,7 @@ export const selectFormFieldGenerator = (
       <InputLabel>{label}</InputLabel>
       <Select
         required
+        multiple={multiple}
         label={label}
         variant="outlined"
         value={stateVar}

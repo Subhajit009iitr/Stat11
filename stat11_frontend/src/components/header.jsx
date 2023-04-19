@@ -24,7 +24,7 @@ export default function Header(props) {
   return (
     <Box sx={{ width: "70%", ml: "25%", position: "sticky"}}>
       <Typography
-        component="box"
+        // component="box"
         sx={{
           fontSize: "32px",
           float: "left",
@@ -36,7 +36,7 @@ export default function Header(props) {
         {Matchdetails[0].name} v/s {Matchdetails[1].name}
         <br />
         <Typography
-          component="box"
+          // component="box"
           sx={{
             color: "#448791",
             fontSize: "20px",
@@ -46,7 +46,7 @@ export default function Header(props) {
           {Matchdetails[0].match.location} &nbsp;
         </Typography>
         <Typography
-          component="box"
+          // component="box"
           sx={{
             color: "#797979",
             fontSize: "20px",
@@ -59,7 +59,7 @@ export default function Header(props) {
       </Typography>
 
       <Typography
-        component="box"
+        // component="box"
         sx={{
           color: "#797979",
           fontSize: "20px",
@@ -74,7 +74,10 @@ export default function Header(props) {
         {teamWhichWonTheToss}
       </Typography>
 
-      <Typography component="box" sx={{ backgroundColor: "#D9D9D9" }}>
+      <Typography 
+      // component="box" 
+      sx={{ backgroundColor: "#D9D9D9" }}
+      >
         <hr style={{ width: "100%" }} />
       </Typography>
     </Box>
