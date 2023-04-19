@@ -49,7 +49,7 @@ export const matchBackendUrl = () => {
 }
 
 export const allMatchAndTeamsUrl = () => {
-    return `${matchBackendUrl()}all_match_and_teams/`
+    return `${matchBackendUrl()}all_match_and_team_details/`
 }
 
 export const teamBattersScoreUrl = () =>{

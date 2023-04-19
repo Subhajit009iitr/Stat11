@@ -10,6 +10,7 @@ import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMVP,batterScoreData, bowlerScoreData } from '../features/match/matchSlice';
+import Header from '../components/header'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -127,51 +128,8 @@ return (
     
     <Box component='div' sx={{ backgroundColor: '#F8F8F8'}}> 
     {/* Hardcoded color */}
-        <SideBar/>
-        <Typography component='box'
-        sx={{
-            fontSize:'32px',
-            float:'left',
-            paddingLeft:'25%',
-            paddingTop:'72px',
-            paddingBottom:'10px',
-        }}>
-            Purple Team v/s Orange Team 
-            <br /> 
-            <Typography component='box'
-            sx={{
-                color:'#448791',
-                fontSize :'20px',
-                float:'left'
-            }}>Location, City, State &nbsp;
-            </Typography>
-                <Typography component='box'
-                sx={{
-                color:'#797979',
-                fontSize :'20px',
-                float:'left'
-            }}> 20 Overs
-            </Typography>
-        </Typography>
-       
-            <Typography component='box'
-                sx={{
-                color:'#797979',
-                fontSize :'20px',
-                textAlign: 'right',
-                paddingTop: '80px',
-                paddingRight: '160px',    
-                float:'right'
-            }}> Toss: <br/>
-             Purple Team
-            </Typography>
-
-        
-
-        <Typography component='box' sx={{backgroundColor:'#D9D9D9'}}>  
-            <hr style={{width: '96vw'}}/>
-        </Typography>
-
+    <SideBar/>
+    <Header />
 <Card
 sx={{boxShadow:"0px 0px 0px 0px",
 paddingRight: '116px',

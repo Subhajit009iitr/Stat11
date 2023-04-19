@@ -1,7 +1,7 @@
 from stat11.models import Team, BatterScoreboard
 from stat11.serializers import TeamNestedSerializer
 
-def get_match_team_data(match_id):
+def get_match_team_details(match_id):
     match_team_data = []
     match_teams = Team.objects.filter(match__id=match_id)
 
@@ -18,8 +18,8 @@ def get_match_team_data(match_id):
                 team_wickets += 1
         serializer = TeamNestedSerializer(team)
         data = serializer.data
-        data['team_runs'] = team_runs
         team_extras=team.noball+team.wide+team.bye+team.legbye
+        data['team_runs'] = team_runs + team_extras
         data['team_extras'] = team_extras
         data['team_wickets'] =  team_wickets
         team_current_overs = team_balls//6

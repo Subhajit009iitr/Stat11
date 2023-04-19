@@ -10,7 +10,6 @@ import { useEffect } from 'react'
 import { getAllMatchAndTeams } from "../../../features/match/matchSlice";
 
 function MainBattingScorecard(i) {
-  console.log("moew",i.in)
   const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -30,14 +29,7 @@ function MainBattingScorecard(i) {
         }}
       >
         <CardContent>
-          <BattingScorecardHeading
-            battingTeamName="Royal Challengers Bangalore"
-            teamRuns="212"
-            teamWickets="2"
-            overs="20"
-            ballsInCurrentOver="0"
-            hasInningsEnded={true}
-          />
+          <BattingScorecardHeading/>
           <BattingTable hasInningsEnded={true} />
           <DisplayTotalScore 
             totalExtras={Matchdetails[i.in].team_extras}
