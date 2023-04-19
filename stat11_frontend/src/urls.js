@@ -52,8 +52,12 @@ export const matchBackendUrl = () => {
     return `${baseBackendUrl()}match/`
 }
 
+// export const allMatchAndTeamsUrl = () => {
+//     return `${matchBackendUrl()}all_match_and_team_details/`
+// }
+
 export const allMatchAndTeamsUrl = () => {
-    return `${matchBackendUrl()}all_match_and_team_details/`
+    return `${matchBackendUrl()}all_match_and_teams/`
 }
 
 // export const participatingTeamsBackendUrl = (matchId) => {

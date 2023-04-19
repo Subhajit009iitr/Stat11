@@ -25,6 +25,7 @@ class MatchModelViewSet(viewsets.ModelViewSet):
         all_match_list = self.get_queryset()
         first_match = all_match_list[0]
         res = get_match_team_details(first_match.id)
+        return Response(res)
 
     def mvp_top_three(self, request):
         match_id = request.query_params.get('match__id')

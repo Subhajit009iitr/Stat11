@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from stat11.models import Team
-from stat11.serializers import TeamSerializer, TeamNestedSerializer
+from stat11.serializers import TeamSerializer, TeamNestedSerializer, TeamNestedRestrictedSerializer
 from stat11.utils import get_team_batter_list, get_team_bowler_list, get_match_team_data
 from rest_framework import status
 
@@ -40,6 +40,17 @@ class TeamModelViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['get'])
     def filter_distinct_teams(self, request):
-        distinct_teams = Team.objects.values('name','college','flag','players').distinct()
-        print(distinct_teams)
-        return Response(distinct_teams)
+        data = []
+        distinct_teams = Team.objects.values('name','college','flag').distinct()
+        for distinct_team in distinct_teams:
+            filter_team = Team.objects.filter(
+                name=distinct_team['name'], 
+                college=distinct_team['college'], 
+                flag=distinct_team['flag']
+            )
+            serializer = TeamNestedRestrictedSerializer(filter_team, many=True)
+            for team in serializer.data:
+                data.append(team)
+
+        res = data
+        return Response(res)

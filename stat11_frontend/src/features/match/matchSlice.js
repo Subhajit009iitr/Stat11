@@ -99,6 +99,7 @@ const matchSlice = createSlice({
             state.error = false
             state.message = ''
             state.dateWiseMatchAndTeamsList = action.payload
+            console.log(action.payload)
         })
         .addCase(getAllMatchAndTeams.rejected, (state,action) => {
             state.loading = false
