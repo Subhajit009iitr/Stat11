@@ -15,16 +15,10 @@ export default function MainScorecard() {
   }, []);
 
   return (
-    <Box sx={{ backgroundColor: "background.default", position: "sticky" }}>
-      <Header
-        team1Name="Royal Challengers Bangalore"
-        team2Name="Lucknow Super Giants"
-        location="M. Chinnaswamy Stadium, Bengaluru"
-        numberOfOvers="20"
-        teamWhichWonTheToss="Lucknow Super Giants"
-      />
+    <Box sx={{ backgroundColor: "#F8F8F8", position: "sticky" }}>
+      <Header />
       <SideBar />
-      <MainBattingScorecard />
+      <MainBattingScorecard in={0}/>
       <MainBowlingScorecard />
       <br />
       <br />

@@ -41,7 +41,7 @@ export const teamBackendUrl = () => {
 }
 
 export const matchTeamsBackendUrl = (matchId) => {
-    return `${teamBackendUrl}?match__id=${matchId}`
+    return `${teamBackendUrl()}?match__id=${matchId}`
 }
 
 export const matchBackendUrl = () => {
@@ -49,7 +49,7 @@ export const matchBackendUrl = () => {
 }
 
 export const allMatchAndTeamsUrl = () => {
-    return `${matchBackendUrl()}all_match_and_teams/`
+    return `${matchBackendUrl()}all_match_and_team_details/`
 }
 
 export const teamBattersScoreUrl = () =>{
@@ -61,7 +61,7 @@ export const teamBowlersScoreUrl = () =>{
 }
 
 export const matchMVPUrl =() =>{
-    return `${matchBackendUrl()}`
+    return `${matchBackendUrl()}mvp_top_three/`
 }
 
 export const matchTeamsUrl =() =>{

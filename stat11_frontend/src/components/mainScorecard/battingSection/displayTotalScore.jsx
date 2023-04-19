@@ -12,10 +12,11 @@ export default function DisplayTotalScore(props) {
           backgroundColor: "secondary.light",
           borderBottomLeftRadius: "16px",
           borderBottomRightRadius: "16px",
+          backgroundColor:"#E5E5E5"
         }}
       >
-        <Grid container rowSpacing={7} columnSpacing={{ xs: 4, sm: 4, md: 4 }}>
-          <Grid item xs={2}>
+        <Grid container rowSpacing={7} columnSpacing={{ xs: 4, sm: 4, md: 4 }} >
+          <Grid item xs={2} >
             <Typography
               variant="h5"
               sx={{ textAlign: "left", ml: "20%", mb: "10%" }}

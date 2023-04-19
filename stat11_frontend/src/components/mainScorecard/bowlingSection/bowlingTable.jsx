@@ -30,9 +30,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+<<<<<<< HEAD
+  // "&:nth-of-type(odd)": {
+  //   backgroundColor: theme.palette.action.hover,
+  // },
+=======
   "&:nth-of-type(odd)": {
     backgroundColor: "white",
   },
+>>>>>>> main
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -48,12 +54,11 @@ function addrows(bowlerDetails)
   const rowsbowler = bowlerDetails.map((bowlerDetail)=>{
     return createBowlerTable(
         bowlerDetail.player.person.first_name+" "+bowlerDetail.player.person.last_name,
+        Math.floor((bowlerDetail.balls)/6),
         bowlerDetail.maidens,
         bowlerDetail.runs,
         bowlerDetail.wickets,
-        bowlerDetail.nb,
-        bowlerDetail.wd,
-        bowlerDetail.eco,
+        bowlerDetail.economy,
       )
   
   
@@ -77,7 +82,11 @@ export default function BowlingTable() {
           boxShadow: "0px 0px 0px 0px",
           paddingRight: "116px",
           paddingLeft: "116px", //360px after nav bar
+<<<<<<< HEAD
+          backgroundColor: "#F8F8F8"
+=======
           backgroundColor: "background.default"
+>>>>>>> main
         }}
       >
         <CardContent>
