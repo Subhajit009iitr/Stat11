@@ -8,6 +8,7 @@ import { Box } from '@mui/material'
 import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 import HomeContent from '../components/homeContent'
 import HelpContent from '../components/helpContent'
+import { pageSideBarAppender } from '../components/genericComponent/genericSideBarAppender'
 
 function Home() {
     const sideBarState = useSelector(state => state.sideBar)
@@ -38,35 +39,9 @@ function Home() {
     },[])
 
     return (
-        <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: "background.default",
-            backgroundAttachment: 'fixed',
-            height: "100vh"
-        }}
-        >
-        <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-        }}
-        >
-            <Box>
-                <SideBar />
-            </Box>
-            <Box
-            sx={{
-                flexGrow: 1,
-                marginLeft: '20%'
-            }}
-            >
-                {content}
-            </Box>
-        </Box>
-        </Box>
+        pageSideBarAppender(
+            content
+        )
     )
 }
 
