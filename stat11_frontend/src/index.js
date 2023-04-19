@@ -20,7 +20,8 @@ export const theme = createTheme({
       dark: "#387078"
     },
     secondary: {
-      main: "#6498E6"
+      main: "#6498E6",
+      light: "#aad3e0"
     },
     hint: {
       main: "#7D7D7D",
@@ -38,7 +39,7 @@ export const theme = createTheme({
       fontSize: "3.2rem"
     },
     h3: {
-      fontSize: "2.8rem"
+      fontSize: "2.6rem"
     },
     h4: {
       fontSize: "2.4rem"
@@ -54,6 +55,9 @@ export const theme = createTheme({
     },
     body2: {
       fontSize: "1.6rem"
+    },
+    small1: {
+      fontSize: "1.4rem"
     },
     button: {
       fontSize: "2.4rem",

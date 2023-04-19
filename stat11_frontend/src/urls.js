@@ -63,3 +63,7 @@ export const teamBowlersScoreUrl = () =>{
 export const matchMVPUrl =() =>{
     return `${matchBackendUrl()}mvp_top_three/`
 }
+
+export const matchTeamsUrl =() =>{
+    return `${matchBackendUrl()}teamList/`
+}

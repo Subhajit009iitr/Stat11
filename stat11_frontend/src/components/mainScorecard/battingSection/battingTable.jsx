@@ -1,16 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+<<<<<<< HEAD
 import { Box } from '@mui/material'
 import { batterScoreData, getAllMatchAndTeams } from "../../../features/match/matchSlice";
 
 import {
+=======
+import { batterScoreData } from "../../../features/match/matchSlice";
+import { 
+>>>>>>> main
   Table,
   TableBody,
   TableCell,
   TableRow,
   TableHead,
   TableContainer,
+  Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -18,7 +24,7 @@ import Paper from "@mui/material/Paper";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#aad3e0",
+    backgroundColor: theme.palette.secondary.light,
     color: theme.palette.common.black,
     fontSize: 20,
   },
@@ -28,9 +34,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+<<<<<<< HEAD
   // "&:nth-of-type(odd)": {
   //   backgroundColor: theme.palette.action.hover,
   // },
+=======
+  "&:nth-of-type(odd)": {
+    backgroundColor: "white",
+  },
+>>>>>>> main
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -139,9 +151,10 @@ export default function BattingTable(props) {
   };
 
   return (
-    <Box >
+    <Box>
       <TableContainer
         component={Paper}
+        sx={{ borderTopLeftRadius: "16px", borderTopRightRadius: "16px" }}
       >
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>

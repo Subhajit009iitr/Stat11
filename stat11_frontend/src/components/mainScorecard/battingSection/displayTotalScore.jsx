@@ -9,7 +9,7 @@ export default function DisplayTotalScore(props) {
         sx={{
           maxWidth: "100%",
           mt: "2%",
-          backgroundColor: props.totalBatter % 2 == 0 ? "#F3F3F3": "#FFFFFF",
+          backgroundColor: "secondary.light",
           borderBottomLeftRadius: "16px",
           borderBottomRightRadius: "16px",
           backgroundColor:"#E5E5E5"
