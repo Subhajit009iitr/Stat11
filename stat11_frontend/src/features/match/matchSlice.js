@@ -99,7 +99,6 @@ const matchSlice = createSlice({
             state.error = false
             state.message = ''
             state.dateWiseMatchAndTeamsList = action.payload
-            console.log(action.payload)
         })
         .addCase(getAllMatchAndTeams.rejected, (state,action) => {
             state.loading = false
@@ -115,28 +114,21 @@ const matchSlice = createSlice({
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
             state.batterScores = action.payload
-            
         })
-
         .addCase(teamScoreData.rejected, (state,action) => {
             state.loading = false
             state.error = true
             state.message = action.error.message
             state.batterScores = []
-            console.log("Error")
         })
-
         .addCase(batterScoreData.pending, (state) => {
             state.loading = true
-            console.log("")
         })
         .addCase(batterScoreData.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
             state.batterScores = action.payload 
         })
         .addCase(batterScoreData.rejected, (state,action) => {
@@ -144,17 +136,14 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.batterScores = []
-            console.log("Error")
         })
         .addCase(matchTeams.pending, (state) => {
             state.loading = true
-            console.log("Match teams pending")
         })
         .addCase(matchTeams.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log("Matchteams payload",action.payload)
             state.Teams = action.payload 
         })
         .addCase(matchTeams.rejected, (state,action) => {
@@ -162,18 +151,14 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.Teams = []
-            console.log("Error")
         })
-        
         .addCase(bowlerScoreData.pending, (state) => {
             state.loading = true
-            console.log("bowler score pendin")
         })
         .addCase(bowlerScoreData.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
             state.bowlerScores = action.payload 
         })
         .addCase(bowlerScoreData.rejected, (state,action) => {
@@ -181,17 +166,14 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.bowlerScores = []
-            console.log("Error")
         })
         .addCase(getMVP.pending, (state) => {
             state.loading = true
-            console.log("MVP pending")
         })
         .addCase(getMVP.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log("MVP Payload ", action.payload)
             state.mvp = action.payload 
         })
         .addCase(getMVP.rejected, (state,action) => {
@@ -199,7 +181,6 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.mvp = []
-            console.log("MVP rejected")
         })
         
 

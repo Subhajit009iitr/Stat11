@@ -50,7 +50,6 @@ const teamSlice = createSlice({
                 state.team1 = action.payload[0]
                 state.team2 = action.payload[1]
             }
-            console.log(action.payload)
         })
         .addCase(getParticipatingTeams.rejected, (state,action) => {
             state.loading = false
@@ -67,7 +66,6 @@ const teamSlice = createSlice({
             state.error = false
             state.message = ''
             state.distinctTeamOptions = action.payload
-            console.log(action.payload)
         })
         .addCase(getDistinctTeamOptions.rejected, (state,action) => {
             state.loading = false

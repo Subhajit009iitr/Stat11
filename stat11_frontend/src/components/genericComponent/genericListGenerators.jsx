@@ -88,7 +88,6 @@ export const playersListTooltipGenerator = (players) => {
 export const teamOptionComponentGenerator = (team) => {
   const collegeName = team['college']!==null || team['college']!=='' ? 'No-College' : team['college']
 
-  console.log(playersListTooltipGenerator(team['players']))
   return (
     <Tooltip
     arrow

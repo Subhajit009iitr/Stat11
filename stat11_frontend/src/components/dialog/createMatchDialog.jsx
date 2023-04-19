@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Box, Dialog, DialogContent, DialogTitle, Divider, IconButton, ListItem, ListItemAvatar, ListItemText, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
 import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/team/teamSlice';
 import { GrClose } from 'react-icons/gr'
@@ -15,18 +15,23 @@ function CreateMatchDialog() {
     const [overs, setOvers] = useState('')
     const [location, setLocation] = useState('')
 
-    const onDialogCloseHandler = () => {
-        console.log("hello")
-        dispatch(
-            openCreateTeamDialog(false)
-        )
-    }
-
     const validateNumberOfOvers = () => {
         if(overs===null || overs==='') return true
 
         if(overs<0) return false
         return true
+    }
+
+    const onDialogCloseHandler = () => {
+        dispatch(
+            openCreateTeamDialog(false)
+        )
+    }
+
+    const createButtonClickHandler = () => {
+        if(team1!=='' && team2!=='' && validateNumberOfOvers()) {
+            console.log("Button clicked")
+        }
     }
 
     useEffect(() => {
@@ -54,7 +59,7 @@ function CreateMatchDialog() {
         onClose={onDialogCloseHandler}
         PaperProps={{ 
             sx: { 
-                width: "40%", 
+                width: "30%", 
                 backgroundColor: 'background.paper' 
             } 
         }}
@@ -74,7 +79,7 @@ function CreateMatchDialog() {
             <DialogTitle>
                 <Typography
                 align='center'
-                variant='h6'
+                variant='h5'
                 >
                     Create Match
                 </Typography>
@@ -114,6 +119,31 @@ function CreateMatchDialog() {
                     setLocation
                 )}
             </DialogContent>
+            <DialogActions
+            sx={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}
+            >
+                <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                sx={{
+                    borderRadius: 8,
+                    pt: 2,
+                    pb: 2,
+                    width: '30%'
+                }}
+                onClick={createButtonClickHandler}
+            >
+                <Typography 
+                variant="h6"
+                >
+                    Create
+                </Typography>
+            </Button>
+            </DialogActions>
         </Dialog>
     )
 }
