@@ -1,15 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-<<<<<<< HEAD
-import { Box } from '@mui/material'
 import { batterScoreData, getAllMatchAndTeams } from "../../../features/match/matchSlice";
-
-import {
-=======
-import { batterScoreData } from "../../../features/match/matchSlice";
 import { 
->>>>>>> main
   Table,
   TableBody,
   TableCell,
@@ -34,15 +27,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-<<<<<<< HEAD
-  // "&:nth-of-type(odd)": {
-  //   backgroundColor: theme.palette.action.hover,
-  // },
-=======
   "&:nth-of-type(odd)": {
     backgroundColor: "white",
   },
->>>>>>> main
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,

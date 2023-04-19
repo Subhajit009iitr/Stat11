@@ -13,6 +13,10 @@ function App() {
     <div className="App">
       <Routes>
         <Route 
+        path={`/`}
+        element={<Auth />}
+        />
+        <Route 
         path={`/displayTeams`}
         element={<DisplayTeams />}
         />

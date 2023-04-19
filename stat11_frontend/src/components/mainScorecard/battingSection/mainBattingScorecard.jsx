@@ -24,12 +24,7 @@ function MainBattingScorecard(i) {
           boxShadow: "0px 0px 0px 0px",
           paddingRight: "116px",
           paddingLeft: "116px", //360px after nav bar
-<<<<<<< HEAD
-          //backgroundColor: "theme.pallete.background.default",
-          backgroundColor: "#F8F8F8"
-=======
           backgroundColor: "background.default"
->>>>>>> main
         }}
       >
         <CardContent>
