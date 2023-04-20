@@ -65,16 +65,16 @@ export const allMatchAndTeamsUrl = () => {
 //     return `${matchBackendUrl()}1/participating_teams/`
 // }
 
-export const teamBattersScoreUrl = () =>{
+export const teamBattersScoreUrl = (matchId) =>{
     return `${teamBackendUrl()}all_teams_and_batters/`
 }
 
-export const teamBowlersScoreUrl = () =>{
+export const teamBowlersScoreUrl = (matchId) =>{
     return `${teamBackendUrl()}all_teams_and_bowlers/`
 }
 
-export const matchMVPUrl =() =>{
-    return `${matchBackendUrl()}mvp_top_three/`
+export const matchMVPUrl =(matchId) =>{
+    return `${matchBackendUrl()}mvp_top_three/?match__id=${matchId}`
 }
 
 export const matchTeamsUrl =() =>{
@@ -83,4 +83,12 @@ export const matchTeamsUrl =() =>{
 
 export const playerBackendUrl = () => {
     return `${baseBackendUrl()}player/`
+}
+
+export const sortedBattersUrl = (matchId) =>{
+    return `${matchBackendUrl()}sortedBatters/?match__id=${matchId}`
+}
+
+export const sortedBowlersUrl = (matchId) =>{
+    return `${matchBackendUrl()}sortedBowlers/?match__id=${matchId}`
 }

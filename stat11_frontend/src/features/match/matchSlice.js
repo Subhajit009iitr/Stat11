@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl, batterScoreboardBackendUrl } from "../../urls";
+import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl, batterScoreboardBackendUrl, sortedBattersUrl, sortedBowlersUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -15,7 +15,9 @@ const initialState = {
     openDialog: false,
     addingTeamIndentifier: '',
     addTeam1: '',
-    addTeam2: ''
+    addTeam2: '',
+    sortedBatters: [],
+    sortedBowlers: [],
 }
 
 export const createMatch = createAsyncThunk('match/createMatch', (matchData) => {
@@ -35,13 +37,29 @@ export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams',
     .then(res => res.data)
 })
 
-export const getMVP = createAsyncThunk('match/getMVP', ()=>{
+export const getMVP = createAsyncThunk('match/getMVP', (matchId)=>{
     return BackendClient
     .get(
-        matchMVPUrl()
+        matchMVPUrl(matchId)
     )
     .then(res =>res.data)
 } )
+
+export const sortedBatterData = createAsyncThunk('match/sortedBatterData', (matchId)=>{
+    return BackendClient
+    .get(
+        sortedBattersUrl(matchId)
+    )
+    .then(res =>res.data)    
+})
+
+export const sortedBowlerData = createAsyncThunk('match/sortedBowlerData', (matchId)=>{
+    return BackendClient
+    .get(
+        sortedBowlersUrl(matchId)
+    )
+    .then(res =>res.data) 
+})
 
 export const batterScoreData = createAsyncThunk('match/batterScoreData', ()=>{
     return BackendClient
@@ -219,6 +237,37 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.mvp = []
+        })
+        .addCase(sortedBatterData.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(sortedBatterData.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.sortedBatters = action.payload 
+        })
+        .addCase(sortedBatterData.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.sortedBatters = []
+        })
+
+        .addCase(sortedBowlerData.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(sortedBowlerData.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.sortedBowlers = action.payload 
+        })
+        .addCase(sortedBowlerData.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.sortedBowlers = []
         })
         
 
