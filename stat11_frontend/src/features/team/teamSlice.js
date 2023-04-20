@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
 import { distinctTeamsBackendUrl, matchParticipatingTeamsBackendUrl } from "../../urls";
+import { addCreateNewMatchTeam } from "../match/matchSlice";
 
 const initialState = {
     loading: false,
@@ -34,6 +35,9 @@ const teamSlice = createSlice({
     reducers: {
         openCreateTeamDialog: (state,action) => {
             state.openDialog = action.payload
+        },
+        appendInDistinctTeamOptions: (state,action) => {
+            state.distinctTeamOptions.push(action.payload)
         }
     },
     extraReducers: (builder) => {
@@ -73,8 +77,11 @@ const teamSlice = createSlice({
             state.message = action.error.message
             state.distinctTeamOptions = []
         })
+        .addCase(addCreateNewMatchTeam, (state,action) => {
+            state.distinctTeamOptions = state.distinctTeamOptions.concat([action.payload['team']])
+        })
     }
 })
 
 export default teamSlice.reducer
-export const { openCreateTeamDialog } = teamSlice.actions
+export const { openCreateTeamDialog, appendInDistinctTeamOptions } = teamSlice.actions

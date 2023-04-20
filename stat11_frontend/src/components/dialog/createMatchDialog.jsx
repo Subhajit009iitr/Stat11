@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, ListItem, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
 import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/team/teamSlice';
 import { GrClose } from 'react-icons/gr'
 import { dateTimePickerFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators';
 import { teamOptionComponentGenerator } from '../genericComponent/genericListGenerators';
-import { createMatch } from '../../features/match/matchSlice';
-import dayjs from 'dayjs';
+import { createMatch, openCreateMatchDialog, selectTeamToAdd } from '../../features/match/matchSlice';
 
 function CreateMatchDialog() {
+    const matchState = useSelector(state => state.match)
     const teamState = useSelector(state => state.team)
     const dispatch = useDispatch()
 
@@ -19,7 +19,6 @@ function CreateMatchDialog() {
 
     const [date, setDate] = useState(null)
     const [time, setTime] = useState(null)
-
 
     const resetLocalState = () => {
         setDate(null)
@@ -44,9 +43,15 @@ function CreateMatchDialog() {
 
     const onDialogCloseHandler = () => {
         dispatch(
-            openCreateTeamDialog(false)
+            openCreateMatchDialog(false)
         )
         resetLocalState()  
+    }
+
+    const createNewTeamClickHandler = () => {
+        dispatch(
+            openCreateTeamDialog(true)
+        )
     }
 
     const dateFieldChangeHandler = (event) => {
@@ -76,13 +81,7 @@ function CreateMatchDialog() {
         }
     }
 
-    useEffect(() => {
-        dispatch(
-            getDistinctTeamOptions()
-        )
-    },[])
-
-    const teamOptionMenuItemList = teamState.distinctTeamOptions.length>0 ?
+    const teamOptionMenuItems = teamState.distinctTeamOptions.length>0 ?
     (
         teamState.distinctTeamOptions.map(team => {
             const value = team
@@ -95,9 +94,40 @@ function CreateMatchDialog() {
     ) :
     []
 
+    const addNewTeamListButton = [
+        [
+            '',
+            <ListItem
+            onClick={createNewTeamClickHandler}
+            >
+                <Typography
+                align='center'
+                variant='body2'
+                color='primary'
+                >
+                    Create New Team
+                </Typography>
+            </ListItem>
+        ]
+    ]
+
+    const teamOptionList = addNewTeamListButton.concat(teamOptionMenuItems)
+
+    useEffect(() => {
+        dispatch(
+            getDistinctTeamOptions()
+        )
+    },[])
+
+    useEffect(() => {
+        console.log('something changed!')
+        if(matchState.addTeam1!=='') setTeam1(matchState.addTeam1)
+        if(matchState.addTeam2!=='') setTeam2(matchState.addTeam2)
+    },[matchState.addTeam1, matchState.addTeam2])
+
     return (
         <Dialog
-        open={teamState.openDialog}
+        open={matchState.openDialog}
         onClose={onDialogCloseHandler}
         PaperProps={{ 
             sx: { 
@@ -137,15 +167,19 @@ function CreateMatchDialog() {
             <DialogContent>
                 {selectFormFieldGenerator(
                     'Team-1',
-                    teamOptionMenuItemList,
+                    teamOptionList,
                     team1,
-                    setTeam1
+                    setTeam1,
+                    false,
+                    () => dispatch(selectTeamToAdd('team1'))
                 )}
                 {selectFormFieldGenerator(
                     'Team-2',
-                    teamOptionMenuItemList,
+                    teamOptionList,
                     team2,
-                    setTeam2
+                    setTeam2,
+                    false,
+                    () => dispatch(selectTeamToAdd('team2'))
                 )}
                 {textFormFieldGenerator(
                     'Number of Overs',
@@ -162,10 +196,8 @@ function CreateMatchDialog() {
                 )}
                 {dateTimePickerFieldGenerator(
                     'Date',
-                    date,
                     dateFieldChangeHandler,
                     'Time',
-                    time,
                     timeFieldChangeHandler
                 )}
             </DialogContent>

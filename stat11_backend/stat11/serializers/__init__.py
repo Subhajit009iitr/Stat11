@@ -1,5 +1,5 @@
 from .user_serializers import UserSerializer, FilteredUserSerializer, UserNameRestrictedSerializer
-from .player_serializers import PlayerSerializer, PlayerNestedSerializer
+from .player_serializers import PlayerSerializer, PlayerNestedSerializer, PlayerNameRestrictedSerializer
 from .tournament_serializers import TournamentSerializer
 from .match_serializers import MatchSerializer
 from .team_serializers import TeamSerializer, TeamNestedSerializer, TeamNestedRestrictedSerializer, TeamSlimSerializer
