@@ -6,6 +6,7 @@ import { GrClose } from 'react-icons/gr'
 import { dateTimePickerFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators';
 import { teamOptionComponentGenerator } from '../genericComponent/genericListGenerators';
 import { createMatch } from '../../features/match/matchSlice';
+import dayjs from 'dayjs';
 
 function CreateMatchDialog() {
     const teamState = useSelector(state => state.team)
@@ -19,6 +20,21 @@ function CreateMatchDialog() {
     const [date, setDate] = useState(null)
     const [time, setTime] = useState(null)
 
+
+    const resetLocalState = () => {
+        setDate(null)
+        setTime(null)
+        setOvers('')
+        setLocation('')
+        setTeam1('')
+        setTeam2('')
+    }
+
+    const validateTeamInputs = () => {
+        if(team1!=='' && team2!=='' && team1!==team2) return true
+        return false
+    }
+
     const validateNumberOfOvers = () => {
         if(overs===null || overs==='') return true
 
@@ -30,14 +46,32 @@ function CreateMatchDialog() {
         dispatch(
             openCreateTeamDialog(false)
         )
+        resetLocalState()  
+    }
+
+    const dateFieldChangeHandler = (event) => {
+        const month = event['$M']+1>9 ? event['$M']+1 : `0${event['$M']+1}`
+        const day = event['$D']>9 ? event['$D'] : `0${event['$D']}`
+        setDate(`${event['$y']}-${month}-${day}`)
+    }
+
+    const timeFieldChangeHandler = (event) => {
+        const hour = event['$H']>9 ? event['$H'] : `0${event['$H']}`
+        const minute = event['$m']>9 ? event['$m'] : `0${event['$m']}`
+        setTime(`${hour}:${minute}:00`)
     }
 
     const createButtonClickHandler = () => {
-        if(team1!=='' && team2!=='' && validateNumberOfOvers()) {
-            console.log("Button clicked")
+        // if(validateTeamInputs() && validateNumberOfOvers()) {
+        if(validateNumberOfOvers()) {
             dispatch(
                 createMatch({
-
+                    date: date,
+                    time: time,
+                    overs_no: overs,
+                    location: location,
+                    team1: team1,
+                    team2: team2
                 })
             )
         }
@@ -130,10 +164,10 @@ function CreateMatchDialog() {
                 {dateTimePickerFieldGenerator(
                     'Date',
                     date,
-                    setDate,
+                    dateFieldChangeHandler,
                     'Time',
                     time,
-                    setTime
+                    timeFieldChangeHandler
                 )}
             </DialogContent>
             <DialogActions

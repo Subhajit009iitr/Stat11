@@ -22,6 +22,13 @@ class MatchModelViewSet(viewsets.ModelViewSet):
         return MatchSerializer
     
     def create(self, request, *args, **kwargs):
+        # data = request.data
+        # match = Match(
+        #     date=data['date'],
+
+        # )
+        # if data['team1']!=None and data['team1']!='':
+
         print(request.data)
         return Response("hello")
         return super().create(request, *args, **kwargs)

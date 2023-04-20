@@ -115,8 +115,7 @@ export const selectFormFieldGenerator = (
   );
 };
 
-export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateSetVar, timeLabel, timeVar, timeSetVar) => {
-  console.log("EnTering...")
+export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateVarChangeHandler, timeLabel, timeVar, timeVarChangeHandler) => {
   return (
     <>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -131,8 +130,8 @@ export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateSetVar, tim
         <DesktopDatePicker
         label={dateLabel}
         inputFormat="YYYY-MM-DD"
-        value={dateVar}
-        onChange={textFieldChangeHandler(dateSetVar)}
+        // value={dateVar}
+        onChange={dateVarChangeHandler}
         renderInput={(params) => <TextField {...params} />}
         sx={{
           mr: 3
@@ -140,8 +139,8 @@ export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateSetVar, tim
         />
         <TimePicker
         label={timeLabel}
-        value={timeVar}
-        onChange={textFieldChangeHandler(timeSetVar)}
+        // value={timeVar}
+        onChange={timeVarChangeHandler}
         renderInput={(params) => <TextField {...params} />}
         />
       </Box>
