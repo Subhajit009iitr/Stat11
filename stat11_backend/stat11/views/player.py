@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from stat11.models import Player
-from stat11.serializers import PlayerSerializer, PlayerNestedSerializer, UserSerializer
+from stat11.serializers import PlayerSerializer, PlayerNestedSerializer, UserSerializer, PlayerNameRestrictedSerializer
 
 class PlayerModelViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
@@ -14,7 +14,7 @@ class PlayerModelViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return PlayerNestedSerializer
+            return PlayerNameRestrictedSerializer
         return PlayerSerializer
 
     @action(detail=False, methods=['get'])

@@ -34,8 +34,46 @@ export const listButtonGenerator = (itemIcon, itemText, clickHandler = () => fal
     )
 }
 
-export const playersListTooltipGenerator = (players) => {
+export const standardAvatarListItemGenerator = (primaryText, secondaryText, avatar=defaultAvatar2) => {
+  return (
+    <ListItem 
+      alignItems="flex-start"
+      >
+        <ListItemAvatar>
+            <Avatar
+            alt="avatar" 
+            src={avatar}
+            />
+        </ListItemAvatar>
+        <ListItemText
+        primary={
+            <>
+            <Typography
+            variant='body2'
+            >
+                {primaryText}
+            </Typography>
+            </>
+        }
+        secondary={
+            <>
+            <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="small1"
+                color="hint.light"
+            >
+                {secondaryText}
+            </Typography>
+            </>
+        }
+        />
+      </ListItem>
+  )
+}
 
+export const playersListTooltipGenerator = (players) => {
+  
   const playerListItem = (player) => {
     return (
       <ListItem
@@ -94,7 +132,7 @@ export const teamOptionComponentGenerator = (team) => {
     placement='right'
     title={playersListTooltipGenerator(team['players'])}
     >
-      <ListItem 
+      {/* <ListItem 
       alignItems="flex-start"
       >
           <ListItemAvatar>
@@ -126,7 +164,11 @@ export const teamOptionComponentGenerator = (team) => {
               </>
           }
           />
-      </ListItem>
+      </ListItem> */}
+      {standardAvatarListItemGenerator(
+        team['name'],
+        collegeName
+      )}
     </Tooltip>
   )
 }

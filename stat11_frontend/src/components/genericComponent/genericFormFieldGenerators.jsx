@@ -83,7 +83,8 @@ export const selectFormFieldGenerator = (
   items,
   stateVar,
   setStateVar,
-  multiple=false
+  multiple=false,
+  onFocusHandler=() => {}
 ) => {
   const menuItems =
     items.length > 0 ? (
@@ -93,7 +94,7 @@ export const selectFormFieldGenerator = (
         </MenuItem>
       ))
     ) : (
-      <></>
+      []
     );
 
   return (
@@ -111,6 +112,7 @@ export const selectFormFieldGenerator = (
         variant="outlined"
         value={stateVar}
         onChange={textFieldChangeHandler(setStateVar)}
+        onFocus={onFocusHandler}
       >
         {menuItems}
       </Select>
@@ -167,8 +169,8 @@ export const fileFormFieldGeneator = (buttonText, onChangeHandler) => {
               borderRadius: 2,
               backgroundColor: '#EFEFEF',
               p: 3,
-              mt: 2,
-              mb: 2,
+              mt: 4,
+              mb: 6,
               width: '100%',
               '&:hover': {
                   backgroundColor: '#E5E5E5'

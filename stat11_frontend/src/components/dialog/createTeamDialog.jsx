@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { openCreateTeamDialog } from '../../features/team/teamSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { GrClose } from 'react-icons/gr'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Input, InputLabel, Typography } from '@mui/material'
-import { fileFormFieldGeneator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
+import { fileFormFieldGeneator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
+import { getAllPlayers } from '../../features/player/playerSlice'
+import { standardAvatarListItemGenerator } from '../genericComponent/genericListGenerators'
+import { addCreateNewMatchTeam } from '../../features/match/matchSlice'
 
 function CreateTeamDialog() {
+    const matchState = useSelector(state => state.match)
     const teamState = useSelector(state => state.team)
+    const playerState = useSelector(state => state.player)
     const dispatch = useDispatch()
 
     const [name, setName] = useState('')
@@ -28,6 +33,45 @@ function CreateTeamDialog() {
     const flagUploadOnChangeHandler = (event) => {
         if(validateFlagImageInput(event)) setFlag(event.target.files[0])
     }
+
+    const addButtonClickHandler = () => {
+        dispatch(
+            addCreateNewMatchTeam({
+                teamIdentifier: matchState.addingTeamIndentifier,
+                team: {
+                    name: name,
+                    college: college,
+                    flag: flag,
+                    players: players
+                } 
+            })
+        )
+        dispatch(
+            openCreateTeamDialog(false)
+        )
+    }
+
+    useEffect(() => {
+        dispatch(
+            getAllPlayers()
+        )
+    },[])
+
+    const playerOptionMenuItemList = playerState.playersList.length>0 ?
+    (
+        playerState.playersList.map(player => {
+            const value = player
+            const component = standardAvatarListItemGenerator(
+                player['person']['username'],
+                `${player['person']['first_name']} ${player['person']['last_name']} - (${player['type']})`
+            )
+            return [
+                value,
+                component
+            ]
+        })
+    ) :
+    []
 
     return (
         <Dialog
@@ -79,74 +123,17 @@ function CreateTeamDialog() {
                     college,
                     setCollege
                 )}
-                {/* <InputLabel>
-                    <Input
-                        sx={{
-                            display: 'none'
-                        }}
-                        type="file"
-                        // onChange={csvUploadHandler}
-                    />
-                    <Button 
-                        variant="contained" 
-                        component="span"
-                        sx={{
-                            borderRadius: 2,
-                            backgroundColor: '#EFEFEF',
-                            p: 3,
-                            mt: 2,
-                            mb: 2,
-                            width: '100%',
-                            '&:hover': {
-                                backgroundColor: '#E5E5E5'
-                            }
-                        }}
-                    >
-                        <Typography
-                        variant='body1'
-                        color='hint.main'
-                        >
-                            Upload Flag Image
-                        </Typography>
-                    </Button>
-                </InputLabel> */}
                 {fileFormFieldGeneator(
                     'Upload Flag Image',
                     flagUploadOnChangeHandler
                 )}
-                {/* {selectFormFieldGenerator(
-                    'Team-1',
-                    teamOptionMenuItemList,
-                    team1,
-                    setTeam1
-                )}
                 {selectFormFieldGenerator(
-                    'Team-2',
-                    teamOptionMenuItemList,
-                    team2,
-                    setTeam2
+                    'Add Players',
+                    playerOptionMenuItemList,
+                    players,
+                    setPlayers,
+                    true
                 )}
-                {textFormFieldGenerator(
-                    'Number of Overs',
-                    overs,
-                    setOvers,
-                    validateNumberOfOvers,
-                    'Negative number of overs are invalid',
-                    'number'
-                )}
-                {textFormFieldGenerator(
-                    'Location',
-                    location,
-                    setLocation
-                )}
-                {dateTimePickerFieldGenerator(
-                    'Date',
-                    date,
-                    dateFieldChangeHandler,
-                    'Time',
-                    time,
-                    timeFieldChangeHandler
-                )} */}
             </DialogContent>
             <DialogActions
             sx={{
@@ -165,12 +152,12 @@ function CreateTeamDialog() {
                     pb: 2,
                     width: '30%'
                 }}
-                // onClick={createButtonClickHandler}
+                onClick={addButtonClickHandler}
                 >
                     <Typography 
                     variant="h6"
                     >
-                        Create
+                        Add
                     </Typography>
                 </Button>
             </DialogActions>

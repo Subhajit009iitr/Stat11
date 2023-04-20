@@ -80,3 +80,7 @@ export const matchMVPUrl =() =>{
 export const matchTeamsUrl =() =>{
     return `${matchBackendUrl()}teamList/`
 }
+
+export const playerBackendUrl = () => {
+    return `${baseBackendUrl()}player/`
+}
