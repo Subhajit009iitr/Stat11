@@ -52,9 +52,9 @@ export default function UpdateScore() {
   ) : (
     <></>
   );
-  useEffect(() => {
-    dispatch(changeSideBarTabsType("home"));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(changeSideBarTabsType("home"));
+  // }, []);
   return (
     <Box sx ={{backgroundColor: "background.default"}}>
       <Header

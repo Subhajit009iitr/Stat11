@@ -21,8 +21,8 @@ function Match() {
                 // return <UpdateScore />
                 // return 'updateScore'
                 // return <DisplayTeams />
-                // return <LiveContent matchId={match_id} />
-                return "Live"
+                return <LiveContent matchId={match_id} />
+                // return "Live
             }
             else if(sideBarState.currentTab==='Scoreboard') {
                 return <MainScorecard matchId={match_id} />
@@ -36,10 +36,9 @@ function Match() {
             else if(sideBarState.currentTab==='Highlights') {
                 return <Highlights matchId={match_id} />
             }
-            // else {
-            //     return <></>
-            // }
-            return 'hello'
+            else {
+                return <></>
+            }
         }
     }
 
@@ -78,7 +77,7 @@ function Match() {
 
     return (
         pageSideBarAppender(
-            matchContent
+            content()
         )
     )
 }
