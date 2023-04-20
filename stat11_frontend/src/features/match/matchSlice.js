@@ -14,6 +14,15 @@ const initialState = {
     match: '',
 }
 
+export const createMatch = createAsyncThunk('match/createMatch', (matchData) => {
+    return BackendClient
+    .post(
+        matchBackendUrl(),
+        matchData
+    )
+    .then(res => res.data)
+})
+
 export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams', () => {
     return BackendClient
     .get(
@@ -91,6 +100,19 @@ const matchSlice = createSlice({
     },
     extraReducers: builder => {
         builder
+        .addCase(createMatch.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(createMatch.fulfilled, (state) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+        })
+        .addCase(createMatch.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+        })
         .addCase(getAllMatchAndTeams.pending, (state) => {
             state.loading = true
         })

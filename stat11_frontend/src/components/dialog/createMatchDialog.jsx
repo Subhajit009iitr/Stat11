@@ -3,8 +3,9 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider
 import { useDispatch, useSelector } from 'react-redux';
 import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/team/teamSlice';
 import { GrClose } from 'react-icons/gr'
-import { selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators';
+import { dateTimePickerFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators';
 import { teamOptionComponentGenerator } from '../genericComponent/genericListGenerators';
+import { createMatch } from '../../features/match/matchSlice';
 
 function CreateMatchDialog() {
     const teamState = useSelector(state => state.team)
@@ -14,6 +15,9 @@ function CreateMatchDialog() {
     const [team2, setTeam2] = useState('')
     const [overs, setOvers] = useState('')
     const [location, setLocation] = useState('')
+
+    const [date, setDate] = useState(null)
+    const [time, setTime] = useState(null)
 
     const validateNumberOfOvers = () => {
         if(overs===null || overs==='') return true
@@ -31,6 +35,11 @@ function CreateMatchDialog() {
     const createButtonClickHandler = () => {
         if(team1!=='' && team2!=='' && validateNumberOfOvers()) {
             console.log("Button clicked")
+            dispatch(
+                createMatch({
+
+                })
+            )
         }
     }
 
@@ -118,11 +127,20 @@ function CreateMatchDialog() {
                     location,
                     setLocation
                 )}
+                {dateTimePickerFieldGenerator(
+                    'Date',
+                    date,
+                    setDate,
+                    'Time',
+                    time,
+                    setTime
+                )}
             </DialogContent>
             <DialogActions
             sx={{
                 display: 'flex',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                mb: 2
             }}
             >
                 <Button

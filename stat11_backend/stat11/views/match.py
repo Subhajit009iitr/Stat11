@@ -15,10 +15,16 @@ class MatchModelViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['tournament__id', 'date', 'time', 'overs_no']
     ordering_fields = ['date', 'time']
+
     def get_serializer_class(self):
         # if self.action == 'list' or self.action == 'retrieve':
         #     return MatchSerializer
         return MatchSerializer
+    
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        return Response("hello")
+        return super().create(request, *args, **kwargs)
     
     @action(detail=False, methods=['get'])
     def all_match_and_team_details(self, request):
