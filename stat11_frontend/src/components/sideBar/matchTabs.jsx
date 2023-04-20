@@ -2,17 +2,25 @@ import React, { useEffect } from 'react'
 import { List } from '@mui/material'
 import matchBarTabs from '../../constants/matchBarTabs'
 import { useDispatch, useSelector } from 'react-redux'
-import { switchSideBarTab } from '../../features/sideBar/sideBarSlice'
+import { changeSideBarTabsType, switchSideBarTab } from '../../features/sideBar/sideBarSlice'
 import { listButtonGenerator } from '../genericComponent/genericListGenerators'
+import { useNavigate } from 'react-router-dom'
 
 function MatchTabs() {
     const sideBarState = useSelector((state) => state.sideBar)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
   
     const sideBarTabClickHandler = (tab) => {
       dispatch(
         switchSideBarTab(tab)
       )
+      if(tab==='Home') {
+        dispatch(
+          changeSideBarTabsType('home')
+        )
+        navigate('/home')
+      }
     }
   
     useEffect(() => {

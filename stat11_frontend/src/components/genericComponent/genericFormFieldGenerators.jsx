@@ -1,4 +1,5 @@
 import {
+  Box,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -7,6 +8,10 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 // Onchange Handler Genrerators
 
@@ -31,7 +36,8 @@ export const textFormFieldGenerator = (
   stateVar,
   setStateVar,
   error = () => true,
-  errorText
+  errorText,
+  fieldType='text'
 ) => {
   let err = !error();
 
@@ -39,7 +45,7 @@ export const textFormFieldGenerator = (
     <TextField
       required={true}
       label={label}
-      type="text"
+      type={fieldType}
       placeholder={label}
       value={stateVar}
       variant="outlined"
@@ -73,7 +79,8 @@ export const selectFormFieldGenerator = (
   label,
   items,
   stateVar,
-  setStateVar
+  setStateVar,
+  multiple=false
 ) => {
   const menuItems =
     items.length > 0 ? (
@@ -96,6 +103,7 @@ export const selectFormFieldGenerator = (
       <InputLabel>{label}</InputLabel>
       <Select
         required
+        multiple={multiple}
         label={label}
         variant="outlined"
         value={stateVar}
@@ -106,3 +114,45 @@ export const selectFormFieldGenerator = (
     </FormControl>
   );
 };
+
+export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateVarChangeHandler, timeLabel, timeVar, timeVarChangeHandler) => {
+  return (
+    <>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Box 
+      sx={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        mt: 2
+      }}
+      >
+        <DesktopDatePicker
+        label={dateLabel}
+        inputFormat="YYYY-MM-DD"
+        // value={dateVar}
+        onChange={dateVarChangeHandler}
+        renderInput={(params) => <TextField {...params} />}
+        sx={{
+          mr: 3
+        }}
+        />
+        <TimePicker
+        label={timeLabel}
+        // value={timeVar}
+        onChange={timeVarChangeHandler}
+        renderInput={(params) => <TextField {...params} />}
+        />
+      </Box>
+    </LocalizationProvider>
+    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <TimePicker
+      label={timeLabel}
+      value={timeVar}
+      onChange={textFieldChangeHandler(timeSetVar)}
+      renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider> */}
+    </>
+  )
+}

@@ -5,10 +5,22 @@ import { Box, Button, Divider, Icon, IconButton, Typography } from '@mui/materia
 import { getAllMatchAndTeams } from '../../features/match/matchSlice';
 import MatchSection from './matchSection';
 import { IoIosAddCircle } from 'react-icons/io'
+import HomeHeader from '../header/homeHeader';
+import CreateMatchDialog from '../dialog/createMatchDialog';
+import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/team/teamSlice';
 
 function HomeContent() {
     const matchState = useSelector(state =>state.match)
     const dispatch = useDispatch()
+
+    const createButtonClickHandler = () => {
+        dispatch(
+            openCreateTeamDialog(true)
+        )
+        dispatch(
+            getDistinctTeamOptions()
+        )
+    }
 
     useEffect(() => {
         dispatch(
@@ -29,37 +41,13 @@ function HomeContent() {
 
     return(
         <>
-            <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-end',
-                height: '120px',
-                mt: 5,
-                ml: 12
-            }}
-            >
-                <Typography
-                variant='h3'
-                sx={{
-                    mb: 9
-                }}
-                >
-                    Welcome Back!   
-                </Typography>
-            </Box>
-            <Divider
-                sx={{
-                backgroundColor: "hint",
-                marginBottom: 3,
-                marginLeft: 6,
-                marginRight: 12
-                }}
+            <HomeHeader 
+            headingText='Welcome Back!'
             />
             {matchCards}
             <IconButton
             color='primary'
-            onClick={() => console.log("Button clciked!")}
+            onClick={createButtonClickHandler}
             sx={{
                 position: 'fixed',
                 right: 0,
@@ -73,6 +61,7 @@ function HomeContent() {
                 size={72}
                 />
             </IconButton>
+            <CreateMatchDialog />
     </>
     );
 }

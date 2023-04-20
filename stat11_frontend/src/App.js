@@ -6,44 +6,58 @@ import Auth from './pages/auth';
 import UpdateScore from './pages/updateScore';
 import MainScorecard from './pages/mainScorecard';
 import DisplayTeams from './pages/displayTeams';
-// import Help from "./pages/help";
+import Match from './pages/match';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route 
-        path={`/`}
-        element={<Auth />}
-        />
-        <Route 
-        path={`/displayTeams`}
-        element={<DisplayTeams />}
-        />
-        <Route
-        path={`/home`} 
-        element={<Home />} 
+        path={`/`} 
+        element={<Auth />} 
         />
         <Route 
         path={`/auth`} 
         element={<Auth />} 
         />
         {/* <Route 
-        path={`/help`} 
-        element={<Help />} 
+        path={`/displayTeams`}
+        element={<DisplayTeams />}
         /> */}
-        <Route 
+        <Route
+        path={`/home`} 
+        element={<Home />} 
+        />
+        <Route
+        path={`/match/:match_id`} 
+        element={<Match />} 
+        >
+          <Route 
+          path={`scorecard`}
+          element={<MainScorecard />}
+          />
+          <Route 
+          path='displayTeams'
+          element={<DisplayTeams />}
+          />
+          <Route 
+          path={`updateScore`}
+          element={<UpdateScore />}
+          />
+        </Route>
+       
+        {/* <Route 
         path={`/updateScore`}
         element={<UpdateScore />}
-        />
+        /> */}
         {/* <Route 
         path={`/high`}
         element={<Highlights/>}
         /> */}
-        <Route 
+        {/* <Route 
         path={`/scorecard`}
         element={<MainScorecard/>}
-        />
+        /> */}
       </Routes>
     </div>
   );

@@ -59,6 +59,9 @@ export const theme = createTheme({
     small1: {
       fontSize: "1.4rem"
     },
+    small2: {
+      fontSize: "1.2rem"
+    },
     button: {
       fontSize: "2.4rem",
       fontWeight: 500,

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl } from "../../urls";
+import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl, batterScoreboardBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -13,6 +13,15 @@ const initialState = {
     Teams: [],
     match: '',
 }
+
+export const createMatch = createAsyncThunk('match/createMatch', (matchData) => {
+    return BackendClient
+    .post(
+        matchBackendUrl(),
+        matchData
+    )
+    .then(res => res.data)
+})
 
 export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams', () => {
     return BackendClient
@@ -48,7 +57,7 @@ export const bowlerScoreData = createAsyncThunk('match/bowlerScoreData', ()=>{
 
 export const teamScoreData = createAsyncThunk('match/teamScoreData', async () => {
     try {
-        const res = await BackendClient.get(teamUrl());
+        const res = await BackendClient.get(batterScoreboardBackendUrl());
         return res.data;
     } catch (err) {
         return console.log(err);
@@ -85,10 +94,25 @@ const matchSlice = createSlice({
     name: 'match',
     initialState,
     reducers: {
-
+        chooseMatch: (state,action) => {
+            state.match = action.payload
+        }
     },
     extraReducers: builder => {
         builder
+        .addCase(createMatch.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(createMatch.fulfilled, (state) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+        })
+        .addCase(createMatch.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+        })
         .addCase(getAllMatchAndTeams.pending, (state) => {
             state.loading = true
         })
@@ -112,28 +136,21 @@ const matchSlice = createSlice({
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
             state.batterScores = action.payload
-            
         })
-
         .addCase(teamScoreData.rejected, (state,action) => {
             state.loading = false
             state.error = true
             state.message = action.error.message
             state.batterScores = []
-            console.log("Error")
         })
-
         .addCase(batterScoreData.pending, (state) => {
             state.loading = true
-            console.log("")
         })
         .addCase(batterScoreData.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
             state.batterScores = action.payload 
         })
         .addCase(batterScoreData.rejected, (state,action) => {
@@ -141,17 +158,14 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.batterScores = []
-            console.log("Error")
         })
         .addCase(matchTeams.pending, (state) => {
             state.loading = true
-            console.log("Match teams pending")
         })
         .addCase(matchTeams.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log("Matchteams payload",action.payload)
             state.Teams = action.payload 
         })
         .addCase(matchTeams.rejected, (state,action) => {
@@ -159,18 +173,14 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.Teams = []
-            console.log("Error")
         })
-        
         .addCase(bowlerScoreData.pending, (state) => {
             state.loading = true
-            console.log("bowler score pendin")
         })
         .addCase(bowlerScoreData.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log(action.payload)
             state.bowlerScores = action.payload 
         })
         .addCase(bowlerScoreData.rejected, (state,action) => {
@@ -178,17 +188,14 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.bowlerScores = []
-            console.log("Error")
         })
         .addCase(getMVP.pending, (state) => {
             state.loading = true
-            console.log("MVP pending")
         })
         .addCase(getMVP.fulfilled, (state,action) => {
             state.loading = false
             state.error = false
             state.message = ''
-            console.log("MVP Payload ", action.payload)
             state.mvp = action.payload 
         })
         .addCase(getMVP.rejected, (state,action) => {
@@ -196,7 +203,6 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.mvp = []
-            console.log("MVP rejected")
         })
         
 
@@ -205,4 +211,4 @@ const matchSlice = createSlice({
 
 
 export default matchSlice.reducer
-export const { updateteam1runs, updateteam2runs } = matchSlice.actions
+export const { updateteam1runs, updateteam2runs, chooseMatch } = matchSlice.actions

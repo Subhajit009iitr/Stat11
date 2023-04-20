@@ -4,9 +4,26 @@ import { Box, Button, Typography } from '@mui/material'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { changeSideBarTabsType } from '../../features/sideBar/sideBarSlice';
+import { chooseMatch } from '../../features/match/matchSlice';
 
 function MatchCard(props) {
-    const { oversNo, teams, matchOver } = props
+    const { match, oversNo, teams, matchOver } = props
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const matchCardClickHandler = (match) => {
+        console.log("hello")
+        dispatch(
+            changeSideBarTabsType('match')
+        )
+        dispatch(
+            chooseMatch(match)
+        )
+        navigate(`/match/${match['id']}`)
+    }
 
     const winteam = teams[0]['runs']>teams[1]['runs'] ? teams[0]['name'] : teams[1]['name'];
     const winner = (
@@ -143,6 +160,7 @@ function MatchCard(props) {
 
     return (
         <Card 
+        onClick={() => matchCardClickHandler(match)}
         sx={{ 
             width: '320px', 
             height: '240px',

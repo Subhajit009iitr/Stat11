@@ -1,22 +1,27 @@
 from stat11.models import Team, BatterScoreboard
-from stat11.serializers import TeamNestedSerializer, TeamSerializer
+from stat11.serializers import TeamSlimSerializer, TeamNestedRestrictedSerializer
 
-def get_match_team_data(match_id):
+def get_match_team_data(match_id, detail=False):
     match_teams_data = []
     match_teams = Team.objects.filter(match__id=match_id)
 
     for team in match_teams:
         team_runs = 0
-        wickets = 0
+        team_wickets = 0
         team_batter_scoreboard = BatterScoreboard.objects.filter(team__id=team.id)
         for scoreboard in team_batter_scoreboard:
             team_runs += scoreboard.runs
             if scoreboard.exit_time is not None:
-                wickets += 1
-        serializer = TeamSerializer(team)
+                team_wickets += 1
+        
+        if detail:
+            serializer = TeamNestedRestrictedSerializer(team)
+        else:
+            serializer = TeamSlimSerializer(team)
+            
         team_data = serializer.data
         team_data['runs'] = team_runs
-        team_data['wickets'] = 'TBD'
+        team_data['wickets'] = team_wickets
         match_teams_data.append(team_data)
 
     return (match_teams_data)
