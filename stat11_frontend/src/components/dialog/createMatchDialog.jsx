@@ -62,8 +62,7 @@ function CreateMatchDialog() {
     }
 
     const createButtonClickHandler = () => {
-        // if(validateTeamInputs() && validateNumberOfOvers()) {
-        if(validateNumberOfOvers()) {
+        if(validateTeamInputs() && validateNumberOfOvers()) {
             dispatch(
                 createMatch({
                     date: date,

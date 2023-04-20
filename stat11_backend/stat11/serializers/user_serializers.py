@@ -14,4 +14,4 @@ class FilteredUserSerializer(serializers.ModelSerializer):
 class UserNameRestrictedSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'photo']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'photo']
