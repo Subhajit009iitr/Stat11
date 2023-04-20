@@ -31,6 +31,11 @@ function CreateTeamDialog() {
         return false
     }
 
+    const checkFileUpload = () => {
+        if(flag!=='') return true
+        return false
+    }
+
     const onDialogCloseHandler = () => {
         dispatch(
             openCreateTeamDialog(false)
@@ -133,7 +138,8 @@ function CreateTeamDialog() {
                 )}
                 {fileFormFieldGeneator(
                     'Upload Flag Image',
-                    flagUploadOnChangeHandler
+                    flagUploadOnChangeHandler,
+                    checkFileUpload(),
                 )}
                 {selectFormFieldGenerator(
                     'Add Players',

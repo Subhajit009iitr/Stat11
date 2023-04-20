@@ -10,6 +10,7 @@ import {
   Select,
   TextField,
   Typography,
+  alpha,
 } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -152,7 +153,20 @@ export const dateTimePickerFieldGenerator = (dateLabel, dateVarChangeHandler, ti
   )
 }
 
-export const fileFormFieldGeneator = (buttonText, onChangeHandler) => {
+export const fileFormFieldGeneator = (
+  buttonText, 
+  onChangeHandler, 
+  imageUploaded=false, 
+  uploadBgColor={
+    text: 'background.paper',
+    bg: alpha("#448791", 0.75),
+    hoverBg: alpha("#448791", 0.9)
+  }
+  ) => {
+  const bgColor = imageUploaded ? uploadBgColor['bg'] : '#EFEFEF'
+  const hoverBgColor = imageUploaded ? uploadBgColor['hoverBg'] : '#E5E5E5'
+  const textColor = imageUploaded ? uploadBgColor['text'] : 'hint.main'
+
   return (
     <InputLabel>
       <Input
@@ -167,19 +181,19 @@ export const fileFormFieldGeneator = (buttonText, onChangeHandler) => {
           component="span"
           sx={{
               borderRadius: 2,
-              backgroundColor: '#EFEFEF',
+              backgroundColor: `${bgColor}`,
               p: 3,
               mt: 4,
               mb: 6,
               width: '100%',
               '&:hover': {
-                  backgroundColor: '#E5E5E5'
+                  backgroundColor: `${hoverBgColor}`
               }
           }}
       >
           <Typography
           variant='body1'
-          color='hint.main'
+          color={textColor}
           >
               {buttonText}
           </Typography>
