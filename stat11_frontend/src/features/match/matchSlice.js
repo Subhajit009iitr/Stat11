@@ -12,6 +12,7 @@ const initialState = {
     mvp: [],
     Teams: [],
     match: '',
+    openDialog: false
 }
 
 export const createMatch = createAsyncThunk('match/createMatch', (matchData) => {
@@ -96,6 +97,9 @@ const matchSlice = createSlice({
     reducers: {
         chooseMatch: (state,action) => {
             state.match = action.payload
+        },
+        openCreateMatchDialog: (state,action) => {
+            state.openDialog = action.payload
         }
     },
     extraReducers: builder => {
@@ -211,4 +215,4 @@ const matchSlice = createSlice({
 
 
 export default matchSlice.reducer
-export const { updateteam1runs, updateteam2runs, chooseMatch } = matchSlice.actions
+export const { updateteam1runs, updateteam2runs, chooseMatch, openCreateMatchDialog } = matchSlice.actions

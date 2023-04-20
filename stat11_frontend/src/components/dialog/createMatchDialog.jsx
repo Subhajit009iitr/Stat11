@@ -5,10 +5,11 @@ import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/tea
 import { GrClose } from 'react-icons/gr'
 import { dateTimePickerFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators';
 import { teamOptionComponentGenerator } from '../genericComponent/genericListGenerators';
-import { createMatch } from '../../features/match/matchSlice';
+import { createMatch, openCreateMatchDialog } from '../../features/match/matchSlice';
 import dayjs from 'dayjs';
 
 function CreateMatchDialog() {
+    const matchState = useSelector(state => state.match)
     const teamState = useSelector(state => state.team)
     const dispatch = useDispatch()
 
@@ -44,7 +45,7 @@ function CreateMatchDialog() {
 
     const onDialogCloseHandler = () => {
         dispatch(
-            openCreateTeamDialog(false)
+            openCreateMatchDialog(false)
         )
         resetLocalState()  
     }
@@ -97,7 +98,7 @@ function CreateMatchDialog() {
 
     return (
         <Dialog
-        open={teamState.openDialog}
+        open={matchState.openDialog}
         onClose={onDialogCloseHandler}
         PaperProps={{ 
             sx: { 
@@ -162,10 +163,8 @@ function CreateMatchDialog() {
                 )}
                 {dateTimePickerFieldGenerator(
                     'Date',
-                    date,
                     dateFieldChangeHandler,
                     'Time',
-                    time,
                     timeFieldChangeHandler
                 )}
             </DialogContent>

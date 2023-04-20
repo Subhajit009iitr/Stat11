@@ -1,12 +1,15 @@
 import {
   Box,
+  Button,
   Checkbox,
   FormControl,
   FormControlLabel,
+  Input,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -115,7 +118,7 @@ export const selectFormFieldGenerator = (
   );
 };
 
-export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateVarChangeHandler, timeLabel, timeVar, timeVarChangeHandler) => {
+export const dateTimePickerFieldGenerator = (dateLabel, dateVarChangeHandler, timeLabel, timeVarChangeHandler) => {
   return (
     <>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -130,7 +133,6 @@ export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateVarChangeHa
         <DesktopDatePicker
         label={dateLabel}
         inputFormat="YYYY-MM-DD"
-        // value={dateVar}
         onChange={dateVarChangeHandler}
         renderInput={(params) => <TextField {...params} />}
         sx={{
@@ -139,20 +141,47 @@ export const dateTimePickerFieldGenerator = (dateLabel, dateVar, dateVarChangeHa
         />
         <TimePicker
         label={timeLabel}
-        // value={timeVar}
         onChange={timeVarChangeHandler}
         renderInput={(params) => <TextField {...params} />}
         />
       </Box>
     </LocalizationProvider>
-    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <TimePicker
-      label={timeLabel}
-      value={timeVar}
-      onChange={textFieldChangeHandler(timeSetVar)}
-      renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider> */}
     </>
+  )
+}
+
+export const fileFormFieldGeneator = (buttonText, onChangeHandler) => {
+  return (
+    <InputLabel>
+      <Input
+          sx={{
+              display: 'none'
+          }}
+          type="file"
+          onChange={onChangeHandler}
+      />
+      <Button 
+          variant="contained" 
+          component="span"
+          sx={{
+              borderRadius: 2,
+              backgroundColor: '#EFEFEF',
+              p: 3,
+              mt: 2,
+              mb: 2,
+              width: '100%',
+              '&:hover': {
+                  backgroundColor: '#E5E5E5'
+              }
+          }}
+      >
+          <Typography
+          variant='body1'
+          color='hint.main'
+          >
+              {buttonText}
+          </Typography>
+      </Button>
+    </InputLabel>
   )
 }

@@ -8,6 +8,7 @@ import { IoIosAddCircle } from 'react-icons/io'
 import HomeHeader from '../header/homeHeader';
 import CreateMatchDialog from '../dialog/createMatchDialog';
 import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/team/teamSlice';
+import CreateTeamDialog from '../dialog/createTeamDialog';
 
 function HomeContent() {
     const matchState = useSelector(state =>state.match)
@@ -62,6 +63,7 @@ function HomeContent() {
                 />
             </IconButton>
             <CreateMatchDialog />
+            <CreateTeamDialog />
     </>
     );
 }

@@ -47,7 +47,7 @@ function MatchSection(props) {
             []
 
             return (
-                <MatchCard 
+                <MatchCard
                 match = {matchData['match']}
                 oversNo = {matchData['match']['overs_no']}
                 teams = {teams}
