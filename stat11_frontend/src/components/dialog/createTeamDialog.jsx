@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { openCreateTeamDialog } from '../../features/team/teamSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { GrClose } from 'react-icons/gr'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Input, InputLabel, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Typography } from '@mui/material'
 import { fileFormFieldGeneator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators'
 import { getAllPlayers } from '../../features/player/playerSlice'
 import { standardAvatarListItemGenerator } from '../genericComponent/genericListGenerators'
@@ -19,6 +19,13 @@ function CreateTeamDialog() {
     const [flag, setFlag] = useState('')
     const [players, setPlayers] = useState([])
 
+    const resetLocalState = () => {
+        setName('')
+        setCollege('')
+        setFlag('')
+        setPlayers([])
+    }
+
     const validateFlagImageInput = (event) => {
         if(event.target.files.length===1) return true
         return false
@@ -28,6 +35,7 @@ function CreateTeamDialog() {
         dispatch(
             openCreateTeamDialog(false)
         )
+        resetLocalState()
     }
 
     const flagUploadOnChangeHandler = (event) => {

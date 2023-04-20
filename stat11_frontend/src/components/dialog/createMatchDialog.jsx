@@ -6,7 +6,6 @@ import { GrClose } from 'react-icons/gr'
 import { dateTimePickerFieldGenerator, selectFormFieldGenerator, textFormFieldGenerator } from '../genericComponent/genericFormFieldGenerators';
 import { teamOptionComponentGenerator } from '../genericComponent/genericListGenerators';
 import { createMatch, openCreateMatchDialog, selectTeamToAdd } from '../../features/match/matchSlice';
-import dayjs from 'dayjs';
 
 function CreateMatchDialog() {
     const matchState = useSelector(state => state.match)
@@ -20,8 +19,6 @@ function CreateMatchDialog() {
 
     const [date, setDate] = useState(null)
     const [time, setTime] = useState(null)
-
-    let [teamOptionMenuItemList, setTeamOptionMenuItemList] = useState([])
 
     const resetLocalState = () => {
         setDate(null)
@@ -84,46 +81,11 @@ function CreateMatchDialog() {
         }
     }
 
-    useEffect(() => {
-        dispatch(
-            getDistinctTeamOptions()
-        )
-    },[])
-
-    // useEffect(() => {
-    //     console.log('something changed!')
-    //     if(matchState.addTeam1!=='') {
-    //         if(teamOptionMenuItemList.length>0) {
-    //             console.log("Entered till...")
-    //             teamOptionMenuItemList.push([
-    //                 matchState.addTeam1,
-    //                 teamOptionComponentGenerator(matchState.addTeam1)
-    //             ])
-    //         }
-    //         setTeam1(matchState.addTeam1)
-    //     }
-    //     if(matchState.addTeam2!=='') {
-    //         if(teamOptionMenuItemList.length>0) {
-    //             teamOptionMenuItemList.push([
-    //                 matchState.addTeam2,
-    //                 teamOptionComponentGenerator(matchState.addTeam2)
-    //             ])
-    //         }
-    //         setTeam2(matchState.addTeam2)
-    //     }
-    // },[matchState.addTeam1, matchState.addTeam2])
-
-    teamOptionMenuItemList = teamState.distinctTeamOptions.length>0 ?
+    const teamOptionMenuItems = teamState.distinctTeamOptions.length>0 ?
     (
         teamState.distinctTeamOptions.map(team => {
             const value = team
             const component = teamOptionComponentGenerator(team)
-            // setTeamOptionMenuItemList(teamOptionMenuItemList.push(
-            //     [
-            //         value,
-            //         component
-            //     ]
-            // ))
             return [
                 value,
                 component
@@ -132,8 +94,8 @@ function CreateMatchDialog() {
     ) :
     []
 
-    const prependAddTeamButton = () => {
-        const button = [
+    const addNewTeamListButton = [
+        [
             '',
             <ListItem
             onClick={createNewTeamClickHandler}
@@ -147,32 +109,20 @@ function CreateMatchDialog() {
                 </Typography>
             </ListItem>
         ]
-        teamOptionMenuItemList.unshift(button)
-        return teamOptionMenuItemList
-    }
+    ]
+
+    const teamOptionList = addNewTeamListButton.concat(teamOptionMenuItems)
+
+    useEffect(() => {
+        dispatch(
+            getDistinctTeamOptions()
+        )
+    },[])
 
     useEffect(() => {
         console.log('something changed!')
-        if(matchState.addTeam1!=='') {
-            if(teamOptionMenuItemList.length>0) {
-                console.log("Entered till...")
-                teamOptionMenuItemList.push([
-                    matchState.addTeam1,
-                    teamOptionComponentGenerator(matchState.addTeam1)
-                ])
-                setTeamOptionMenuItemList(teamOptionMenuItemList)
-            }
-            setTeam1(matchState.addTeam1)
-        }
-        if(matchState.addTeam2!=='') {
-            if(teamOptionMenuItemList.length>0) {
-                teamOptionMenuItemList.push([
-                    matchState.addTeam2,
-                    teamOptionComponentGenerator(matchState.addTeam2)
-                ])
-            }
-            setTeam2(matchState.addTeam2)
-        }
+        if(matchState.addTeam1!=='') setTeam1(matchState.addTeam1)
+        if(matchState.addTeam2!=='') setTeam2(matchState.addTeam2)
     },[matchState.addTeam1, matchState.addTeam2])
 
     return (
@@ -217,7 +167,7 @@ function CreateMatchDialog() {
             <DialogContent>
                 {selectFormFieldGenerator(
                     'Team-1',
-                    prependAddTeamButton(),
+                    teamOptionList,
                     team1,
                     setTeam1,
                     false,
@@ -225,7 +175,7 @@ function CreateMatchDialog() {
                 )}
                 {selectFormFieldGenerator(
                     'Team-2',
-                    teamOptionMenuItemList,
+                    teamOptionList,
                     team2,
                     setTeam2,
                     false,
