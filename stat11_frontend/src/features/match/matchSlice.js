@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { teamUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl, batterScoreboardBackendUrl, sortedBattersUrl, sortedBowlersUrl } from "../../urls";
+import { teamUrl, allMatchAndTeamsDetailsUrl, teamBackendUrl, matchUrl, matchBackendUrl, matchTeamsUrl, allMatchAndTeamsUrl, teamBattersScoreUrl, teamBowlersScoreUrl, matchMVPUrl, batterScoreboardBackendUrl, sortedBattersUrl, sortedBowlersUrl } from "../../urls";
 
 const initialState = {
     loading: false,
@@ -18,6 +18,7 @@ const initialState = {
     addTeam2: '',
     sortedBatters: [],
     sortedBowlers: [],
+    details: [],
 }
 
 export const createMatch = createAsyncThunk('match/createMatch', (matchData) => {
@@ -33,6 +34,14 @@ export const getAllMatchAndTeams = createAsyncThunk('match/getAllMatchAndTeams',
     return BackendClient
     .get(
         allMatchAndTeamsUrl()
+    )
+    .then(res => res.data)
+})
+
+export const getAllMatchAndTeamsDetails = createAsyncThunk('match/getAllMatchAndTeamsDetails', (match_id) => {
+    return BackendClient
+    .get(
+        allMatchAndTeamsDetailsUrl(match_id)
     )
     .then(res => res.data)
 })
@@ -61,18 +70,18 @@ export const sortedBowlerData = createAsyncThunk('match/sortedBowlerData', (matc
     .then(res =>res.data) 
 })
 
-export const batterScoreData = createAsyncThunk('match/batterScoreData', ()=>{
+export const batterScoreData = createAsyncThunk('match/batterScoreData', (team_id)=>{
     return BackendClient
     .get(
-        teamBattersScoreUrl()
+        teamBattersScoreUrl(team_id)
     )
     .then(res =>res.data)    
 })
 
-export const bowlerScoreData = createAsyncThunk('match/bowlerScoreData', ()=>{
+export const bowlerScoreData = createAsyncThunk('match/bowlerScoreData', (team_id)=>{
     return BackendClient
     .get(
-        teamBowlersScoreUrl()
+        teamBowlersScoreUrl(team_id)
     )
     .then(res =>res.data) 
 })
@@ -161,6 +170,22 @@ const matchSlice = createSlice({
             state.error = true
             state.message = action.error.message
             state.dateWiseMatchAndTeamsList = []
+        })
+
+        .addCase(getAllMatchAndTeamsDetails.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(getAllMatchAndTeamsDetails.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.details = action.payload
+        })
+        .addCase(getAllMatchAndTeamsDetails.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.details = []
         })
 
         .addCase(teamScoreData.pending, (state) => {

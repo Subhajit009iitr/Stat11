@@ -52,9 +52,9 @@ export const matchBackendUrl = () => {
     return `${baseBackendUrl()}match/`
 }
 
-// export const allMatchAndTeamsUrl = () => {
-//     return `${matchBackendUrl()}all_match_and_team_details/`
-// }
+export const allMatchAndTeamsDetailsUrl = (matchId) => {
+    return `${matchBackendUrl()}all_match_and_team_details/?match__id=${matchId}`
+}
 
 export const allMatchAndTeamsUrl = () => {
     return `${matchBackendUrl()}all_match_and_teams/`
@@ -65,12 +65,12 @@ export const allMatchAndTeamsUrl = () => {
 //     return `${matchBackendUrl()}1/participating_teams/`
 // }
 
-export const teamBattersScoreUrl = (matchId) =>{
-    return `${teamBackendUrl()}all_teams_and_batters/`
+export const teamBattersScoreUrl = (teamId) =>{
+    return `${teamBackendUrl()}all_teams_and_batters/?team__id=${teamId}`
 }
 
-export const teamBowlersScoreUrl = (matchId) =>{
-    return `${teamBackendUrl()}all_teams_and_bowlers/`
+export const teamBowlersScoreUrl = (teamId) =>{
+    return `${teamBackendUrl()}all_teams_and_bowlers/?team__id=${teamId}`
 }
 
 export const matchMVPUrl =(matchId) =>{

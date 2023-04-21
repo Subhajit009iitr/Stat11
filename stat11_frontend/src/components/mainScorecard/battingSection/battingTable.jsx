@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { batterScoreData, getAllMatchAndTeams } from "../../../features/match/matchSlice";
+import { batterScoreData } from "../../../features/match/matchSlice";
 import { 
   Table,
   TableBody,
@@ -14,6 +14,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
+import { useParams } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -102,17 +103,20 @@ function addrows(batterDetails) {
 
 export default function BattingTable(props) {
 
-  const Matchdetails = useSelector(state => state.match.matchAndTeamsList)
+  // const { team_id } = useParams()
   const batterDetails = useSelector(state => state.match.batterScores)
+  // const team1 = useSelector(state=> state.team.team1)
+  // console.log("lul",team1)
+  // const team2 = useSelector(state=> state.team.team2)
+  // console.log('hui',team2)
   const rows_batter = addrows(batterDetails)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(
-      batterScoreData(),
-      getAllMatchAndTeams()
+      batterScoreData(props.obj.id),
     )
   }, [])
-  console.log("batters ", batterDetails)
+  // console.log("batters ", batterDetails)
   let secondarytext;
   if (props.hasInningsEnded) {
     secondarytext = "Not out";
