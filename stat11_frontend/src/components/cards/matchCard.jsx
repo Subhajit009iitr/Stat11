@@ -69,7 +69,8 @@ function MatchCard(props) {
             alignContent: 'flex-start'
         }}
         >
-            {matchOver ? winner : liveButton}
+            {/* {matchOver ? winner : liveButton} */}
+            {winner}
         </Box>
     )
 

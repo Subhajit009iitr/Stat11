@@ -40,7 +40,7 @@ function createBowlerTable(Bowler, overs, maidens, runs, wickets, eco) {
 }
 
 const rows_bowler = [
-  createBowlerTable("Raiwat Bapat", 6.5, 8, 1, 0, 5.5),
+  createBowlerTable("Mohammed Shami", 4, 1, 25, 3, 6.25),
   // createBowlerTable("Nishita sandwich", 6.0, 8, 1, 0, 5.5),
   // createBowlerTable("Manashree Eclair", 6.0, 8, 1, 0, 5.5),
 ];

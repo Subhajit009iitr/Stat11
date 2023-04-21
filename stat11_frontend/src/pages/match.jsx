@@ -9,6 +9,7 @@ import MainScorecard from './mainScorecard'
 import DisplayTeams from './displayTeams'
 import Highlights from './highlights'
 import LiveContent from '../components/liveContent'
+import Analytics from './analytics'
 
 function Match() {
     const { match_id } = useParams()
@@ -29,7 +30,7 @@ function Match() {
                 return <MainScorecard matchId={match_id} />
             }
             else if(sideBarState.currentTab==='Analysis') {
-                return 'Analytics'
+                return <Analytics />
             }
             else if(sideBarState.currentTab==='Teams') {
                 return <DisplayTeams matchId={match_id} />

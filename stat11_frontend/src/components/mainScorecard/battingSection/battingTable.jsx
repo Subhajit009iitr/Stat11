@@ -78,8 +78,17 @@ function createBatterTable(
 function addrows(batterDetails) {
 
   const rowsbatter = batterDetails.map((batterDetail) => {
-    var bowler = (batterDetail.status == "out")? (batterDetail.bowled_out_by.person.first_name + " " + batterDetail.bowled_out_by.person.last_name): " ";
-    var fielder = (batterDetail.status == "out" && (batterDetail.wicket_type!="bowled")|(batterDetail.wicket_type!="lbw"))? (batterDetail.wicket_taker.person.first_name + " " + batterDetail.wicket_taker.person.last_name): " ";
+    var bowler = batterDetail.bowled_out_by!==null ? 
+    (
+      (batterDetail.status == "out")? (batterDetail.bowled_out_by.person.first_name + " " + batterDetail.bowled_out_by.person.last_name): " "
+    ) :
+    " "
+    var fielder = batterDetail.wicket_taker!==null ? 
+    (
+      (batterDetail.status == "out" && (batterDetail.wicket_type!="bowled")|(batterDetail.wicket_type!="lbw"))? (batterDetail.wicket_taker.person.first_name + " " + batterDetail.wicket_taker.person.last_name): " "
+    ) :
+    " "
+
     return createBatterTable(
       //batterDetail.player.person.username,
       batterDetail.player.person.first_name + " " + batterDetail.player.person.last_name,
