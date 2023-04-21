@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import BattingScorecardHeading from "../mainScorecard/battingSection/battingScorecardHeading";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,26 +48,20 @@ const rows_batter = [
 ];
 
 function BattingScorecard() {
+  const teamState = useSelector(state => state.team)
   const secondarytext = "Batting";
   return (
-    <Box sx = {{width: "80%", ml: "20%", position: "sticky"}}>
+    <Box sx = {{ position: "sticky"}}>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
-          paddingRight: "116px",
-          paddingLeft: "116px", //360px after nav bar
+          paddingRight: "5%",
+          paddingLeft: "5%", //360px after nav bar
           backgroundColor: "background.default"
         }}
       >
         <CardContent>
-          <BattingScorecardHeading
-            battingTeamName="Royal Challengers Bangalore"
-            teamRuns="212"
-            teamWickets="2"
-            overs="20"
-            ballsInCurrentOver="0"
-            hasInningsEnded={true}
-          />
+        <BattingScorecardHeading obj={teamState.team1}/>
           <TableContainer component={Paper} sx={{ borderRadius: "16px" }}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>

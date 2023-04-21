@@ -44,10 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stat11',
     'rest_framework',
     'django_filters',
     'corsheaders',
+    'stat11',
 ]
 
 MIDDLEWARE = [
@@ -121,7 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+        # 'rest_framework.authentication.AllowAny'
     ]
 }
 

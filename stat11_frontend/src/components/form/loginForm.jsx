@@ -73,7 +73,10 @@ function LoginForm() {
         {textFormFieldGenerator(
           'Password',
           pass,
-          setPass
+          setPass,
+          () => {return true},
+          'Error text',
+          'password'
         )}
         <Link
         component="button"

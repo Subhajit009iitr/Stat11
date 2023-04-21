@@ -18,3 +18,4 @@ class BatterScoreboard(models.Model):
     wicket_type=models.CharField(max_length=16, choices=WICKET_TYPES, default=BOWLED)
     entry_time=models.TimeField(null=True, blank=True)
     exit_time=models.TimeField(null=True, blank=True)
+    # batting_turn=models.BooleanField(default=False)

@@ -36,6 +36,10 @@ export const batterScoreboardBackendUrl = () => {
     return `${baseBackendUrl()}batter_scoreboard/`
 }
 
+export const bowlerScoreboardBackendUrl = () => {
+    return `${baseBackendUrl()}bowler_scoreboard/`
+}
+
 export const teamBackendUrl = () => {
     return `${baseBackendUrl()}team/`
 }
@@ -91,4 +95,31 @@ export const sortedBattersUrl = (matchId) =>{
 
 export const sortedBowlersUrl = (matchId) =>{
     return `${matchBackendUrl()}sortedBowlers/?match__id=${matchId}`
+}
+export const typeWisePlayerBackendUrl = (type) => {
+    return `${playerBackendUrl()}?type=${type}`
+}
+
+export const battersByStatusBackendUrl = (teamId, status) => {
+    if(teamId===undefined || status===undefined) {
+        teamId=0
+        status=''
+    }
+    return `${batterScoreboardBackendUrl()}?team__id=${teamId}&status=${status}`
+}
+
+export const bowlersByStatusBackendUrl = (teamId, status) => {
+    if(teamId===undefined || status===undefined) {
+        teamId=0
+        status=''
+    }
+    return `${bowlerScoreboardBackendUrl()}?team__id=${teamId}&status=${status}`
+}
+
+export const teamBattersByTypeBackendUrl = (matchId, type) => {
+    return `${batterScoreboardBackendUrl()}?team__match__id=${matchId}`
+}
+
+export const teamBowlersByTypeBackendUrl = (matchId, type) => {
+    return `${bowlerScoreboardBackendUrl()}?team__match__id=${matchId}`
 }

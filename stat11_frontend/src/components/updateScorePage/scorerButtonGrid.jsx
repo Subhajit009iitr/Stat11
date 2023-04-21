@@ -4,7 +4,13 @@ import { Box, Button, Grid } from "@mui/material";
 export default function ScorerButtonGrid() {
   return (
     <>
-      <Box sx={{ width: "60%", ml: "30%", mt: "2%" }}>
+      <Box 
+      sx={{ 
+        mt: "2%" ,
+        mb: 10,
+        ml: 20,
+        mr: 20
+        }}>
         <Grid container rowSpacing={5} columnSpacing={{ xs: 4, sm: 4, md: 4 }}>
           <Grid item xs={2}>
             <Button
