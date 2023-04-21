@@ -47,12 +47,12 @@ const rows_bowler = [
 
 export default function BowlingScorecard() {
   return (
-    <Box sx = {{width: "80%", ml: "20%", position: "sticky", backgroundColor: "#F8F8F8"}}>
+    <Box sx = {{ position: "sticky", backgroundColor: "#F8F8F8"}}>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
-          paddingRight: "116px",
-          paddingLeft: "116px", //360px after nav bar
+          paddingRight: "5%",
+          paddingLeft: "5%", //360px after nav bar
           backgroundColor: "background.default"
         }}
       >

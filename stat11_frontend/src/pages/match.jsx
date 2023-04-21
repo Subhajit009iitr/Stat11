@@ -8,7 +8,7 @@ import UpdateScore from './updateScore'
 import MainScorecard from './mainScorecard'
 import DisplayTeams from './displayTeams'
 import Highlights from './highlights'
-// import LiveContent from '../components/liveContent'
+import LiveContent from '../components/liveContent'
 
 function Match() {
     const { match_id } = useParams()
@@ -21,7 +21,8 @@ function Match() {
                 // return <UpdateScore />
                 // return 'updateScore'
                 // return <DisplayTeams />
-                return <LiveContent matchId={match_id} />
+                // return <LiveContent matchId={match_id} />
+                return <UpdateScore />
                 // return "Live
             }
             else if(sideBarState.currentTab==='Scoreboard') {

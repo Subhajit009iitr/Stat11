@@ -54,11 +54,17 @@ function ChooseBatterDialog() {
             // }
             return [
                 'hello',
-                <></>
+                <Box>Hello</Box>
             ]
         })
     ) :
     []
+
+    // useEffect(() => {
+    //     dispatch(
+    //         getMat
+    //     )
+    // },[])
 
     return (
         <Dialog

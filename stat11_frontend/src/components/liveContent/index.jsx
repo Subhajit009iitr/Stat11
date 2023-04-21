@@ -18,6 +18,8 @@ import { openTossWinDialog } from "../../features/team/teamSlice";
 import MatchHeader from "../header/matchHeader";
 import { getCurrentBatters, getMatchBatters, getTeamBatters, openChooseBatterDialog } from "../../features/scoreboard/batterScoreboardSlice";
 import { getCurrentBowlers, getMatchBowlers, openChooseBowlerDialog } from "../../features/scoreboard/bowlerScoreboardSlice";
+import ChooseBatterDialog from "../dialog/chooseBattersDialog";
+import ChooseBowlerDialog from "../dialog/chooseBowlerDialog";
 // import dismissalModes from "../constants/modeOfDismissalList";
 // import SideBar from "../components/sideBar/sideBar";
 
@@ -150,6 +152,8 @@ function LiveContent(props) {
         >
             <BattingScorecard />
         </Box>
+        <ChooseBatterDialog />
+        <ChooseBowlerDialog />
         
         
         {/* <Box sx={{ width: "60%", ml: "30%", mt: "1%" }}>
