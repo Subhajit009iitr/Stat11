@@ -14,7 +14,7 @@ git version : ^2.40.0
 
 To clone the repository, either use the Git GUI if you have one installed or enter the following commands:
 ```bash
-git clone https://github.com/Ak216puniA/Enono.git
+https://github.com/Ak216puniA/Stat11
 ```
 ### Setup
 
