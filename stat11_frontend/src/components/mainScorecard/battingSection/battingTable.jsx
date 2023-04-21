@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { batterScoreData, getAllMatchAndTeams } from "../../../features/match/matchSlice";
+import { batterScoreData } from "../../../features/match/matchSlice";
 import { 
   Table,
   TableBody,
@@ -14,6 +14,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
+import { useParams } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -102,17 +103,16 @@ function addrows(batterDetails) {
 
 export default function BattingTable(props) {
 
-  const Matchdetails = useSelector(state => state.match.matchAndTeamsList)
-  const batterDetails = useSelector(state => state.match.batterScores)
-  const rows_batter = addrows(batterDetails)
+  // const batterDetails = useSelector(state => state.match.batterScores)
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(
-      batterScoreData(),
-      getAllMatchAndTeams()
+      batterScoreData(props.obj.id),
     )
   }, [])
-  console.log("batters ", batterDetails)
+  console.log(props.bat)
+  const rows_batter = addrows(props.bat)
   let secondarytext;
   if (props.hasInningsEnded) {
     secondarytext = "Not out";

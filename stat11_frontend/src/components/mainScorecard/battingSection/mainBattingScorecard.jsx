@@ -7,42 +7,35 @@ import BattingTable from "./battingTable";
 import DisplayTotalScore from "./displayTotalScore";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllMatchAndTeams } from "../../../features/match/matchSlice";
+import { getAllMatchAndTeamsDetails } from "../../../features/match/matchSlice";
 
-function MainBattingScorecard(i) {
-  const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(
-      getAllMatchAndTeams()
-      )
-  },[])
-  return (
-    <Box sx = {{width: "80%", ml: "20%", position: "sticky"}}>
+function MainBattingScorecard(props) {
+
+  return ( 
+    <Box sx = {{width: "80vw", position: "sticky", mt: "8vh"}}>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
-          paddingRight: "116px",
-          paddingLeft: "116px", //360px after nav bar
+          paddingRight: "5%",
+          paddingLeft: "5%", //360px after nav bar
           backgroundColor: "background.default"
         }}
       >
         <CardContent>
-          <BattingScorecardHeading/>
-          <BattingTable hasInningsEnded={true} />
+          <BattingScorecardHeading obj={props.obj}/>
+          <BattingTable hasInningsEnded={true} obj={props.obj} bat={props.bat}/>
           <DisplayTotalScore 
-            totalExtras={Matchdetails[i.in].team_extras}
-            wides={Matchdetails[i.in].wide}
-            byes={Matchdetails[i.in].bye}
-            legByes={Matchdetails[i.in].legbye}
-            noBalls={Matchdetails[i.in].noball}
-            teamRuns={Matchdetails[i.in].team_runs}
-            teamWickets={Matchdetails[i.in].team_wickets}
-            overs={Matchdetails[i.in].team_extras}
-            ballsInCurrentOver={Matchdetails[i.in].team_current_overs}
-            totalBatter={Matchdetails[i.in].team_current_over_balls}
+          
+            byes={props.obj.bye}
+            legByes={props.obj.legbye}
+            noBalls={props.obj.no_ball}
+            wide={props.obj.wide}
+            totalExtras={props.obj.bye+props.obj.legbye+props.obj.no_ball+props.obj.wide}
+            teamRuns={props.obj.runs+props.obj.bye+props.obj.legbye+props.obj.no_ball+props.obj.wide}
+            teamWickets={props.obj.wickets}
+            // overs={new_obj.team_current_overs}
+            // ballsInCurrentOver={new_obj.team_current_over_balls}
           />
-          {/* The index in MatchDetais will change according to which team is displayed */}
         </CardContent>
       </Card>
     </Box>

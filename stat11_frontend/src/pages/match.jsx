@@ -18,20 +18,21 @@ function Match() {
         if(sideBarState.tabsType==='match'){
             if(sideBarState.currentTab==='Live') {
                 // return <UpdateScore />
-                return 'updateScore'
+                // return 'updateScore'
+                return <DisplayTeams />
             }
-            // else if(sideBarState.currentTab==='Scoreboard') {
-            //     return <MainScorecard />
-            // }
+            else if(sideBarState.currentTab==='Scoreboard') {
+                return <MainScorecard />
+            }
             else if(sideBarState.currentTab==='Analysis') {
                 return 'Analytics'
             }
             // else if(sideBarState.currentTab==='Teams') {
             //     return <DisplayTeams />
             // }
-            // else if(sideBarState.currentTab==='Highlights') {
-            //     return <Highlights />
-            // }
+            else if(sideBarState.currentTab==='Highlights') {
+                return <Highlights />
+            }
             // else {
             //     return <></>
             // }

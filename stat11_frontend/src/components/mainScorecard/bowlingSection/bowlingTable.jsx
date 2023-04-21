@@ -17,6 +17,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { useParams } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -60,22 +61,23 @@ function addrows(bowlerDetails)
    return rowsbowler 
 }
 
-export default function BowlingTable() {
-  const bowlerDetails = useSelector(state=>state.match.bowlerScores)
-  const rows_bowler = addrows(bowlerDetails)
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(
-      bowlerScoreData()
-    )
-  },[])
+export default function BowlingTable(props) {
+  // const bowlerDetails = useSelector(state=>state.match.bowlerScores)
+  // const dispatch = useDispatch()
+  // useEffect(()=>{
+  //   dispatch(
+  //     bowlerScoreData(props.obj.id)
+  //   )
+  // },[])
+  const rows_bowler = addrows(props.bol)
+  // console.log("bobo",bowlerDetails)
   return (
     <div>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
-          paddingRight: "116px",
-          paddingLeft: "116px", //360px after nav bar
+          paddingRight: "5%",
+          paddingLeft: "5%", 
           backgroundColor: "background.default"
         }}
       >

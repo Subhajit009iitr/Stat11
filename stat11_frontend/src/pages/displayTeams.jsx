@@ -4,13 +4,16 @@ import {
 import React from "react";
 import Header from "../components/header";
 import SideBar from "../components/sideBar/sideBar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { changeSideBarTabsType } from "../features/sideBar/sideBarSlice";
 import DisplayTeamLists from "../components/displayTeams/displayTeamLists";
+import MatchHeader from "../components/header";
 
 function DisplayTeams(props) {
   const dispatch = useDispatch();
+  const team1 = useSelector(state => state.team.team1)
+  const team2 = useSelector(state => state.team.team2)
 
   useEffect(() => {
     dispatch(changeSideBarTabsType("match"));
@@ -18,19 +21,12 @@ function DisplayTeams(props) {
   
   return (
     <Box sx = {{backgroundColor: "background.default"}}>
-      <Header
-        team1Name="Royal Challengers Bangalore"
-        team2Name="Lucknow Super Giants"
-        location="M. Chinnaswamy Stadium, Bengaluru"
-        numberOfOvers="20"
-        teamWhichWonTheToss="Lucknow Super Giants"
-      />
+      <MatchHeader 
+      primaryText={team1.name+" v/s "+team2.name} 
+      secondaryText={team2.match.location} 
+      tossText = {(team1.toss)?team1.name:team2.name}/>
       <SideBar />
-      {/* <TeamNameHeading
-        team1Name="Royal Challengers Bangalore"
-        team2Name="Lucknow Super Giants"
-      /> */}
-      <DisplayTeamLists team1Name = "Royal Challengers Bangalore" team2Name = "Lucknow Super Giants"/>
+      <DisplayTeamLists />
       <br/>
       <br/>
       <br/>

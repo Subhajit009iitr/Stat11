@@ -14,7 +14,8 @@ import {
 import { tableCellClasses } from "@mui/material/TableCell";
 import Paper from "@mui/material/Paper";
 import { useSelector,useDispatch } from "react-redux";
-import { matchTeams,getAllMatchAndTeams } from "../../features/match/matchSlice";
+import { matchTeams,getAllMatchAndTeamsDetails } from "../../features/match/matchSlice";
+import { useParams } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,28 +38,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function DisplayTeamLists() {
-
-  const Matchdetails = useSelector(state =>state.match.matchAndTeamsList)
+export default function DisplayTeamLists(props) {
+  const { match_id } = useParams()
+  const Matchdetails = useSelector(state =>state.match.details)
   const Team = useSelector(state => state.match.Teams);
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(getAllMatchAndTeams())
-    dispatch(matchTeams())
+    dispatch(getAllMatchAndTeamsDetails(match_id))
+    dispatch(matchTeams(match_id))
   },[])
 
-  console.log("Yesss");
+  // console.log("Yesss");
   const team1List = Team[0];
-  console.log("Yes");
+  // console.log("Yes");
   const team2List = Team[1];
   
   return (
     <Box
       component="div"
       sx={{
-        marginLeft: "27%",
-        marginTop: "2%",
-        width: "65%",
+        marginLeft: "5vw",
+        marginTop: "5vh",
+        width: "70vw",
         borderRadius: "16px",
       }}
     >

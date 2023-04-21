@@ -6,14 +6,14 @@ from rest_framework.filters import OrderingFilter
 from stat11.models import Match, Team, Player
 from stat11.serializers import MatchSerializer
 from stat11.utils import get_match_team_details, get_match_mvp_data
-from stat11.utils import get_match_team_data, segregate_match_and_teams_date_wise, get_match_mvp_data , get_match_team_list_data
+from stat11.utils import get_match_team_data, segregate_match_and_teams_date_wise, get_match_mvp_data , get_match_team_list_data, get_sorted_batter_list, get_sorted_bowler_list
 from stat11.serializers import MatchSerializer
 from rest_framework import status
 
 class MatchModelViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all().order_by('-date')
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    filterset_fields = ['tournament__id', 'date', 'time', 'overs_no']
+    filterset_fields = ['date', 'time', 'overs_no']
     ordering_fields = ['date', 'time']
 
     def get_serializer_class(self):
@@ -64,11 +64,11 @@ class MatchModelViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['get'])
     def all_match_and_team_details(self, request):
-        all_match_list = self.get_queryset()
-        first_match = all_match_list[0]
-        res = get_match_team_details(first_match.id)
+        match_id = request.query_params.get('match__id')
+        res = get_match_team_details(match_id)
         return Response(res)
 
+    @action(detail=False, methods=['get'])
     def mvp_top_three(self, request):
         match_id = request.query_params.get('match__id')
         res= get_match_mvp_data(match_id)
@@ -106,3 +106,15 @@ class MatchModelViewSet(viewsets.ModelViewSet):
 
     #     res = match_teams_data
     #     return Response(res, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['get'])
+    def sortedBatters(self, request):
+        match_id = request.query_params.get('match__id')
+        res= get_sorted_batter_list(match_id)
+        return Response(res)
+    
+    @action(detail=False, methods=['get'])
+    def sortedBowlers(self, request):
+        match_id = request.query_params.get('match__id')
+        res= get_sorted_bowler_list(match_id)
+        return Response(res)

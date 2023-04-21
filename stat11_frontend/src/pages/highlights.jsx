@@ -9,8 +9,10 @@ import SideBar from '../components/sideBar/sideBar'
 import { changeSideBarTabsType } from '../features/sideBar/sideBarSlice'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMVP,batterScoreData, bowlerScoreData } from '../features/match/matchSlice';
+import { getMVP, sortedBatterData, sortedBowlerData } from '../features/match/matchSlice';
 import Header from '../components/header'
+import { useParams } from 'react-router-dom';
+import MatchHeader from "../components/header";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -89,6 +91,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
   
 function Highlights() {
+  const { match_id } = useParams()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(
@@ -96,26 +99,28 @@ function Highlights() {
       )
 },[])
 
-const batterDetails = useSelector(state=>state.match.batterScores)
-const bowlerDetails = useSelector(state=>state.match.bowlerScores)
+const batterDetails = useSelector(state=>state.match.sortedBatters)
+const bowlerDetails = useSelector(state=>state.match.sortedBowlers)
+const team1 = useSelector(state =>state.team.team1)
+const team2 = useSelector(state =>state.team.team2)
 const mvpDetails = useSelector(state=>state.match.mvp)
 useEffect(() => {
   dispatch(
-      batterScoreData(),
+      sortedBatterData(match_id),
       
     )
 },[])
 
 useEffect(() => {
   dispatch(
-      bowlerScoreData(),
+      sortedBowlerData(match_id),
       
     )
 },[])
 
 useEffect(() => {
   dispatch(
-      getMVP(),     
+      getMVP(match_id),     
     )
 },[])
 const MVProws = addMVProws(mvpDetails)
@@ -125,15 +130,18 @@ const rows_batter = addbatterrows(batterDetails)
 // console.log("MVP Details ", mvpDetails)
 
 return (
-    
-    <Box component='div' sx={{ backgroundColor: '#F8F8F8'}}> 
+    <Box component='div' sx={{ backgroundColor: '#F8F8F8', width: "80vw"}}> 
     {/* Hardcoded color */}
     <SideBar/>
-    <Header />
+    {/* <Header /> */}
+    <MatchHeader 
+      primaryText={team1.name+" v/s "+team2.name} 
+      secondaryText={team2.match.location} 
+      tossText = {(team1.toss)?team1.name:team2.name}/>
 <Card
 sx={{boxShadow:"0px 0px 0px 0px",
-paddingRight: '116px',
-paddingLeft: '25%', //360px after nav bar
+paddingRight: '5%',
+paddingLeft: '5%', //360px after nav bar
 backgroundColor:"#F8F8F8" //Hardcoded here
 }}
 ><CardContent>
@@ -229,6 +237,7 @@ backgroundColor:"#F8F8F8" //Hardcoded here
     </Card>
     
     </Box>
+
   )
 }
 

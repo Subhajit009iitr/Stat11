@@ -26,7 +26,7 @@ export default function DisplayTotalScore(props) {
           </Grid>
           <Grid item xs={5}>
             <Typography variant="h5" sx={{textAlign: "left" }}>
-              {props.totalExtras} (w {props.wides}, lb {props.legByes}, b{" "}
+              {props.totalExtras} (w {props.wide}, lb {props.legByes}, b{" "}
               {props.byes}, nb {props.noBalls})
             </Typography>
           </Grid>
@@ -35,8 +35,8 @@ export default function DisplayTotalScore(props) {
               variant="h5"
               sx={{textAlign: "right", mr: "7%"}}
             >
-              {props.teamRuns}-{props.teamWickets} ({props.overs}.
-              {props.ballsInCurrentOver})
+              {props.teamRuns}-{props.teamWickets}
+               {/* ({props.overs}.{props.ballsInCurrentOver}) */}
             </Typography>
           </Grid>
         </Grid>
