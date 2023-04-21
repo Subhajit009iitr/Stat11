@@ -95,10 +95,10 @@ export const teamScoreData = createAsyncThunk('match/teamScoreData', async () =>
     }
 });
 
-export const matchTeams = createAsyncThunk('match/matchTeams', ()=>{
+export const matchTeams = createAsyncThunk('match/matchTeams', (matchId)=>{
     return BackendClient
     .get(
-        matchTeamsUrl()
+        matchTeamsUrl(matchId)
     )
     .then(res =>res.data) 
 })
@@ -180,6 +180,7 @@ const matchSlice = createSlice({
             state.error = false
             state.message = ''
             state.details = action.payload
+            console.log("potato",action.payload)
         })
         .addCase(getAllMatchAndTeamsDetails.rejected, (state,action) => {
             state.loading = false

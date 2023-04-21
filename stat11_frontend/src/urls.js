@@ -77,8 +77,8 @@ export const matchMVPUrl =(matchId) =>{
     return `${matchBackendUrl()}mvp_top_three/?match__id=${matchId}`
 }
 
-export const matchTeamsUrl =() =>{
-    return `${matchBackendUrl()}teamList/`
+export const matchTeamsUrl =(matchId) =>{
+    return `${matchBackendUrl()}teamList/?match__id=${matchId}`
 }
 
 export const playerBackendUrl = () => {
