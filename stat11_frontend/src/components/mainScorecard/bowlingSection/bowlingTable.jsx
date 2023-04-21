@@ -62,14 +62,14 @@ function addrows(bowlerDetails)
 }
 
 export default function BowlingTable(props) {
-  const bowlerDetails = useSelector(state=>state.match.bowlerScores)
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(
-      bowlerScoreData(props.obj.id)
-    )
-  },[])
-  const rows_bowler = addrows(bowlerDetails)
+  // const bowlerDetails = useSelector(state=>state.match.bowlerScores)
+  // const dispatch = useDispatch()
+  // useEffect(()=>{
+  //   dispatch(
+  //     bowlerScoreData(props.obj.id)
+  //   )
+  // },[])
+  const rows_bowler = addrows(props.bol)
   // console.log("bobo",bowlerDetails)
   return (
     <div>

@@ -103,20 +103,16 @@ function addrows(batterDetails) {
 
 export default function BattingTable(props) {
 
-  // const { team_id } = useParams()
-  const batterDetails = useSelector(state => state.match.batterScores)
-  // const team1 = useSelector(state=> state.team.team1)
-  // console.log("lul",team1)
-  // const team2 = useSelector(state=> state.team.team2)
-  // console.log('hui',team2)
-  const rows_batter = addrows(batterDetails)
+  // const batterDetails = useSelector(state => state.match.batterScores)
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(
       batterScoreData(props.obj.id),
     )
   }, [])
-  // console.log("batters ", batterDetails)
+  console.log(props.bat)
+  const rows_batter = addrows(props.bat)
   let secondarytext;
   if (props.hasInningsEnded) {
     secondarytext = "Not out";

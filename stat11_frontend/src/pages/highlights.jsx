@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMVP, sortedBatterData, sortedBowlerData } from '../features/match/matchSlice';
 import Header from '../components/header'
 import { useParams } from 'react-router-dom';
+import MatchHeader from "../components/header";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -100,6 +101,8 @@ function Highlights() {
 
 const batterDetails = useSelector(state=>state.match.sortedBatters)
 const bowlerDetails = useSelector(state=>state.match.sortedBowlers)
+const team1 = useSelector(state =>state.team.team1)
+const team2 = useSelector(state =>state.team.team2)
 const mvpDetails = useSelector(state=>state.match.mvp)
 useEffect(() => {
   dispatch(
@@ -127,11 +130,14 @@ const rows_batter = addbatterrows(batterDetails)
 // console.log("MVP Details ", mvpDetails)
 
 return (
-    
-    <Box component='div' sx={{ backgroundColor: '#F8F8F8'}}> 
+    <Box component='div' sx={{ backgroundColor: '#F8F8F8', width: "80vw"}}> 
     {/* Hardcoded color */}
     <SideBar/>
     {/* <Header /> */}
+    <MatchHeader 
+      primaryText={team1.name+" v/s "+team2.name} 
+      secondaryText={team2.match.location} 
+      tossText = {(team1.toss)?team1.name:team2.name}/>
 <Card
 sx={{boxShadow:"0px 0px 0px 0px",
 paddingRight: '5%',
@@ -231,6 +237,7 @@ backgroundColor:"#F8F8F8" //Hardcoded here
     </Card>
     
     </Box>
+
   )
 }
 

@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 export default function MainBowlingScorecard(props) {
   return (
     <Box sx={{ width: "80vw",  position: "sticky"}}>
-      <BowlingTable obj={props.obj}/>
+      <BowlingTable obj={props.obj} bol={props.bol}/>
     </Box>
   );
 }

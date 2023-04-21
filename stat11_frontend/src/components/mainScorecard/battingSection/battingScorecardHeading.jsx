@@ -37,6 +37,7 @@ export default function BattingScorecardHeading(props) {
               variant="h4"
               sx={{
                 textAlign: "right",
+                width: "80vw",
                 mr: "5%",
                 mb: "3%",
                 color: "white",

@@ -36,7 +36,7 @@ export default function DisplayTotalScore(props) {
               sx={{textAlign: "right", mr: "7%"}}
             >
               {props.teamRuns}-{props.teamWickets}
-               ({props.overs}.{props.ballsInCurrentOver})
+               {/* ({props.overs}.{props.ballsInCurrentOver}) */}
             </Typography>
           </Grid>
         </Grid>

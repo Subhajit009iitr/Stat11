@@ -10,17 +10,9 @@ import { useEffect } from 'react'
 import { getAllMatchAndTeamsDetails } from "../../../features/match/matchSlice";
 
 function MainBattingScorecard(props) {
-  // const Matchdetails = useSelector(state =>state.match.details)
-  // const dispatch = useDispatch()
-  // useEffect(()=>{
-  //   dispatch(
-  //     getAllMatchAndTeamsDetails(props.obj.match.id)
-  //     )
-  // },[])
-  // console.log("hum",Matchdetails[0])
-  // const new_obj = (props.obj.id == Matchdetails[0].id)? Matchdetails[0]:Matchdetails[1]
+
   return ( 
-    <Box sx = {{width: "80vw", position: "sticky"}}>
+    <Box sx = {{width: "80vw", position: "sticky", mt: "8vh"}}>
       <Card
         sx={{
           boxShadow: "0px 0px 0px 0px",
@@ -31,7 +23,7 @@ function MainBattingScorecard(props) {
       >
         <CardContent>
           <BattingScorecardHeading obj={props.obj}/>
-          <BattingTable hasInningsEnded={true} obj={props.obj}/>
+          <BattingTable hasInningsEnded={true} obj={props.obj} bat={props.bat}/>
           <DisplayTotalScore 
           
             byes={props.obj.bye}

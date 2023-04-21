@@ -1,85 +1,70 @@
-import React from "react";
-import { Typography, Box } from "@mui/material";
-import { getAllMatchAndTeams } from "../features/match/matchSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { Box, Divider, Typography } from '@mui/material'
+import React from 'react'
 
-export default function Header(props) {
-  const dispatch = useDispatch();
-  const Matchdetails = useSelector((state) => state.match.matchAndTeamsList);
-  useEffect(() => {
-    dispatch(getAllMatchAndTeams());
-  }, []);
+function MatchHeader(props) {
+    const {primaryText, secondaryText, tossText } = props
 
-  let teamWhichWonTheToss;
-  function decideWhichTeamWonTheToss() {
-    if (Matchdetails[0].toss) {
-      teamWhichWonTheToss = Matchdetails[0].name;
-    } else {
-      teamWhichWonTheToss = Matchdetails[1].name;
-    }
-  }
-
-  decideWhichTeamWonTheToss();
-  return (
-    <Box sx={{ width: "70%", ml: "25%", position: "sticky"}}>
-      <Typography
-        // component="box"
+    return (
+        <>
+        <Box
         sx={{
-          fontSize: "32px",
-          float: "left",
-          paddingLeft: "30px",
-          paddingTop: "72px",
-          // paddingBottom: "10px",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            height: '120px',
+            mt: 5,
+            ml: 12,
+            mr: 24
         }}
-      >
-        {Matchdetails[0].name} v/s {Matchdetails[1].name}
-        <br />
-        <Typography
-          // component="box"
-          sx={{
-            color: "#448791",
-            fontSize: "20px",
-            float: "left",
-          }}
         >
-          {Matchdetails[0].match.location} &nbsp;
-        </Typography>
-        <Typography
-          // component="box"
-          sx={{
-            color: "#797979",
-            fontSize: "20px",
-            float: "left",
-          }}
-        >
-          {" "}
-          {Matchdetails[0].match.overs_no} Overs
-        </Typography>
-      </Typography>
-
-      <Typography
-        // component="box"
+            <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-start'
+            }}
+            >
+                <Typography
+                variant='h3'
+                sx={{
+                    mb: 3
+                }}
+                >
+                    {primaryText}
+                </Typography>
+                <Typography
+                variant='body1'
+                color='primary.main'
+                sx={{
+                    mb: 6
+                }}
+                >
+                    {secondaryText}
+                </Typography>
+            </Box>
+            <Box>
+            <Typography
+                variant='body1'
+                color='hint.light'
+                sx={{
+                    mb: 6
+                }}
+                >
+                    {`Toss: ${tossText}`}
+                </Typography>
+            </Box>
+        </Box>
+        <Divider
         sx={{
-          color: "#797979",
-          fontSize: "20px",
-          textAlign: "right",
-          paddingTop: "80px",
-          // paddingRight: "160px",
-          float: "right",
+            backgroundColor: "hint",
+            mb: 3,
+            ml: 10,
+            mr: 20
         }}
-      >
-        {" "}
-        Toss: <br />
-        {teamWhichWonTheToss}
-      </Typography>
-
-      <Typography 
-      // component="box" 
-      sx={{ backgroundColor: "#D9D9D9" }}
-      >
-        <hr style={{ width: "100%" }} />
-      </Typography>
-    </Box>
-  );
+        />
+        </>
+    )
 }
+
+export default MatchHeader
