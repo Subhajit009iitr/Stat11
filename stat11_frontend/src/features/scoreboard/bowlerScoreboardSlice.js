@@ -1,20 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { currentBowlersBackendUrl } from "../../urls";
+import { bowlersByStatusBackendUrl, teamBowlersByTypeBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
     error: false,
     message: '',
-    team1Bowlers: '',
-    team2Bowlers: '',
-    currentBowlers: []
+    matchBowlers: [],
+    currentBowlers: '',
+    openDialog: false
 }
 
-export const getCurrentBowlers = createAsyncThunk('bowlerScoreboard/getCurrentBowlers', (data) => {
+export const getMatchBowlers = createAsyncThunk('batterScoreboard/getTeamBowlers', (matchId) => {
     return BackendClient
     .get(
-        currentBowlersBackendUrl(data['teamId'],data['status'])
+        teamBowlersByTypeBackendUrl(matchId)
+    )
+    .then(res => res.data)
+})
+
+export const getCurrentBowlers = createAsyncThunk('bowlerScoreboard/getCurrentBowlers', (teamId) => {
+    return BackendClient
+    .get(
+        bowlersByStatusBackendUrl(teamId,'bowling')
     )
     .then(res => res.data)
 })
@@ -22,6 +30,11 @@ export const getCurrentBowlers = createAsyncThunk('bowlerScoreboard/getCurrentBo
 const bowlerScoreboardSlice = createSlice({
     name: 'bowlerScoreboard',
     initialState,
+    reducers: {
+        openChooseBowlerDialog: (state,action) => {
+            state.openDialog = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(getCurrentBowlers.pending, (state) => {
@@ -41,7 +54,22 @@ const bowlerScoreboardSlice = createSlice({
             state.message = action.error.message
             state.currentBowlers = []
         })
+        .addCase(getMatchBowlers.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(getMatchBowlers.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.matchBowlers = action.payload
+        })
+        .addCase(getMatchBowlers.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+        })
     }
 })
 
 export default bowlerScoreboardSlice.reducer
+export const { openChooseBowlerDialog } = bowlerScoreboardSlice.actions

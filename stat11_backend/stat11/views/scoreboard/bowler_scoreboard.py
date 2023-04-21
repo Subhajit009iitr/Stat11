@@ -9,7 +9,7 @@ from stat11.serializers import BowlerScoreboardSerializer, BowlerScoreboardNeste
 class BowlerScoreboardModelViewSet(viewsets.ModelViewSet):
     queryset = BowlerScoreboard.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    filterset_fields = ['team__id', 'player__id', 'status']
+    filterset_fields = ['team__id', 'player__id', 'status', 'team__match__id']
     ordering_fields = ['player__person__username', 'player__person__first_name', 'team__name']
 
     def get_serializer_class(self):

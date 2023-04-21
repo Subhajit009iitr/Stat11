@@ -16,8 +16,8 @@ export const store = configureStore({
     match: matchReducer,
     team: teamReducer,
     player: playerReducer,
-    batterScorebaord: batterScorebaordReducer,
-    bowlerScorebaord: bowlerScorebaordReducer
+    batterScoreboard: batterScorebaordReducer,
+    bowlerScoreboard: bowlerScorebaordReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}),
 });

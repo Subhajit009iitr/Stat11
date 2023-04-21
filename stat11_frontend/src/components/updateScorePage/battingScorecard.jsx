@@ -43,7 +43,6 @@ function createBatterTable(Batter, runs, balls, s4, s6, SR) {
 const rows_batter = [
   createBatterTable("Raiwat Bapat", 6.0, 8, 1, 0, 5.5),
   createBatterTable("Nishita sandwich", 6.0, 8, 1, 0, 5.5),
-  // createBatterTable("3.Manashree Eclair", 6.0, 8, 1, 0, 5.5),
 ];
 
 function BattingScorecard() {

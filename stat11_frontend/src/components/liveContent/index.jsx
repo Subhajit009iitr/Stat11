@@ -16,16 +16,19 @@ import BowlingScorecard from "../updateScorePage/bowlingScorecard";
 import ScorerButtonGrid from "../updateScorePage/scorerButtonGrid";
 import { openTossWinDialog } from "../../features/team/teamSlice";
 import MatchHeader from "../header/matchHeader";
-import { getCurrentBatters } from "../../features/scoreboard/batterScoreboardSlice";
-import { getCurrentBowlers } from "../../features/scoreboard/bowlerScoreboardSlice";
+import { getCurrentBatters, getMatchBatters, getTeamBatters, openChooseBatterDialog } from "../../features/scoreboard/batterScoreboardSlice";
+import { getCurrentBowlers, getMatchBowlers, openChooseBowlerDialog } from "../../features/scoreboard/bowlerScoreboardSlice";
 // import dismissalModes from "../constants/modeOfDismissalList";
 // import SideBar from "../components/sideBar/sideBar";
 
-function LiveContent() {
+function LiveContent(props) {
+    const { matchId } = props
     const dispatch = useDispatch();
 
     const teamState = useSelector(state => state.team)
     const matchState = useSelector(state => state.match)
+    const batterScoreboardState = useSelector(state => state.batterScoreboard)
+    const bowlerScoreboardState = useSelector(state => state.bowlerScoreboard)
 
     const [newBowler, setNewBowler] = useState("");
     const [newBatsman, setNewBatsman] = useState("");
@@ -65,11 +68,17 @@ function LiveContent() {
         <></>
     );
 
-    // useEffect(() => {
-    //     dispatch(
-    //         get
-    //     )
-    // },[])
+    useEffect(() => {
+        dispatch(
+            getMatchBatters(matchId)
+        )
+        dispatch(
+            getMatchBowlers(matchId)
+        )
+        // dispatch(
+        //     getCurrentBatters()
+        // )
+    },[])
 
     useEffect(() => {
 
@@ -86,10 +95,7 @@ function LiveContent() {
         dispatch(
             getCurrentBatters(
                 teamState.turnTeam!=='' ? 
-                {
-                    teamId: teamState.turnTeam['id'],
-                    status: 'batting'
-                } :
+                teamState.turnTeam['id'] :
                 0
             )
         )
@@ -98,19 +104,37 @@ function LiveContent() {
                 teamState.turnTeam!=='' ?
                 (
                     teamState.turnTeam['id']===teamState.team1['id'] ?
-                    {
-                        teamId: teamState.team2['id'],
-                        status: 'bowling'
-                    } :
-                    {
-                        teamId: teamState.turnTeam['id'],
-                        status: 'bowling'
-                    }
+                    teamState.team2['id']:
+                    teamState.turnTeam['id']
                 ) :
                 0
             )
         )
     },[teamState.turnTeam])
+
+    useEffect(() => {
+        if(batterScoreboardState.currentBatters.length===0) {
+            dispatch(
+                openChooseBatterDialog(true)
+            )
+        }else {
+            dispatch(
+                openChooseBatterDialog(false)
+            )
+        }       
+    },[teamState.turnTeam, batterScoreboardState.currentBatters])
+
+    useEffect(() => {
+        if(bowlerScoreboardState.currentBowlers.length===0) {
+            dispatch(
+                openChooseBowlerDialog(true)
+            )
+        }else {
+            dispatch(
+                openChooseBowlerDialog(false)
+            )
+        }       
+    },[teamState.turnTeam, bowlerScoreboardState.currentBatters])
     
     return (
         <>

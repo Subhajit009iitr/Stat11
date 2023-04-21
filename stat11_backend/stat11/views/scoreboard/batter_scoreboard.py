@@ -9,7 +9,7 @@ from stat11.serializers import BatterScoreboardSerializer, BatterScoreboardNeste
 class BatterScoreboardModelViewSet(viewsets.ModelViewSet):
     queryset = BatterScoreboard.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    filterset_fields = ['team__id', 'player__id', 'bowled_out_by__person__id', 'wicket_taker__person__id', 'wicket_type', 'status']
+    filterset_fields = ['team__id', 'player__id', 'bowled_out_by__person__id', 'wicket_taker__person__id', 'wicket_type', 'status', 'team__match__id']
     ordering_fields = ['player__person__username', 'player__person__first_name', 'team__name']
 
     def get_serializer_class(self):

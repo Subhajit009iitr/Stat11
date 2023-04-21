@@ -1,20 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import BackendClient from "../../BackendClient";
-import { currentBattersBackendUrl } from "../../urls";
+import { battersByStatusBackendUrl, teamBattersByTypeBackendUrl } from "../../urls";
 
 const initialState = {
     loading: false,
     error: false,
     message: '',
-    team1Batters: '',
-    team2Batters: '',
-    currentBatters: []
+    matchBatters: [],
+    currentBatters: '',
+    openDialog: false
 }
 
-export const getCurrentBatters = createAsyncThunk('batterScoreboard/getCurrentBatters', (data) => {
+export const getMatchBatters = createAsyncThunk('batterScoreboard/getTeamBatters', (matchId) => {
     return BackendClient
     .get(
-        currentBattersBackendUrl(data['teamId'],data['status'])
+        teamBattersByTypeBackendUrl(matchId)
+    )
+    .then(res => res.data)
+})
+
+export const getCurrentBatters = createAsyncThunk('batterScoreboard/getCurrentBatters', (teamId) => {
+    return BackendClient
+    .get(
+        battersByStatusBackendUrl(teamId,'batting')
     )
     .then(res => res.data)
 })
@@ -22,6 +30,11 @@ export const getCurrentBatters = createAsyncThunk('batterScoreboard/getCurrentBa
 const batterScoreboardSlice = createSlice({
     name: 'batterScoreboard',
     initialState,
+    reducers: {
+        openChooseBatterDialog: (state,action) => {
+            state.openDialog = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(getCurrentBatters.pending, (state) => {
@@ -41,7 +54,22 @@ const batterScoreboardSlice = createSlice({
             state.message = action.error.message
             state.currentBatters = []
         })
+        .addCase(getMatchBatters.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(getMatchBatters.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.matchBatters = action.payload
+        })
+        .addCase(getMatchBatters.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+        })
     }
 })
 
 export default batterScoreboardSlice.reducer
+export const { openChooseBatterDialog } = batterScoreboardSlice.actions
