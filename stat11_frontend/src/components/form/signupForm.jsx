@@ -24,6 +24,8 @@ function SignupForm() {
   const [pass, setPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [playerType, setPlayerType] = useState("");
+  const [fName, setFName] = useState('')
+  const [lName, setLName] = useState('')
 
   const validateEmail = () => {
     if (email === "") return true;
@@ -60,6 +62,8 @@ function SignupForm() {
             password: pass,
             is_player: isPlayer,
             player_type: playerType,
+            first_name: fName,
+            last_name: lName
           })
         );
       } else {
@@ -108,6 +112,16 @@ function SignupForm() {
       </Box>
       {textFormFieldGenerator("Username", username, setUsername)}
       {textFormFieldGenerator(
+        "First Name", 
+        fName, 
+        setFName
+      )}
+      {textFormFieldGenerator(
+        "Last Name", 
+        lName, 
+        setLName
+      )}
+      {textFormFieldGenerator(
         "Email-ID",
         email,
         setEmail,
@@ -119,14 +133,16 @@ function SignupForm() {
         pass,
         setPass,
         validatePass,
-        "Invalid password format"
+        "Invalid password format",
+        'password'
       )}
       {textFormFieldGenerator(
         "Confirm Password",
         confirmPass,
         setConfirmPass,
         validateConfirmPass,
-        "Confirm password doesn't match password"
+        "Confirm password doesn't match password",
+        'password'
       )}
       <Box
         sx={{

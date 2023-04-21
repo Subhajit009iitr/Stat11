@@ -11,6 +11,7 @@ import { getDistinctTeamOptions, openCreateTeamDialog } from '../../features/tea
 import CreateTeamDialog from '../dialog/createTeamDialog';
 
 function HomeContent() {
+    const authState = useSelector(state => state.auth)
     const matchState = useSelector(state =>state.match)
     const dispatch = useDispatch()
 
@@ -40,28 +41,34 @@ function HomeContent() {
     ) :
     []
 
+    const createMatchButton = authState.isAuthenticated===true ?
+    (
+        <IconButton
+        color='primary'
+        onClick={createButtonClickHandler}
+        sx={{
+            position: 'fixed',
+            right: 0,
+            bottom: 0,
+            mr: 16,
+            mb: 16,
+            p: 0
+        }}
+        >
+            <IoIosAddCircle 
+            size={72}
+            />
+        </IconButton>
+    ) :
+    <></>
+
     return(
         <>
             <HomeHeader 
             headingText='Welcome Back!'
             />
             {matchCards}
-            <IconButton
-            color='primary'
-            onClick={createButtonClickHandler}
-            sx={{
-                position: 'fixed',
-                right: 0,
-                bottom: 0,
-                mr: 16,
-                mb: 16,
-                p: 0
-            }}
-            >
-                <IoIosAddCircle 
-                size={72}
-                />
-            </IconButton>
+            {createMatchButton}
             <CreateMatchDialog />
             <CreateTeamDialog />
     </>

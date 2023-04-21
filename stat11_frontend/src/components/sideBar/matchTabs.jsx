@@ -9,6 +9,7 @@ import { resetTeamState } from '../../features/team/teamSlice'
 
 function MatchTabs() {
     const sideBarState = useSelector((state) => state.sideBar)
+    const authState = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
   
@@ -29,12 +30,14 @@ function MatchTabs() {
   
     useEffect(() => {
       dispatch(
-        switchSideBarTab('Live')
+        switchSideBarTab('Scoreboard')
       )
     },[])
   
     const matchTabs = matchBarTabs.length>0 ?
     matchBarTabs.map(tab => {
+      if(authState.isAuthenticated===false && tab['text']==='Live') return
+      
       const buttonBackgroundColor = sideBarState.currentTab===tab['text'] ? 'primary.light' : 'background.paper'
       const typographyColor = sideBarState.currentTab===tab['text'] ? 'hint.dark' : 'hint.light'
       return listButtonGenerator(
@@ -44,6 +47,8 @@ function MatchTabs() {
         buttonBackgroundColor,
         typographyColor
       )
+      
+      
     })
     :
     []
