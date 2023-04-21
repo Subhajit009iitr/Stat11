@@ -11,6 +11,7 @@ import DisplayTeamLists from "../components/displayTeams/displayTeamLists";
 import MatchHeader from "../components/header";
 
 function DisplayTeams(props) {
+  const {matchId} = props
   const dispatch = useDispatch();
   const team1 = useSelector(state => state.team.team1)
   const team2 = useSelector(state => state.team.team2)
@@ -25,8 +26,8 @@ function DisplayTeams(props) {
       primaryText={team1.name+" v/s "+team2.name} 
       secondaryText={team2.match.location} 
       tossText = {(team1.toss)?team1.name:team2.name}/>
-      <SideBar />
-      <DisplayTeamLists />
+      {/* <SideBar /> */}
+      <DisplayTeamLists matchId={matchId}/>
       <br/>
       <br/>
       <br/>

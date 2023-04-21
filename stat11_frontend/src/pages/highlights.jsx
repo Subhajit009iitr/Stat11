@@ -132,7 +132,7 @@ const rows_batter = addbatterrows(batterDetails)
 return (
     <Box component='div' sx={{ backgroundColor: '#F8F8F8', width: "80vw"}}> 
     {/* Hardcoded color */}
-    <SideBar/>
+    {/* <SideBar/> */}
     {/* <Header /> */}
     <MatchHeader 
       primaryText={team1.name+" v/s "+team2.name} 

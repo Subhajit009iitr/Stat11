@@ -180,12 +180,14 @@ const matchSlice = createSlice({
             state.error = false
             state.message = ''
             state.details = action.payload
+            console.log("FULFILLED")
             console.log("potato",action.payload)
         })
         .addCase(getAllMatchAndTeamsDetails.rejected, (state,action) => {
             state.loading = false
             state.error = true
             state.message = action.error.message
+            console.log("REJECTED..")
             state.details = []
         })
 

@@ -39,19 +39,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function DisplayTeamLists(props) {
-  const { match_id } = useParams()
-  const Matchdetails = useSelector(state =>state.match.details)
+  // const { match_id } = useParams()
+  const {matchId} = props
+  const Matchdetails = useSelector(state => state.match.details)
   const Team = useSelector(state => state.match.Teams);
   const dispatch = useDispatch();
+
   useEffect(()=>{
-    dispatch(getAllMatchAndTeamsDetails(match_id))
-    dispatch(matchTeams(match_id))
+    dispatch(getAllMatchAndTeamsDetails(matchId))
+    dispatch(matchTeams(matchId))
   },[])
 
+  // console.log("MATCH ID")
+  // console.log(matchId)
   // console.log("Yesss");
-  const team1List = Team[0];
+  const team1List = Team[0]===undefined ? [] : Team[0];
   // console.log("Yes");
-  const team2List = Team[1];
+  const team2List = Team[1]===undefined ? [] : Team[1];
+
+  const matchDet = Matchdetails===[] ? [[{name: 'Team1'}],[{name: 'Team2'}]] : Matchdetails
+
   
   return (
     <Box
@@ -72,7 +79,7 @@ export default function DisplayTeamLists(props) {
                   <TableRow>
                     <StyledTableCell >
                       <Typography variant="h5" sx={{ color: "white", textAlign: "center"}}>
-                        {Matchdetails[0].name}
+                        {Matchdetails[0]===undefined ? 'Team1' : Matchdetails[0].name}
                       </Typography>
                     </StyledTableCell>
                   </TableRow>
@@ -105,7 +112,7 @@ export default function DisplayTeamLists(props) {
                   <TableRow>
                     <StyledTableCell>
                       <Typography variant="h5" sx={{ color: "white", textAlign: "center"}}>
-                        {Matchdetails[1].name}
+                        {Matchdetails[1]===undefined ? 'Team2' : Matchdetails[1].name}
                       </Typography>
                     </StyledTableCell>
                   </TableRow>

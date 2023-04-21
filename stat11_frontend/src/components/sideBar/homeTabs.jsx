@@ -21,7 +21,10 @@ function HomeTabs() {
   
     useEffect(() => {
       if(sideBarState.currentTab==='Login') navigate('/auth')
-      if(sideBarState.currentTab==='Logout') dispatch(logoutUser())
+      if(sideBarState.currentTab==='Logout') {
+        dispatch(logoutUser())
+        navigate('/auth')
+      }
     },[sideBarState.currentTab])
   
     useEffect(() => {

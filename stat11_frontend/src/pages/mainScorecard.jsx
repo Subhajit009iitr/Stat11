@@ -18,8 +18,9 @@ export default function MainScorecard() {
   const [batt, setBatt] = useState(batterDetails);
   const [bowl, setBowl] = useState(bowlerDetails);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(changeSideBarTabsType("match"))
+    // dispatch(changeSideBarTabsType("match"))
     dispatch(batterScoreData(team.id))
     dispatch(bowlerScoreData(team.id))
   }, []);
@@ -46,7 +47,7 @@ export default function MainScorecard() {
       primaryText={team1.name+" v/s "+team2.name} 
       secondaryText={team2.match.location} 
       tossText = {(team1.toss)?team1.name:team2.name}/>
-      <SideBar />
+      {/* <SideBar /> */}
       <Button sx={{float:'left', width: "40vw"}} onClick={() => {handleTeam1Click()}}>
       {team1.name}
       </Button>

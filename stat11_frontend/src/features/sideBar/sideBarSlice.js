@@ -15,9 +15,13 @@ const sideBarSlice = createSlice({
     reducers: {
         switchSideBarTab: (state,action) => {
             state.currentTab = action.payload
+            console.log("TAB CHANGED...")
+            console.log(action.payload)
         },
         changeSideBarTabsType: (state,action) => {
             state.tabsType = action.payload
+            console.log("TAB TYPE CHANGED...")
+            console.log(action.payload)
         }
     }
 })

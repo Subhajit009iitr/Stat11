@@ -8,6 +8,7 @@ import UpdateScore from './updateScore'
 import MainScorecard from './mainScorecard'
 import DisplayTeams from './displayTeams'
 import Highlights from './highlights'
+// import LiveContent from '../components/liveContent'
 
 function Match() {
     const { match_id } = useParams()
@@ -19,19 +20,21 @@ function Match() {
             if(sideBarState.currentTab==='Live') {
                 // return <UpdateScore />
                 // return 'updateScore'
-                return <DisplayTeams />
+                // return <DisplayTeams />
+                // return <LiveContent matchId={match_id} />
+                return "Live"
             }
             else if(sideBarState.currentTab==='Scoreboard') {
-                return <MainScorecard />
+                return <MainScorecard matchId={match_id} />
             }
             else if(sideBarState.currentTab==='Analysis') {
                 return 'Analytics'
             }
-            // else if(sideBarState.currentTab==='Teams') {
-            //     return <DisplayTeams />
-            // }
+            else if(sideBarState.currentTab==='Teams') {
+                return <DisplayTeams matchId={match_id} />
+            }
             else if(sideBarState.currentTab==='Highlights') {
-                return <Highlights />
+                return <Highlights matchId={match_id} />
             }
             // else {
             //     return <></>
@@ -39,6 +42,30 @@ function Match() {
             return 'hello'
         }
     }
+
+    const matchContent = sideBarState.tabsType==='match' ?
+    (
+        sideBarState.currentTab==='Live' ?
+        "LIVE" :
+        (
+            sideBarState.currentTab==='Scoreboard' ?
+            <MainScorecard matchId={match_id} /> :
+            (
+                sideBarState.currentTab==='Analysis' ?
+                "Analytics" :
+                (
+                    sideBarState.currentTab==='Teams' ?
+                    <DisplayTeams matchId={match_id} /> :
+                    (
+                        sideBarState.currentTab==='Highlights' ?
+                        <Highlights matchId={match_id} /> :
+                        <></>
+                    )
+                )
+            )
+        )
+    ) :
+    <></>
 
     useEffect(() => {
         dispatch(
@@ -51,7 +78,7 @@ function Match() {
 
     return (
         pageSideBarAppender(
-            content()
+            matchContent
         )
     )
 }
