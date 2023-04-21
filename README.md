@@ -1,8 +1,7 @@
 # Stat11
+## CSN-254 Course Project
 
-### CSN-254 Course Project
-
-Stat11 is a web application that provide real-time statistics for cricket matches and corresponding score analysis using sharts.
+Stat11 is a web application that allows live scoring of cricket matches and provides real-time statistics and score analysis using charts and graphs.
 
 ## Getting Started
 
@@ -14,13 +13,15 @@ git version : ^2.40.0
 
 To clone the repository, either use the Git GUI if you have one installed or enter the following commands:
 ```bash
-https://github.com/Ak216puniA/Stat11
+git clone https://github.com/Ak216puniA/Stat11.git
 ```
 ### Setup
 
+- `cd ./stat11_frontend`
 - `npm install` to install all the dependencies in your device.
-
-
+- `cd ..`
+- `cd ./stat11_backend` 
+- `pip install -r requirements.txt`
 
 
 ## About
@@ -43,11 +44,5 @@ App features include:
 5. Screen responsiveness for a wide range of devices
 
 
-
-### App flow :
-
-
-
 ## Tech Stack :
-We have used ReactJs, Redux toolkitm Django Rest framework and MYSQL Database 
-
+We have used ReactJs, Redux toolkit, Django Rest framework and MYSQL Database
