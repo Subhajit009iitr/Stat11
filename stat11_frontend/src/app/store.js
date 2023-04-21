@@ -5,8 +5,8 @@ import sideBarReducer from '../features/sideBar/sideBarSlice'
 import matchReducer from '../features/match/matchSlice'
 import teamReducer from '../features/team/teamSlice'
 import playerReducer from '../features/player/playerSlice'
-import batterScorebaordReducer from '../features/scoreboard/batterScoreboardSlice'
-import bowlerScorebaordReducer from '../features/scoreboard/bowlerScoreboardSlice'
+import batterScoreboardReducer from '../features/scoreboard/batterScoreboardSlice'
+import bowlerScoreboardReducer from '../features/scoreboard/bowlerScoreboardSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,8 +16,8 @@ export const store = configureStore({
     match: matchReducer,
     team: teamReducer,
     player: playerReducer,
-    batterScoreboard: batterScorebaordReducer,
-    bowlerScoreboard: bowlerScorebaordReducer
+    batterScoreboard: batterScoreboardReducer,
+    bowlerScoreboard: bowlerScoreboardReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}),
 });
