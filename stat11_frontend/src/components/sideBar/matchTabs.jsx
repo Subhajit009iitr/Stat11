@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { changeSideBarTabsType, switchSideBarTab } from '../../features/sideBar/sideBarSlice'
 import { listButtonGenerator } from '../genericComponent/genericListGenerators'
 import { useNavigate } from 'react-router-dom'
+import { resetTeamState } from '../../features/team/teamSlice'
 
 function MatchTabs() {
     const sideBarState = useSelector((state) => state.sideBar)
@@ -18,6 +19,9 @@ function MatchTabs() {
       if(tab==='Home') {
         dispatch(
           changeSideBarTabsType('home')
+        )
+        dispatch(
+          resetTeamState()
         )
         navigate('/home')
       }

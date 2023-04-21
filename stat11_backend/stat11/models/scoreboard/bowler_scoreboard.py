@@ -18,4 +18,5 @@ class BowlerScoreboard(models.Model):
     status=models.CharField(max_length=10, choices=BOWLER_STATUSES, default=IDLE)
     entry_time=models.TimeField(null=True, blank=True)
     exit_time=models.TimeField(null=True, blank=True)
+    # bowling_turn=models.BooleanField(default=False)
 

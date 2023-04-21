@@ -52,6 +52,17 @@ const teamSlice = createSlice({
         },
         openTossWinDialog: (state,action) => {
             state.openTossDialog = action.payload
+        },
+        resetTeamState: (state) => {
+            state.loading = false
+            state.error = false
+            state.message = '' 
+            state.team1 = ''
+            state.team2 = ''
+            state.distinctTeamOptions = [] 
+            state.openDialog = false 
+            state.turnTeam = '' 
+            state.openTossDialog = false
         }
     },
     extraReducers: (builder) => {
@@ -120,8 +131,9 @@ const teamSlice = createSlice({
                 id: action.payload['id'],
                 name: action.payload['name']
             }
-            console.log("TOSS TURN UPDATE....")
-            console.log(action.payload)
+            
+            if(state.team1!=='' && action.payload['id']===state.team1['id']) state.team1 = action.payload
+            if(state.team2!=='' && action.payload['id']===state.team2['id']) state.team2 = action.payload
         })
         .addCase(updateParticipatingTeamToss.rejected, (state,action) => {
             state.loading = false
@@ -133,4 +145,4 @@ const teamSlice = createSlice({
 })
 
 export default teamSlice.reducer
-export const { openCreateTeamDialog, appendInDistinctTeamOptions, openTossWinDialog } = teamSlice.actions
+export const { openCreateTeamDialog, appendInDistinctTeamOptions, openTossWinDialog, resetTeamState } = teamSlice.actions

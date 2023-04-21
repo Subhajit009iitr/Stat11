@@ -15,6 +15,9 @@ import BattingScorecard from "../updateScorePage/battingScorecard";
 import BowlingScorecard from "../updateScorePage/bowlingScorecard";
 import ScorerButtonGrid from "../updateScorePage/scorerButtonGrid";
 import { openTossWinDialog } from "../../features/team/teamSlice";
+import MatchHeader from "../header/matchHeader";
+import { getCurrentBatters } from "../../features/scoreboard/batterScoreboardSlice";
+import { getCurrentBowlers } from "../../features/scoreboard/bowlerScoreboardSlice";
 // import dismissalModes from "../constants/modeOfDismissalList";
 // import SideBar from "../components/sideBar/sideBar";
 
@@ -22,6 +25,7 @@ function LiveContent() {
     const dispatch = useDispatch();
 
     const teamState = useSelector(state => state.team)
+    const matchState = useSelector(state => state.match)
 
     const [newBowler, setNewBowler] = useState("");
     const [newBatsman, setNewBatsman] = useState("");
@@ -61,7 +65,14 @@ function LiveContent() {
         <></>
     );
 
+    // useEffect(() => {
+    //     dispatch(
+    //         get
+    //     )
+    // },[])
+
     useEffect(() => {
+
         if(teamState.turnTeam===''){
             dispatch(
                 openTossWinDialog(true)
@@ -71,29 +82,53 @@ function LiveContent() {
                 openTossWinDialog(false)
             )
         }
+
+        dispatch(
+            getCurrentBatters(
+                teamState.turnTeam!=='' ? 
+                {
+                    teamId: teamState.turnTeam['id'],
+                    status: 'batting'
+                } :
+                0
+            )
+        )
+        dispatch(
+            getCurrentBowlers(
+                teamState.turnTeam!=='' ?
+                (
+                    teamState.turnTeam['id']===teamState.team1['id'] ?
+                    {
+                        teamId: teamState.team2['id'],
+                        status: 'bowling'
+                    } :
+                    {
+                        teamId: teamState.turnTeam['id'],
+                        status: 'bowling'
+                    }
+                ) :
+                0
+            )
+        )
     },[teamState.turnTeam])
     
     return (
-        <Box sx ={{backgroundColor: "background.default"}}>
-        {/* <Header
-            team1Name="Royal Challengers Bangalore"
-            team2Name="Lucknow Super Giants"
-            location="M. Chinnaswamy Stadium, Bengaluru"
-            numberOfOvers="20"
-            teamWhichWonTheToss="Lucknow Super Giants"
-        /> */}
-        {/* <SideBar /> */}
-        {/* <TeamScore
-            teamName="Mumbai Indians"
-            teamRuns="185"
-            wicketsFallen="3"
-            oversBowled="14"
-            ballsInCurrentOver="3"
-            teamNetRunRate="14.3"
-        /> */}
+        <>
+        <MatchHeader 
+        primaryText={`${teamState.team1['name']} v/s ${teamState.team2['name']}`}
+        secondaryText={`${matchState.match['location']}`}
+        tossText={`${teamState.turnTeam['name']}`}
+        />
+        <Box
+        sx={{
+
+        }}
+        >
+            <BattingScorecard />
+        </Box>
         
-        <BattingScorecard />
-        <Box sx={{ width: "60%", ml: "30%", mt: "1%" }}>
+        
+        {/* <Box sx={{ width: "60%", ml: "30%", mt: "1%" }}>
             <Grid container rowSpacing={5} columnSpacing={{ xs: 4, sm: 4, md: 4 }}>
             <Grid item xs={4}>
                 {selectBowler}
@@ -116,8 +151,8 @@ function LiveContent() {
         <br />
         <br />
         <br />
-        <br />
-        </Box>
+        <br /> */}
+        </>
     );
 }
 

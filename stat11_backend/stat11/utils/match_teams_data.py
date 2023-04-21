@@ -24,8 +24,8 @@ def get_match_team_data(match_id, detail=False):
         team_data = serializer.data
         team_data['runs'] = team_runs
         team_data['wickets'] = team_wickets
-        team_data['current_overs'] = team_balls//6
-        team_data['current_over_balls'] = team_balls%6
+        team_data['team_current_overs'] = team_balls//6
+        team_data['team_current_over_balls'] = team_balls%6
         match_teams_data.append(team_data)
 
     return (match_teams_data)

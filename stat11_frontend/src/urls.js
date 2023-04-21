@@ -36,6 +36,10 @@ export const batterScoreboardBackendUrl = () => {
     return `${baseBackendUrl()}batter_scoreboard/`
 }
 
+export const bowlerScoreboardBackendUrl = () => {
+    return `${baseBackendUrl()}bowler_scoreboard/`
+}
+
 export const teamBackendUrl = () => {
     return `${baseBackendUrl()}team/`
 }
@@ -91,4 +95,11 @@ export const sortedBattersUrl = (matchId) =>{
 
 export const sortedBowlersUrl = (matchId) =>{
     return `${matchBackendUrl()}sortedBowlers/?match__id=${matchId}`
+}
+export const battersByStatusBackendUrl = (teamId, status) => {
+    return `${batterScoreboardBackendUrl()}current_batters/?team__id=${teamId}&status=${status}`
+}
+
+export const bowlersByStatusBackendUrl = (teamId, status) => {
+    return `${bowlerScoreboardBackendUrl()}current_bowlers/?team__id=${teamId}&status=${status}`
 }

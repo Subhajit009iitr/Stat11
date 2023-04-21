@@ -21,6 +21,14 @@ const initialState = {
     details: [],
 }
 
+export const getCurrentMatch = createAsyncThunk('match/getCurrentMatch', (matchId) => {
+    return BackendClient
+    .get(
+        `${matchBackendUrl()}${matchId}/`
+    )
+    .then(res => res.data)
+})
+
 export const createMatch = createAsyncThunk('match/createMatch', (matchData) => {
     return BackendClient
     .post(
@@ -299,6 +307,21 @@ const matchSlice = createSlice({
         })
         
 
+        .addCase(getCurrentMatch.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(getCurrentMatch.fulfilled, (state,action) => {
+            state.loading = false
+            state.error = false
+            state.message = ''
+            state.match = action.payload
+        })
+        .addCase(getCurrentMatch.rejected, (state,action) => {
+            state.loading = false
+            state.error = true
+            state.message = action.error.message
+            state.match = ''
+        })
     }
 })
 
