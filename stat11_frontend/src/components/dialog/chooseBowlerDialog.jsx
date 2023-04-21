@@ -21,10 +21,12 @@ function ChooseBowlerDialog() {
     }
 
     const onDialogCloseHandler = () => {
-        dispatch(
-            openChooseBowlerDialog(false)
-        )
-        resetState()
+        if(bowlerScoreboardState.currentBowlers.length!==0){
+            dispatch(
+                openChooseBowlerDialog(false)
+            )
+            resetState()
+        }
     }
 
     const chooseButtonClickHandler = () => {
@@ -35,29 +37,30 @@ function ChooseBowlerDialog() {
         }
     }
 
-    const bowlerOptions = playerState.bowlerList.length>0 ?
+    const bowlerOptions = bowlerScoreboardState.matchBowlers.length>0 && teamState.turnTeam!==''?
     (
-        // playerState.bowlerList.map(bowler => {
-        //     return [
-        //         bowler,
-        //         standardAvatarListItemGenerator(
-        //             `${bowler['person']['username']}`,
-        //             `${bowler['person']['first_name']} ${bowler['person']['last_name']} - (${bowler['type']})`
-        //         )
-        //     ]
-        // })
-        bowlerScoreboardState.matchBatters.map(bowler => {
-            if(bowler['team']['id']===teamState.turnTeam['id']){
-                return [
-                    bowler,
-                    standardAvatarListItemGenerator(
-                        `${bowler['player']['persone']['username']}`,
-                        `${bowler['player']['person']['first_name']} ${bowler['player']['person']['last_name']} - (${bowler['player']['type']})`
-                    )
-                ]
-            }else {
-                return
-            }
+        bowlerScoreboardState.matchBowlers.map(bowler => {
+            console.log("BOWLER OPTION...")
+            console.log(bowler)
+            console.log(bowler['team']['id'])
+            console.log(teamState.turnTeam['name'])
+            console.log("---------------")
+            return [
+                "hello",
+                <></>
+            ]
+            // if(bowler['team']['id']===teamState.turnTeam['id']){
+            //     console.log("ENTERED...")
+            //     return [
+            //         bowler,
+            //         standardAvatarListItemGenerator(
+            //             `${bowler['player']['persone']['username']}`,
+            //             `${bowler['player']['person']['first_name']} ${bowler['player']['person']['last_name']} - (${bowler['player']['type']})`
+            //         )
+            //     ]
+            // }else {
+            //     return []
+            // }
         })
     ) :
     []
@@ -73,6 +76,11 @@ function ChooseBowlerDialog() {
     //         )
     //     }       
     // },[teamState.turnTeam, bowlerScoreboardState.currentBatters])
+
+    useEffect(() => {
+        console.log("SBISFLNSLKDFNOIWNKLWNJKDBSOIND")
+        console.log(bowlerScoreboardState.matchBowlers)
+    },[bowlerScoreboardState.matchBowlers])
 
     return (
         <Dialog

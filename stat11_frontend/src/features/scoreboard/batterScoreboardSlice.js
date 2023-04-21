@@ -62,6 +62,8 @@ const batterScoreboardSlice = createSlice({
             state.error = false
             state.message = ''
             state.matchBatters = action.payload
+            console.log("FETCHED MATCH BATTERS...")
+            console.log(action.payload)
         })
         .addCase(getMatchBatters.rejected, (state,action) => {
             state.loading = false

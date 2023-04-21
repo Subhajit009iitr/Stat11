@@ -105,7 +105,7 @@ export const battersByStatusBackendUrl = (teamId, status) => {
         teamId=0
         status=''
     }
-    return `${batterScoreboardBackendUrl()}current_batters/?team__id=${teamId}&status=${status}`
+    return `${batterScoreboardBackendUrl()}?team__id=${teamId}&status=${status}`
 }
 
 export const bowlersByStatusBackendUrl = (teamId, status) => {
@@ -113,13 +113,13 @@ export const bowlersByStatusBackendUrl = (teamId, status) => {
         teamId=0
         status=''
     }
-    return `${bowlerScoreboardBackendUrl()}current_bowlers/?team__id=${teamId}&status=${status}`
+    return `${bowlerScoreboardBackendUrl()}?team__id=${teamId}&status=${status}`
 }
 
 export const teamBattersByTypeBackendUrl = (matchId, type) => {
-    return `${batterScoreboardBackendUrl()}current_batters/?team__match__id=${matchId}`
+    return `${batterScoreboardBackendUrl()}?team__match__id=${matchId}`
 }
 
 export const teamBowlersByTypeBackendUrl = (matchId, type) => {
-    return `${bowlerScoreboardBackendUrl()}current_bowlers/?team__match__id=${matchId}`
+    return `${bowlerScoreboardBackendUrl()}?team__match__id=${matchId}`
 }

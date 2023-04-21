@@ -69,12 +69,12 @@ function LiveContent(props) {
     );
 
     useEffect(() => {
-        dispatch(
-            getMatchBatters(matchId)
-        )
-        dispatch(
-            getMatchBowlers(matchId)
-        )
+        // dispatch(
+        //     getMatchBatters(matchId)
+        // )
+        // dispatch(
+        //     getMatchBowlers(matchId)
+        // )
         // dispatch(
         //     getCurrentBatters()
         // )
@@ -112,29 +112,29 @@ function LiveContent(props) {
         )
     },[teamState.turnTeam])
 
-    useEffect(() => {
-        if(batterScoreboardState.currentBatters.length===0) {
-            dispatch(
-                openChooseBatterDialog(true)
-            )
-        }else {
-            dispatch(
-                openChooseBatterDialog(false)
-            )
-        }       
-    },[teamState.turnTeam, batterScoreboardState.currentBatters])
+    // useEffect(() => {
+    //     if(batterScoreboardState.currentBatters.length===0) {
+    //         dispatch(
+    //             openChooseBatterDialog(true)
+    //         )
+    //     }else {
+    //         dispatch(
+    //             openChooseBatterDialog(false)
+    //         )
+    //     }       
+    // },[teamState.turnTeam, batterScoreboardState.currentBatters])
 
-    useEffect(() => {
-        if(bowlerScoreboardState.currentBowlers.length===0) {
-            dispatch(
-                openChooseBowlerDialog(true)
-            )
-        }else {
-            dispatch(
-                openChooseBowlerDialog(false)
-            )
-        }       
-    },[teamState.turnTeam, bowlerScoreboardState.currentBatters])
+    // useEffect(() => {
+    //     if(bowlerScoreboardState.currentBowlers.length===0) {
+    //         dispatch(
+    //             openChooseBowlerDialog(true)
+    //         )
+    //     }else {
+    //         dispatch(
+    //             openChooseBowlerDialog(false)
+    //         )
+    //     }       
+    // },[teamState.turnTeam, bowlerScoreboardState.currentBatters])
     
     return (
         <>

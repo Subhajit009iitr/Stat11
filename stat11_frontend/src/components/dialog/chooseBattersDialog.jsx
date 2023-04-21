@@ -22,10 +22,12 @@ function ChooseBatterDialog() {
     }
 
     const onDialogCloseHandler = () => {
-        dispatch(
-            openChooseBatterDialog(false)
-        )
-        resetState()
+        if(batterScoreboardState.currentBatters.length!==0){
+            dispatch(
+                openChooseBatterDialog(false)
+            )
+            resetState()
+        } 
     }
 
     const chooseButtonClickHandler = () => {
@@ -38,44 +40,25 @@ function ChooseBatterDialog() {
 
     const batterOptions = batterScoreboardState.matchBatters.length>0 && teamState.turnTeam!=='' ?
     (
-        // playerState.batterList.map(batter => {
-        //     return [
-        //         batter,
-        //         standardAvatarListItemGenerator(
-        //             `${batter['person']['username']}`,
-        //             `${batter['person']['first_name']} ${batter['person']['last_name']} - (${batter['type']})`
-        //         )
-        //     ]
-        // })
         batterScoreboardState.matchBatters.map(batter => {
-            if(batter['team']['id']===teamState.turnTeam['id']){
-                return [
-                    batter,
-                    standardAvatarListItemGenerator(
-                        `${batter['player']['persone']['username']}`,
-                        `${batter['player']['person']['first_name']} ${batter['player']['person']['last_name']} - (${batter['player']['type']})`
-                    )
-                ]
-            }else {
-                return
-            }
+            // if(batter['team']['id']===teamState.turnTeam['id']){
+            //     return [
+            //         batter,
+            //         standardAvatarListItemGenerator(
+            //             `${batter['player']['persone']['username']}`,
+            //             `${batter['player']['person']['first_name']} ${batter['player']['person']['last_name']} - (${batter['player']['type']})`
+            //         )
+            //     ]
+            // }else {
+            //     return
+            // }
+            return [
+                'hello',
+                <></>
+            ]
         })
     ) :
     []
-
-    // useEffect(() => {
-    //     if(batterScoreboardState.currentBatters===[]) {
-    //         dispatch(
-    //             openChooseBatterDialog(true)
-    //         )
-    //     }else {
-    //         dispatch(
-    //             openChooseBatterDialog(false)
-    //         )
-    //     }       
-    // },[teamState.turnTeam, batterScoreboardState.currentBatters])
-    console.log("HELMOALDNLSD>>>>>>")
-    console.log(batterScoreboardState.openDialog)
 
     return (
         <Dialog
